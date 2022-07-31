@@ -1,0 +1,32 @@
+form {
+  .error {
+    @extend .invalid-feedback;
+    display: block;
+  }
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  &__inner {
+    margin: 20vh auto auto;
+    padding: 40px;
+    min-width: 460px;
+    background: #fff;
+    border: solid 10px #f5f2ea;
+  }
+  &__logo {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 250px;
+    }
+  }
+  &__button-wrapper {
+    display: flex;
+    a {
+      margin-left: auto;
+    }
+  }
+}
