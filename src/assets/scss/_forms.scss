@@ -12,9 +12,14 @@ form {
   &__inner {
     margin: 20vh auto auto;
     padding: 40px;
-    min-width: 460px;
+    width: 440px;
     background: #fff;
     border: solid 10px #f5f2ea;
+    > p {
+      @include small-text;
+      margin-bottom: 40px;
+      text-align: center;
+    }
   }
   &__logo {
     display: flex;
@@ -25,8 +30,18 @@ form {
   }
   &__button-wrapper {
     display: flex;
+    margin-top: 30px;
     a {
+      @include small-text;
       margin-left: auto;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .login-form {
+    &__inner {
+      width: 90%;
     }
   }
 }
