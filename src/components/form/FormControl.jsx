@@ -12,14 +12,14 @@ const FormControl = (props) => {
       return <Input {...rest} />;
     // case "textarea":
     //   return <Textarea {...rest} />;
-    case "select":
-      return <Select {...rest} />;
-    case "radio":
-      return <RadioButtons {...rest} />;
+    // case "select":
+    //   return <Select {...rest} />;
+    // case "radio":
+    //   return <RadioButtons {...rest} />;
     // case "checkbox":
     // return <CheckboxGroup {...rest} />;
-    case "date":
-      return <DatePicker {...rest} />;
+    // case "date":
+    //   return <DatePicker {...rest} />;
     // case "chakraInput":
     //   return <ChakraInput {...rest} />;
     default:
