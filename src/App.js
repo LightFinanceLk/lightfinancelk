@@ -6,13 +6,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./components/Layout";
+import LoginPage from "./pages/auth/LoginPage";
 
 function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<>Home</>} />
+          <Route path="/" element={<LoginPage />} />
         </Routes>
       </Layout>
     </Router>

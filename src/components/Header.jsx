@@ -2,8 +2,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import HeaderDropDown from "./shared/header/HeaderDropDown";
 import logo from "./../assets/img/logo.png";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
     <header className="p-3 mb-3 border-bottom header">
       <div className="container">
@@ -39,6 +41,7 @@ const Header = () => {
             </button>
           </div>
 
+          {isAuth ? "authenticated" : "not authenticated"}
           <HeaderDropDown>
             <li>
               <a className="dropdown-item" href="#">
