@@ -17,8 +17,8 @@ const LoginForm = (props) => {
       .min(6, "Password must be at least 6 characters"),
   });
   const onSubmit = (values) => {
-    props.submitHandler();
-    console.log("Form data", values);
+    props.submitHandler(values);
+    // console.log("Form data", values);
   };
   return (
     <div className="login-form">
