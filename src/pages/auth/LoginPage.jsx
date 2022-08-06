@@ -18,6 +18,7 @@ const LoginPage = () => {
         console.log("data", formData);
         const res = await authApi.login(JSON.stringify(formData));
         if (res) {
+          // TODO validate res to res.length
           console.log(res);
           navigate("/dashboard");
           dispatch(authActions.login(res.data.token));

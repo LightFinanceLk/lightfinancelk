@@ -1,9 +1,19 @@
 import axiosApi from "./axiosApi";
 import axios from "axios";
 
-const signUp = (formData) => {
+const signUp = async (formData) => {
   console.log("formData", formData);
   return axiosApi.post(`users/signup`, formData);
+  // const res = await axios.post(
+  //   `http://localhost:5000/api/users/signup`,
+  //   formData,
+  //   {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  // console.log(res); // '{"answer":42}'
 };
 
 const login = async (formData) => {

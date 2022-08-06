@@ -8,7 +8,7 @@ const Header = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   return (
     <>
-      {isAuth === true ? (
+      {isAuth && (
         <header className="p-3 mb-3 border-bottom header">
           <div className="container">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -67,8 +67,6 @@ const Header = () => {
             </div>
           </div>
         </header>
-      ) : (
-        ""
       )}
     </>
   );
