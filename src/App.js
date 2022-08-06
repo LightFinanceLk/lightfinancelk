@@ -8,6 +8,9 @@ import {
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
 import LoginPage from "./pages/auth/LoginPage";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import Dashboard from "./pages/dashboard/Dashboard";
+import SignUpPage from "./pages/auth/SignUpPage";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/not-found" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/not-found" replace />} />
@@ -25,3 +31,5 @@ function App() {
 }
 
 export default App;
+
+// {isauth && ()}
