@@ -32,20 +32,37 @@ form {
   }
 }
 
-.login-form {
+.lf-auth-form {
+  $this: ".lf-auth-form";
+
   display: flex;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  min-height: 100vh;
   &__inner {
-    margin: 20vh auto auto;
+    margin: 50px 0;
     padding: 40px;
-    width: 440px;
     background: #fff;
     border: solid 10px #f5f2ea;
     > p {
       @include small-text;
       margin-bottom: 40px;
       text-align: center;
+    }
+  }
+  &__welcome-msg {
+    text-align: center;
+    p {
+      &:nth-of-type(1) {
+        margin-bottom: 0;
+        font-size: 36px;
+        font-weight: $font-weight-bold;
+      }
+      &:nth-of-type(2) {
+        margin-bottom: 30px;
+        font-size: 18px;
+        font-weight: $font-weight-bold;
+      }
     }
   }
   &__logo {
@@ -57,21 +74,65 @@ form {
   }
   &__button-wrapper {
     display: flex;
+    flex-direction: column;
     margin-top: 30px;
-    a {
-      @include small-text;
-      margin-left: auto;
+    a,
+    div {
+      text-align: center;
+      font-size: 12px;
     }
+  }
+  &__submit-button {
+    clear: both;
   }
   input {
     font-size: 14px;
   }
+  &--login {
+    #{$this}__button-wrapper {
+      > div {
+        &:last-of-type {
+          margin-top: 20px;
+        }
+      }
+    }
+    #{$this}__submit-button {
+      margin-bottom: 10px;
+    }
+  }
+  &--signup {
+    #{$this}__submit-button {
+      margin-bottom: 30px;
+    }
+  }
+  &--reset-pw {
+    #{$this}__submit-button {
+      margin-bottom: 30px;
+    }
+  }
 }
 
 @include media-breakpoint-down(md) {
-  .login-form {
+  .lf-auth-form {
     &__inner {
       width: 90%;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .lf-auth-form {
+    $this: ".lf-auth-form";
+    &--login,
+    &--reset-pw {
+      #{$this}__inner {
+        width: 440px;
+      }
+    }
+    &--signup {
+      #{$this}__inner {
+        width: 800px;
+      }
     }
   }
 }

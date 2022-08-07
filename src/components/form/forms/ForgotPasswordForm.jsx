@@ -1,10 +1,11 @@
 import { Form, Formik } from "formik";
 import React from "react";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import FormControl from "../FormControl";
 import logo from "./../../../assets/img/logo.png";
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = (props) => {
   const initialValues = {
     email: "",
   };
@@ -12,12 +13,13 @@ const ForgotPasswordForm = () => {
     email: Yup.string().email("Invalid email format").required("Required"),
   });
   const onSubmit = (values) => {
-    console.log("Form data", values);
+    props.submitHandler(values);
+    // console.log("Form data", values);
   };
   return (
-    <div className="login-form">
-      <div className="login-form__inner">
-        <figure className="figure login-form__logo">
+    <div className="lf-auth-form lf-auth-form--reset-pw">
+      <div className="lf-auth-form__inner">
+        <figure className="figure lf-auth-form__logo">
           <img src={logo} alt="" className=" img-fluid" />
         </figure>
         <p>
@@ -38,14 +40,19 @@ const ForgotPasswordForm = () => {
                   label="Email Address"
                   name="email"
                 />
-                <div className="login-form__button-wrapper">
+
+                <div className="lf-auth-form__button-wrapper">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary lf-auth-form__submit-button"
                     type="submit"
                     disabled={!formik.isValid}
                   >
                     Submit
                   </button>
+                  <div>
+                    Back to
+                    <Link to="/"> Login</Link>
+                  </div>
                 </div>
               </Form>
             );

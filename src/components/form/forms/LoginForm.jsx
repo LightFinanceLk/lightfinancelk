@@ -21,11 +21,15 @@ const LoginForm = (props) => {
     // console.log("Form data", values);
   };
   return (
-    <div className="login-form">
-      <div className="login-form__inner">
-        <figure className="figure login-form__logo">
+    <div className="lf-auth-form lf-auth-form--login">
+      <div className="lf-auth-form__inner">
+        <figure className="figure lf-auth-form__logo">
           <img src={logo} alt="" className=" img-fluid" />
         </figure>
+        <div className="lf-auth-form__welcome-msg">
+          <p>Welcome Back!</p>
+          <p>Sign into Your account.</p>
+        </div>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -46,15 +50,21 @@ const LoginForm = (props) => {
                   label="Password"
                   name="password"
                 />
-                <div className="login-form__button-wrapper">
+                <div className="lf-auth-form__button-wrapper">
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary lf-auth-form__submit-button"
                     type="submit"
                     disabled={!formik.isValid}
                   >
-                    Log In
+                    Sign In
                   </button>
-                  <Link to="/forgot-password">Forgot Password</Link>
+                  <div>
+                    Forgot password?
+                    <Link to="/forgot-password"> Reset Password</Link>
+                  </div>
+                  <div>
+                    Don't have an account?<Link to="/signup"> Sign Up</Link>
+                  </div>
                 </div>
               </Form>
             );
