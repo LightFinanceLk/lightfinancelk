@@ -1,11 +1,21 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import HeaderDropDown from "./shared/header/HeaderDropDown";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store/auth";
 import logo from "./../assets/img/logo.png";
-import { useSelector } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    dispatch(authActions.logout());
+    navigate("/login");
+  };
+
   return (
     <>
       {isAuth && (
@@ -59,7 +69,7 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#" onClick={logoutHandler}>
                     Log Out
                   </a>
                 </li>

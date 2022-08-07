@@ -18,7 +18,6 @@ const LoginForm = (props) => {
   });
   const onSubmit = (values) => {
     props.submitHandler(values);
-    // console.log("Form data", values);
   };
   return (
     <div className="lf-auth-form lf-auth-form--login">

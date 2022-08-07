@@ -20,12 +20,13 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Dashboard />} exact />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Route>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/not-found" replace />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Layout>
     </Router>
