@@ -4,11 +4,17 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import authApi from "../../api/authApi";
 import SignUpForm from "../../components/form/forms/SignUpForm";
-import moment from "moment";
 
 const SignUpPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    if (storedUserData && storedUserData.token) {
+      dispatch(authActions.login(storedUserData));
+      navigate("/");
+    }
+  }, []);
   // const [formData, setFormData] = useState({});
 
   // useEffect(() => {

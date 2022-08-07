@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import LoginForm from "../../components/form/forms/LoginForm";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    if (storedUserData && storedUserData.token) {
+      dispatch(authActions.login(storedUserData));
+      navigate("/");
+    }
+  }, []);
 
-  // const [formData, setFormData] = useState({});
-
-  const loginHandler = (formData) => {
-    console.log(formData);
-    const login = async (formData) => {
-      try {
-        console.log("data", formData);
-        const res = await authApi.login(JSON.stringify(formData));
-        if (res) {
-          // TODO validate res to res.length
-          console.log(res);
-          navigate("/dashboard");
-          dispatch(authActions.login(res.data.token));
-        }
-      } catch (e) {
-        console.log(e);
+  const loginHandler = async (formData) => {
+    try {
+      const res = await authApi.login(JSON.stringify(formData));
+      if (res.data) {
+        // TODO validate res to res.length
+        dispatch(authActions.login(res.data));
+        navigate("/");
       }
-    };
-    login(formData);
+    } catch (e) {
+      console.log(e);
+    }
   };
-
-  // useEffect(() => {
-  //   if (!(formData && Object.keys(formData).length === 0)) {
-  //     // console.log("formData", formData);
-  //   }
-  // }, [formData]);
 
   return <LoginForm submitHandler={loginHandler}></LoginForm>;
 };
