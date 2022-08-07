@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useDispatch } from "react-redux";
@@ -9,19 +8,15 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [formData, setFormData] = useState({});
-
   const loginHandler = (formData) => {
     console.log(formData);
     const login = async (formData) => {
       try {
-        console.log("data", formData);
         const res = await authApi.login(JSON.stringify(formData));
         if (res) {
           // TODO validate res to res.length
-          console.log(res);
-          navigate("/dashboard");
-          dispatch(authActions.login(res.data.token));
+          dispatch(authActions.login(res.data));
+          navigate("/");
         }
       } catch (e) {
         console.log(e);
@@ -29,12 +24,6 @@ const LoginPage = () => {
     };
     login(formData);
   };
-
-  // useEffect(() => {
-  //   if (!(formData && Object.keys(formData).length === 0)) {
-  //     // console.log("formData", formData);
-  //   }
-  // }, [formData]);
 
   return <LoginForm submitHandler={loginHandler}></LoginForm>;
 };
