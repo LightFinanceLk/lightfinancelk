@@ -14,7 +14,7 @@ const LoginPage = () => {
       dispatch(authActions.login(storedUserData));
       navigate("/");
     }
-  }, []);
+  }, [dispatch, navigate]);
 
   const loginHandler = async (formData) => {
     try {

@@ -8,19 +8,18 @@ import ForgotPasswordForm from "../../components/form/forms/ForgotPasswordForm";
 const ForgotPasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userData"));
     if (storedUserData && storedUserData.token) {
       dispatch(authActions.login(storedUserData));
       navigate("/");
     }
-  }, []);
+  }, [dispatch, navigate]);
 
   const resetHandler = async (formData) => {
     console.log(formData);
-    // const resetPassword = async (formData) => {
     try {
-      console.log("reset data", formData);
       const res = await authApi.resetPassword(JSON.stringify(formData));
       if (res) {
         // TODO validate res to res.length
@@ -30,8 +29,6 @@ const ForgotPasswordPage = () => {
     } catch (e) {
       console.log(e);
     }
-    // };
-    // resetPassword(formData);
   };
   return <ForgotPasswordForm submitHandler={resetHandler}></ForgotPasswordForm>;
 };

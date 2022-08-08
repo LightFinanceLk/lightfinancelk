@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import DateView from "react-datepicker";
 import { Field, ErrorMessage } from "formik";
 import TextError from "./TextError";
-// import "react-datepicker/dist/react-datepicker.css";
 import { DatePicker } from "antd";
 import moment from "moment";
 
 const DatePickerControl = (props) => {
-  const { label, name, ...rest } = props;
+  const { label, name } = props;
   const dateFormat = "YYYY/MM/DD";
   const [date, setDate] = useState("");
   useEffect(() => {
@@ -22,9 +20,8 @@ const DatePickerControl = (props) => {
         {label}
       </label>
       <Field name={name}>
-        {({ form, field }) => {
+        {({ form }) => {
           const { setFieldValue } = form;
-          const { value } = field;
           return (
             <DatePicker
               className="form-control"

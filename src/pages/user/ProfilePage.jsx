@@ -18,7 +18,6 @@ const ProfilePage = () => {
         const res = await userApi.getDataByUserId(uId);
         if (res) {
           // TODO validate res to res.length
-          // navigate("/login");
           setInitialValues(res.data);
         }
       } catch (e) {
@@ -26,12 +25,10 @@ const ProfilePage = () => {
       }
     };
     gerUserDataById(uId);
-    // setInitialValues({});
-  }, []);
+  }, [uId]);
 
   const submitHandler = async (formData) => {
     console.log(formData);
-    // const resetPassword = async (formData) => {
     try {
       console.log("reset data", formData);
       const res = await userApi.updateDataByUserId(
@@ -40,14 +37,10 @@ const ProfilePage = () => {
       );
       if (res) {
         // TODO validate res to res.length
-        console.log(res);
-        // navigate("/login");
       }
     } catch (e) {
       console.log(e);
     }
-    // };
-    // resetPassword(formData);
   };
   const changePasswordHandler = async (formData) => {
     try {
@@ -75,7 +68,6 @@ const ProfilePage = () => {
       console.log(e);
     }
   };
-  // return <ProfileForm initialValues={initialValues} />;
   return (
     <>
       <ProfileForm

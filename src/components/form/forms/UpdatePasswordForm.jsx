@@ -1,11 +1,8 @@
 import { Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import FormControl from "../FormControl";
 
 const UpdatePasswordForm = (props) => {
-  // const [initialValues, setInitialValues] = useState({});
-  // const [dob, setDob] = useState(moment(props.date).format("YYYY/MM/DD"));
   const initialValues = {
     currentPassword: "",
     newPassword: "",
@@ -20,16 +17,6 @@ const UpdatePasswordForm = (props) => {
     resetForm();
     props.changePasswordHandler(values);
   };
-  // useEffect(() => {
-  //   setInitialValues(() => {
-  //     return { ...props.initialValues.user };
-  //   });
-  //   setDob(() => {
-  //     if (props.initialValues.user && props.initialValues.user.dob) {
-  //       return props.initialValues.user.dob;
-  //     }
-  //   });
-  // }, [props.initialValues.user]);
   return (
     <div className="lf-profile-form">
       <div className="lf-profile-form__inner">

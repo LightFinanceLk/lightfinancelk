@@ -69,9 +69,13 @@ const Header = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#" onClick={logoutHandler}>
+                  <button
+                    className="dropdown-item"
+                    href="#"
+                    onClick={logoutHandler}
+                  >
                     Log Out
-                  </a>
+                  </button>
                 </li>
               </HeaderDropDown>
             </div>
