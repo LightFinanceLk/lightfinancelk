@@ -38,10 +38,10 @@ const SignUpPage = () => {
     const login = async (formData) => {
       try {
         // console.log("data", formData);
-        const dob = formData.dob.format("YYYY-MM-DD");
-        // const age = moment().diff(dob, "years", false);
-        formData = { ...formData, dob };
-        console.log(formData);
+        // const dob = formData.dob.format("YYYY-MM-DD");
+        // // const age = moment().diff(dob, "years", false);
+        // formData = { ...formData, dob };
+        // console.log(formData);
         const res = await authApi.signUp(JSON.stringify(formData));
         if (res) {
           // console.log(res);
