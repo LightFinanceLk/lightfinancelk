@@ -16,22 +16,22 @@ const ForgotPasswordPage = () => {
     }
   }, []);
 
-  const resetHandler = (formData) => {
+  const resetHandler = async (formData) => {
     console.log(formData);
-    const resetPassword = async (formData) => {
-      try {
-        console.log("reset data", formData);
-        const res = await authApi.resetPassword(JSON.stringify(formData));
-        if (res) {
-          // TODO validate res to res.length
-          console.log(res);
-          navigate("/login");
-        }
-      } catch (e) {
-        console.log(e);
+    // const resetPassword = async (formData) => {
+    try {
+      console.log("reset data", formData);
+      const res = await authApi.resetPassword(JSON.stringify(formData));
+      if (res) {
+        // TODO validate res to res.length
+        console.log(res);
+        navigate("/login");
       }
-    };
-    resetPassword(formData);
+    } catch (e) {
+      console.log(e);
+    }
+    // };
+    // resetPassword(formData);
   };
   return <ForgotPasswordForm submitHandler={resetHandler}></ForgotPasswordForm>;
 };

@@ -64,9 +64,9 @@ const Header = () => {
               {isAuth ? "authenticated" : "not authenticated"}
               <HeaderDropDown>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Settings
-                  </a>
+                  <NavLink to="/profile">
+                    <span className="dropdown-item">Settings</span>
+                  </NavLink>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#" onClick={logoutHandler}>
