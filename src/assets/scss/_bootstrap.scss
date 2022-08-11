@@ -5,6 +5,35 @@ $border-radius-pill: 0;
 
 $font-family-base: "Lato", sans-serif;
 
+// $primary: #1266f1;
+// $secondary: #b23cfd;
+// $success: #00b74a;
+// $info: #39c0ed;
+// $warning: #ffa900;
+// $danger: #f93154;
+// $light: #9fa6b2;
+// $dark: #262626;
+
+// $theme-colors: (
+//     "light":      #191653,
+//     "dark":       #fffdff,
+//     "primary":    #12b9b5,
+//     "secondary":  #0095a2,
+//     "info":       #475083,
+//     "success":    #00af4a,
+//     "warning":    #f1ca00,
+//     "danger":     #f90034,
+// );
+
+$primary: #1a2f40;
+$secondary: #da473a;
+$success: #2ca963;
+$info: #eacbc1;
+$warning: #e6cc2b;
+$danger: #f5171a;
+$light: #bdece2;
+$dark: #030405;
+
 @import "~bootstrap/scss/mixins/banner";
 
 // scss-d~bootstrap/scss/ocs-start import-stack

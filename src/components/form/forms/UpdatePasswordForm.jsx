@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import FormControl from "../FormControl";
 import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
-import { notification } from "antd";
+import { message } from "antd";
 
 const UpdatePasswordForm = (props) => {
   const [isPasswordSVisible, setIsPasswordVisible] = useState(true);
@@ -76,22 +76,12 @@ const UpdatePasswordForm = (props) => {
                         name="newPassword"
                         onPaste={(e) => {
                           e.preventDefault();
-                          notification.warning({
-                            message: "Sorry",
-                            description: "Copying and Pasting are disabled.",
-                            duration: 5,
-                            placement: "top",
-                          });
+                          message.info("Pasting is disabled.", 3);
                           return false;
                         }}
                         onCopy={(e) => {
                           e.preventDefault();
-                          notification.warning({
-                            message: "Sorry",
-                            description: "Copying and Pasting are disabled.",
-                            duration: 5,
-                            placement: "top",
-                          });
+                          message.info("Copying is disabled.", 3);
                           return false;
                         }}
                       />
@@ -117,22 +107,12 @@ const UpdatePasswordForm = (props) => {
                         name="confirmedNewPassword"
                         onPaste={(e) => {
                           e.preventDefault();
-                          notification.warning({
-                            message: "Sorry",
-                            description: "Copying and Pasting are disabled.",
-                            duration: 5,
-                            placement: "top",
-                          });
+                          message.info("Pasting is disabled.", 3);
                           return false;
                         }}
                         onCopy={(e) => {
                           e.preventDefault();
-                          notification.warning({
-                            message: "Sorry",
-                            description: "Copying and Pasting are disabled.",
-                            duration: 5,
-                            placement: "top",
-                          });
+                          message.info("Copying is disabled.", 3);
                           return false;
                         }}
                       />

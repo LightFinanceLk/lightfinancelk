@@ -4,6 +4,23 @@ form {
     display: block;
     clear: both;
   }
+  input[type="radio"]:after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: 0;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid white;
+  }
+
+  input[type="radio"]:checked:after {
+    background-color: $secondary;
+  }
 }
 
 .lf-radio-input {
