@@ -1,8 +1,12 @@
 import { Form, Formik } from "formik";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import FormControl from "../FormControl";
+import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
+import { notification } from "antd";
 
 const UpdatePasswordForm = (props) => {
+  const [isPasswordSVisible, setIsPasswordVisible] = useState(true);
   const initialValues = {
     currentPassword: "",
     newPassword: "",
@@ -10,9 +14,17 @@ const UpdatePasswordForm = (props) => {
   };
   const validationSchema = Yup.object({
     currentPassword: Yup.string().required("Required"),
-    newPassword: Yup.string().required("Required"),
+    newPassword: Yup.string()
+      .required("Required")
+      .min(6, "Password is too short. Minimum 6 characters."),
     confirmedNewPassword: Yup.string().required("Required"),
   });
+
+  const togglePasswordVisibility = () => {
+    // When the handler is invoked inverse the boolean state of passwordShown
+    setIsPasswordVisible(!isPasswordSVisible);
+  };
+
   const onSubmit = (values, { resetForm }) => {
     resetForm();
     props.changePasswordHandler(values);
@@ -31,33 +43,112 @@ const UpdatePasswordForm = (props) => {
           {(formik) => {
             return (
               <Form>
-                <div className="container">
+                <div className="container lf-profile-form__password-fields">
                   <div className="row">
                     <div className="col-sm-6">
                       <FormControl
                         control="input"
-                        type="text"
+                        type={isPasswordSVisible ? "text" : "password"}
                         label="Current Password"
                         name="currentPassword"
                       />
+                      {isPasswordSVisible ? (
+                        <EyeInvisibleFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      ) : (
+                        <EyeFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-sm-6">
                       <FormControl
                         control="input"
-                        type="text"
+                        type={isPasswordSVisible ? "text" : "password"}
                         label="New Password"
                         name="newPassword"
+                        onPaste={(e) => {
+                          e.preventDefault();
+                          notification.warning({
+                            message: "Sorry",
+                            description: "Copying and Pasting are disabled.",
+                            duration: 5,
+                            placement: "top",
+                          });
+                          return false;
+                        }}
+                        onCopy={(e) => {
+                          e.preventDefault();
+                          notification.warning({
+                            message: "Sorry",
+                            description: "Copying and Pasting are disabled.",
+                            duration: 5,
+                            placement: "top",
+                          });
+                          return false;
+                        }}
                       />
+                      {isPasswordSVisible ? (
+                        <EyeInvisibleFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      ) : (
+                        <EyeFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      )}
                     </div>
                     <div className="col-sm-6">
                       <FormControl
                         control="input"
-                        type="text"
+                        type={isPasswordSVisible ? "text" : "password"}
                         label="Retype New Password to confirm"
                         name="confirmedNewPassword"
+                        onPaste={(e) => {
+                          e.preventDefault();
+                          notification.warning({
+                            message: "Sorry",
+                            description: "Copying and Pasting are disabled.",
+                            duration: 5,
+                            placement: "top",
+                          });
+                          return false;
+                        }}
+                        onCopy={(e) => {
+                          e.preventDefault();
+                          notification.warning({
+                            message: "Sorry",
+                            description: "Copying and Pasting are disabled.",
+                            duration: 5,
+                            placement: "top",
+                          });
+                          return false;
+                        }}
                       />
+                      {isPasswordSVisible ? (
+                        <EyeInvisibleFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      ) : (
+                        <EyeFilled
+                          onClick={togglePasswordVisibility}
+                          className="lf-profile-form__password-visibility"
+                          style={{ color: "#00000073" }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

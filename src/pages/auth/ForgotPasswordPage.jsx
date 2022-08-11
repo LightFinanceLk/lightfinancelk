@@ -18,12 +18,9 @@ const ForgotPasswordPage = () => {
   }, [dispatch, navigate]);
 
   const resetHandler = async (formData) => {
-    console.log(formData);
     try {
       const res = await authApi.resetPassword(JSON.stringify(formData));
       if (res) {
-        // TODO validate res to res.length
-        console.log(res);
         navigate("/login");
       }
     } catch (e) {

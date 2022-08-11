@@ -29,13 +29,13 @@
       }
     }
   }
-  &__logo {
-    display: flex;
-    justify-content: center;
-    img {
-      width: 250px;
-    }
-  }
+  // &__logo {
+  //   display: flex;
+  //   justify-content: center;
+  //   img {
+  //     width: 250px;
+  //   }
+  // }
   &__button-wrapper {
     display: flex;
     flex-direction: column;
@@ -52,28 +52,42 @@
   input {
     font-size: 14px;
   }
-  &--login {
-    #{$this}__button-wrapper {
+  &__password-fields {
+    .row {
       > div {
-        &:last-of-type {
-          margin-top: 20px;
-        }
+        position: relative;
+        padding-right: 40px;
       }
     }
-    #{$this}__submit-button {
-      margin-bottom: 10px;
-    }
   }
-  &--signup {
-    #{$this}__submit-button {
-      margin-bottom: 30px;
-    }
+  &__password-visibility {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    font-size: 20px;
   }
-  &--reset-pw {
-    #{$this}__submit-button {
-      margin-bottom: 30px;
-    }
-  }
+  // &--login {
+  //   #{$this}__button-wrapper {
+  //     > div {
+  //       &:last-of-type {
+  //         margin-top: 20px;
+  //       }
+  //     }
+  //   }
+  //   #{$this}__submit-button {
+  //     margin-bottom: 10px;
+  //   }
+  // }
+  // &--signup {
+  //   #{$this}__submit-button {
+  //     margin-bottom: 30px;
+  //   }
+  // }
+  // &--reset-pw {
+  //   #{$this}__submit-button {
+  //     margin-bottom: 30px;
+  //   }
+  // }
 }
 
 @include media-breakpoint-down(md) {

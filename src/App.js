@@ -11,6 +11,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import Dashboard from "./pages/dashboard/Dashboard";
 import SignUpPage from "./pages/auth/SignUpPage";
+import InitPasswordPage from "./pages/auth/InitPasswordPage";
 import ProtectedRoutes from "./pages/auth/ProtectedRoutes";
 import ProfilePage from "./pages/user/ProfilePage";
 
@@ -22,6 +23,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Dashboard />} exact />
             <Route path="/profile" element={<ProfilePage />} exact />
+            <Route path="/reset-password" element={<InitPasswordPage />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Route>
