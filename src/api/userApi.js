@@ -16,11 +16,17 @@ const updatePassword = async (userId, data) => {
   return axiosApi.patch(`users/updatePassword/${userId}`, data);
 };
 
+const resetPassword = async (formData) => {
+  // recheck this?????
+  return axiosApi.post(`users/resetPassword`, formData);
+};
+
 const userApi = {
   getDataByUserId,
   updateDataByUserId,
   updatePassword,
   deleteProfile,
+  resetPassword,
 };
 
 export default userApi;
