@@ -6,6 +6,8 @@ import LoginForm from "../../components/form/forms/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
 
+let logoutTimer;
+
 const LoginPage = () => {
   const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
@@ -22,6 +24,14 @@ const LoginPage = () => {
     }
     if (userData) {
       const user = jwt(userData.token);
+      const remainingTime =
+        (user.exp - new Date(new Date()).getTime() / 1000) * 1000;
+      clearTimeout(logoutTimer);
+      logoutTimer = setTimeout(() => {
+        dispatch(authActions.logout());
+        navigate("/login");
+        clearTimeout(logoutTimer);
+      }, remainingTime);
       const persistData = {
         token: userData.token,
         uId: user.userId,
