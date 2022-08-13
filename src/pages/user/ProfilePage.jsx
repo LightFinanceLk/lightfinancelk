@@ -84,4 +84,7 @@ const ProfilePage = () => {
   );
 };
 
+// set date format
+// set currency and remove currency from account
+
 export default ProfilePage;

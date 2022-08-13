@@ -40,14 +40,14 @@ const Header = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/account">
+                  <NavLink to="/account/create">
                     <span className="nav-link px-2 link-secondary">
                       Accounts
                     </span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/record">
+                  <NavLink to="/record/create">
                     <span className="nav-link px-2 link-secondary">
                       Records
                     </span>
