@@ -1,18 +1,16 @@
 import { useFormikContext, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import FormControl from "../../FormControl";
+import FormControl from "../../fields/FormControl";
 import categories from "./categories";
-import RadioButtons from "../../RadioButtons";
-import DatePickerControl from "../../DatePicker";
+import RadioButtons from "../../fields/RadioButtons";
+import DatePickerControl from "../../fields/DatePicker";
 import moment from "moment";
 
 const AutoUpdateForm = (props) => {
   const { values } = useFormikContext();
 
   useEffect(() => {
-    console.log(values);
-    console.log(props);
     if (values.category !== "") {
       let index;
       Object.keys(categories).map((el, i) => {
@@ -44,7 +42,7 @@ const AutoUpdateForm = (props) => {
       ]);
       props.setIsSubCategoryEnabled(false);
     }
-  }, [values, props]);
+  }, [values]);
   return null;
 };
 
@@ -62,6 +60,7 @@ const CreateRecordForm = (props) => {
     },
   ]);
   const [isSubCategoryEnabled, setIsSubCategoryEnabled] = useState(true);
+  const [userAccounts, setUserAccounts] = useState([]);
 
   useEffect(() => {
     let cat = Object.keys(categories);
@@ -82,23 +81,37 @@ const CreateRecordForm = (props) => {
         ...catOptions,
       ]);
     }
-  }, []);
+    let userAccounts = [
+      {
+        key: "Choose",
+        value: "",
+      },
+    ];
+    props.userAccounts.map((account) => {
+      userAccounts.push({ key: account.accountName, value: account._id });
+    });
+    setUserAccounts(userAccounts);
+  }, [props.userAccounts]);
 
   const initialValues = {
-    transactionType: "expense",
-    account: "",
-    transactionAmount: "",
+    recordType: "expense",
+    accountId: "",
+    amount: "",
+    // currency: "",
     category: "",
     subCategory: "",
     date: "",
+    // payee: "",
+    // note: "",
+    // paymentType: "",
+    // paymentStatus: "",
+    // place: "",
   };
 
   const validationSchema = Yup.object({
-    transactionType: Yup.string().required("Required"),
-    account: Yup.string().required("Required"),
-    transactionAmount: Yup.number("Amount should be a number").required(
-      "Required"
-    ),
+    recordType: Yup.string().required("Required"),
+    accountId: Yup.string().required("Required"),
+    amount: Yup.number("Amount should be a number").required("Required"),
     category: Yup.string().required("Required"),
     date: Yup.string().required("Required"),
   });
@@ -133,7 +146,7 @@ const CreateRecordForm = (props) => {
                       <div className="col-sm-12">
                         <RadioButtons
                           label=""
-                          name="transactionType"
+                          name="recordType"
                           options={transactionTypeOptions}
                         ></RadioButtons>
                       </div>
@@ -141,8 +154,8 @@ const CreateRecordForm = (props) => {
                         <FormControl
                           control="select"
                           label="Account Name"
-                          name="account"
-                          options={props.userAccounts}
+                          name="accountId"
+                          options={userAccounts}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -174,9 +187,9 @@ const CreateRecordForm = (props) => {
                       <div className="col-sm-6">
                         <FormControl
                           control="input"
-                          type="text"
+                          type="number"
                           label="Amount"
-                          name="transactionAmount"
+                          name="amount"
                         />
                       </div>
                       <div className="col-sm-6">show currency here....</div>

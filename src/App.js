@@ -15,6 +15,7 @@ import InitPasswordPage from "./pages/auth/InitPasswordPage";
 import ProtectedRoutes from "./pages/auth/ProtectedRoutes";
 import ProfilePage from "./pages/user/ProfilePage";
 import CreateAccountPage from "./pages/account/CreateAccountPage";
+import AccountPage from "./pages/account/AccountPage";
 import CreateRecordPage from "./pages/record/CreateRecordPage";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<Dashboard />} exact />
             <Route path="/profile" element={<ProfilePage />} exact />
             <Route path="/reset-password" element={<InitPasswordPage />} />
+            <Route path="/account" element={<AccountPage />} />
             <Route path="/account/create" element={<CreateAccountPage />} />
             <Route path="/record/create" element={<CreateRecordPage />} />
             <Route path="/not-found" element={<NotFound />} />

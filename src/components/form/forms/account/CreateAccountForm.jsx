@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import FormControl from "../../FormControl";
+import FormControl from "../../fields/FormControl";
 
 const CreateAccountForm = (props) => {
   const initialValues = {

@@ -6,7 +6,7 @@ const accountSlice = createSlice({
     accounts: [],
   },
   reducers: {
-    setAccounts(state, res) {
+    getAccounts(state, res) {
       state.accounts = res.payload;
     },
   },

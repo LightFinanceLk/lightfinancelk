@@ -1,9 +1,9 @@
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import FormControl from "../FormControl";
-import DatePickerControl from "../DatePicker";
-import RadioButtons from "../RadioButtons";
+import FormControl from "../fields/FormControl";
+import DatePickerControl from "../fields/DatePicker";
+import RadioButtons from "../fields/RadioButtons";
 import moment from "moment";
 
 const ProfileForm = (props) => {

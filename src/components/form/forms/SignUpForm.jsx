@@ -2,9 +2,9 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import FormControl from "../FormControl";
-import DatePickerControl from "../DatePicker";
-import RadioButtons from "../RadioButtons";
+import FormControl from "../fields/FormControl";
+import DatePickerControl from "../fields/DatePicker";
+import RadioButtons from "../fields/RadioButtons";
 import logo from "./../../../assets/img/logo.png";
 
 const SignUpForm = (props) => {
@@ -18,6 +18,10 @@ const SignUpForm = (props) => {
     phone: "",
     occupation: "",
   };
+
+  // const phoneRegExp =
+  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
@@ -26,6 +30,11 @@ const SignUpForm = (props) => {
     maritalStatus: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email format").required("Required"),
     phone: Yup.string().required("Required"),
+    // phone: Yup.string()
+    //   .required("required")
+    //   .matches(phoneRegExp, "Phone number is not valid")
+    //   .min(10, "Phone number is too short")
+    //   .max(10, "Phone number is too long"),
     occupation: Yup.string().required("Required"),
   });
   const genderOptions = [
