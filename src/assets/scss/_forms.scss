@@ -49,13 +49,10 @@ form {
   }
 }
 
-.lf-auth-form {
-  $this: ".lf-auth-form";
-
+@mixin lfAccount {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   &__inner {
     margin: 50px 0;
     padding: 40px;
@@ -65,21 +62,6 @@ form {
       @include small-text;
       margin-bottom: 40px;
       text-align: center;
-    }
-  }
-  &__welcome-msg {
-    text-align: center;
-    p {
-      &:nth-of-type(1) {
-        margin-bottom: 0;
-        font-size: 36px;
-        font-weight: $font-weight-bold;
-      }
-      &:nth-of-type(2) {
-        margin-bottom: 30px;
-        font-size: 18px;
-        font-weight: $font-weight-bold;
-      }
     }
   }
   &__logo {
@@ -102,8 +84,31 @@ form {
   &__submit-button {
     clear: both;
   }
-  input {
+  input,
+  select,
+  option {
     font-size: 14px;
+  }
+}
+
+.lf-auth-form {
+  @include lfAccount();
+  $this: ".lf-auth-form";
+  min-height: 100vh;
+  &__welcome-msg {
+    text-align: center;
+    p {
+      &:nth-of-type(1) {
+        margin-bottom: 0;
+        font-size: 36px;
+        font-weight: $font-weight-bold;
+      }
+      &:nth-of-type(2) {
+        margin-bottom: 30px;
+        font-size: 18px;
+        font-weight: $font-weight-bold;
+      }
+    }
   }
   &--login {
     #{$this}__button-wrapper {
@@ -125,6 +130,19 @@ form {
   &--reset-pw {
     #{$this}__submit-button {
       margin-bottom: 30px;
+    }
+  }
+}
+
+.lf-account-form {
+  $this: ".lf-account-form";
+  @include lfAccount();
+  &__welcome-msg {
+    text-align: center;
+    p {
+      margin-bottom: 30px;
+      font-size: 18px;
+      font-weight: $font-weight-bold;
     }
   }
 }

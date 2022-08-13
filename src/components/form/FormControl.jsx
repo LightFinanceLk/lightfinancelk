@@ -1,7 +1,7 @@
 import React from "react";
 // import CheckboxGroup from "./CheckboxGroup";
 import RadioButtons from "./RadioButtons";
-// import Select from "./Select";
+import Select from "./Select";
 import Input from "./Input";
 import DatePicker from "./DatePicker";
 
@@ -12,19 +12,16 @@ const FormControl = (props) => {
       return <Input {...rest} />;
     // case "textarea":
     //   return <Textarea {...rest} />;
-    // case "select":
-    //   return <Select {...rest} />;
+    case "select":
+      return <Select {...rest} />;
     case "radio":
       return <RadioButtons {...rest} />;
     // case "checkbox":
     // return <CheckboxGroup {...rest} />;
     case "date":
       return <DatePicker {...rest} />;
-    // case "chakraInput":
-    //   return <ChakraInput {...rest} />;
     default:
       return null;
-    // return <div>FormControl</div>;
   }
 };
 
