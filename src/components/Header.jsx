@@ -47,7 +47,7 @@ const Header = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/record/create">
+                  <NavLink to="/record/create-bulk">
                     <span className="nav-link px-2 link-secondary">
                       Records
                     </span>

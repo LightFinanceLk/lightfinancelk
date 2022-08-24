@@ -17,6 +17,7 @@ import ProfilePage from "./pages/user/ProfilePage";
 import CreateAccountPage from "./pages/account/CreateAccountPage";
 import AccountPage from "./pages/account/AccountPage";
 import CreateRecordPage from "./pages/record/CreateRecordPage";
+import BulkRecordsPage from "./pages/bulkRecords/BulkRecordsPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/account" element={<AccountPage />} />
             <Route path="/account/create" element={<CreateAccountPage />} />
             <Route path="/record/create" element={<CreateRecordPage />} />
+            <Route path="/record/create-bulk" element={<BulkRecordsPage />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/not-found" replace />} />
           </Route>
@@ -46,3 +48,5 @@ function App() {
 export default App;
 
 // {isauth && ()}
+
+// add to env GENERATE_SOURCEMAP=false

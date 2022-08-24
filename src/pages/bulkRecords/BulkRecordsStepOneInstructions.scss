@@ -1,0 +1,9 @@
+.bulk-record-step-1-inst {
+  img {
+    width: 50px;
+    border: 10px solid transparent;
+    &.active {
+      border-color: red;
+    }
+  }
+}
