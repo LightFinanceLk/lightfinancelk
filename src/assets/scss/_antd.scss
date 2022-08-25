@@ -2,8 +2,10 @@
   .ant-message-notice-content {
     display: block;
     padding: 0;
+    margin: 0 auto;
+    max-width: 1200px;
     .ant-message-custom-content {
-      padding: 10px 16px;
+      padding: 10px 30px;
     }
     .ant-message-info {
       background-color: $blue-100;

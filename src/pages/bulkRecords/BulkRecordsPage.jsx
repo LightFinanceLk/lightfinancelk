@@ -20,7 +20,7 @@ const steps = [
   {
     title: "Add Raw Data",
     content:
-      "Select raw data type and copy your data into the text input field",
+      "Select raw data type and copy your data into the text input field.",
   },
   {
     title: "Select Amount Column",
@@ -39,7 +39,7 @@ const steps = [
     content: "",
   },
   {
-    title: "Select Categories",
+    title: "Let's Finalize Records",
     content: "",
   },
 ];
@@ -126,9 +126,7 @@ const BulkRecordsPage = () => {
                   </>
                 ) : current === 5 ? (
                   <>
-                    <p>
-                      When the Categories are selected, click "Complete" button.
-                    </p>
+                    <p>Optionally categories can be selected.</p>
                     <p>(Selecting Categories is not mandatory)</p>
                   </>
                 ) : (

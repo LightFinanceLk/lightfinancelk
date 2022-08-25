@@ -66,10 +66,59 @@ const BulkRecordsStepTwoInstructions = (props) => {
           });
         }
       } catch (error) {
-        message.error(`The selected field is not suitable for amount column`);
+        message.error(`The selected column is not suitable for amount column`);
       }
     } else if (multipleColumns) {
-      props.dataColumns.map((col) => {});
+      try {
+        let updatedDataSource = props.dataSource;
+        updatedDataSource = updatedDataSource.map((item) => {
+          if (item[values.incomeColumn] !== "" && item[values.expenseColumn]) {
+            throw new Error("Income and expenses cannot be on the same line.");
+          }
+          Object.keys(item).forEach((key) => {
+            if (key === values.incomeColumn && item[key] !== "") {
+              const value = item[key];
+              delete item[key];
+              // console.log(value, "value1");
+              item.Amount = toFloatingPointNumber(value);
+              return item;
+            } else if (key === values.expenseColumn && item[key] !== "") {
+              const value = item[key];
+              delete item[key];
+              // console.log(value, "value2");
+              item.Amount = toFloatingPointNumber(value) * -1;
+              return item;
+            }
+          });
+          return item;
+        });
+
+        const updatedDataColumns = props.dataColumns.filter((col) => {
+          if (
+            col.key === values.incomeColumn ||
+            col.key === values.expenseColumn
+          ) {
+            return false;
+          }
+          return true;
+        });
+
+        props.setDataColumns([
+          ...updatedDataColumns,
+          {
+            title: "Amount",
+            dataIndex: "Amount",
+            key: "Amount",
+          },
+        ]);
+        props.setDataSource(updatedDataSource);
+        props.setCurrent(2);
+      } catch (error) {
+        message.error({
+          content: `The selected columns are not suitable for amount column. ${error}`,
+          duration: 5,
+        });
+      }
     }
   };
 

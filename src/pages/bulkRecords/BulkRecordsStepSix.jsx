@@ -155,6 +155,7 @@ const BulkRecordsStepSix = (props) => {
               onTreeSelect(record, treeValue);
             }}
             value={treeValue}
+            defaultValue="Other"
           />
         );
       },

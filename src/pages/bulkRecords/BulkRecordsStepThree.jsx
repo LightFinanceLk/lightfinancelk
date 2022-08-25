@@ -17,6 +17,7 @@ const BulkRecordsStepThree = (props) => {
   };
 
   useEffect(() => {
+    const selectedRows = [];
     if (props.dataColumns && columns.length === 0) {
       let columns = props.dataColumns;
       const amountColIndex = props.dataColumns.findIndex(
@@ -25,6 +26,15 @@ const BulkRecordsStepThree = (props) => {
       columns.splice(amountColIndex, 0, Table.SELECTION_COLUMN);
       setColumns(columns);
     }
+
+    props.dataSource.map((item, index) => {
+      Object.keys(item).forEach((key) => {
+        if (key === "Amount" && item[key] < 0) {
+          selectedRows.push(index);
+        }
+      });
+    });
+    setSelectedRowKeys(selectedRows);
   }, []);
 
   return (

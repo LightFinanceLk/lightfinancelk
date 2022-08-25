@@ -81,6 +81,18 @@ const BulkRecordsStepOneInstructions = (props) => {
               </dd>
             </dl>
           </>
+        ) : props.rawDataType === "json" ? (
+          <>
+            <p>
+              <a
+                href="https://jsonformatter.curiousconcept.com/"
+                target="__black"
+              >
+                Validate and format
+              </a>
+              &nbsp;your JSON data.
+            </p>
+          </>
         ) : (
           ""
         )}

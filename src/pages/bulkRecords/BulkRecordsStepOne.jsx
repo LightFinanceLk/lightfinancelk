@@ -70,17 +70,26 @@ const BulkRecordsStepOne = (props) => {
     };
 
     if (props.rawDataType === "html") {
-      const jsonTables = HtmlTableToJson.parse(values.rawData);
-      if (jsonTables.results[0]) {
-        createDataSource(jsonTables.results[0]);
-      } else {
-        message.error(
-          `Error in HTML <thead> markup. Please check and try again.`
-        );
-      }
-      if (jsonTables.headers[0]) {
-        createColumns(jsonTables.headers[0]);
-      } else {
+      try {
+        const jsonTables = HtmlTableToJson.parse(values.rawData);
+        if (jsonTables.results[0]) {
+          createDataSource(jsonTables.results[0]);
+        } else {
+          isError = true;
+          message.error(
+            `Error in HTML <thead> markup. Please check and try again.`
+          );
+        }
+        if (jsonTables.headers[0]) {
+          createColumns(jsonTables.headers[0]);
+        } else {
+          isError = true;
+          message.error(
+            `Error in HTML <tbody> markup. Please check and try again.`
+          );
+        }
+      } catch (error) {
+        isError = true;
         message.error(
           `Error in HTML <tbody> markup. Please check and try again.`
         );
@@ -93,6 +102,7 @@ const BulkRecordsStepOne = (props) => {
         .fromString(values.rawData)
         .then((jsonObj) => {
           if (jsonObj) {
+            console.log(jsonObj);
             createColumns(Object.keys(jsonObj[0]));
             createDataSource(jsonObj);
           } else {
@@ -102,6 +112,20 @@ const BulkRecordsStepOne = (props) => {
         .catch(() => {
           message.error(`Error in CSV data. Please check and try again.`);
         });
+    } else if (props.rawDataType === "json") {
+      try {
+        const jsonData = JSON.parse(`${values.rawData}`);
+        if (Object.keys(jsonData)) {
+          const data = Object.keys(jsonData)[0];
+          createColumns(Object.keys(jsonData[data][0]));
+          createDataSource(jsonData[data]);
+        }
+      } catch (error) {
+        isError = true;
+        message.error(
+          `Error in JSON data. Please validate or format JSON data and try again.`
+        );
+      }
     }
     if (!isError) {
       props.setCurrent(1);
@@ -122,43 +146,54 @@ const BulkRecordsStepOne = (props) => {
             <Form>
               <FormControl
                 control="textarea"
-                label={`Add ${props.rawDataType.toUpperCase()}`}
                 name="rawData"
                 placeholder={
-                  props.rawDataType === "html" ? (
-                    `eg.
+                  props.rawDataType === "html"
+                    ? `eg.
                     <table>
                       <thead>
                         <tr>
                           <th>Date</th>
-                          <th>Amount</th>
                           <th>Description</th>
+                          <th>Amount</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td>25/07/2022</td>
-                          <td>1000</td>
                           <td>Salary</td>
+                          <td>1000</td>
                         </tr>
                         <tr>
                           <td>28/07/2022</td>
-                          <td>500</td>
                           <td>Doctor Fee</td>
+                          <td>500</td>
                         </tr>
                       </tbody>
                     </table>`
-                  ) : props.rawDataType === "csv" ? (
-                    `eg.
+                    : props.rawDataType === "csv"
+                    ? `eg.
                     Date,Amount,Description
                     25/07/2022,1000,Salary
                     28/07/2022,500,Doctor Fee
                     `
-                  ) : props.rawDataType === "json" ? (
-                    <></>
-                  ) : (
-                    ""
-                  )
+                    : props.rawDataType === "json"
+                    ? `eg.
+                    {
+                      "data":[
+                        {
+                            "date": "25/07/2022",
+                            "description": "Salary",
+                            "amount": "1000",
+                        },
+                        {
+                            "date": "28/07/2022",
+                            "description": "Doctor Fee",
+                            "amount": "500",
+                        }
+                      ]
+                    }`
+                    : ""
                 }
               />
               <div className="lf-auth-form__button-wrapper">
