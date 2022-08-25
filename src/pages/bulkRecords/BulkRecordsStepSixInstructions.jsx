@@ -13,7 +13,7 @@ const BulkRecordsStepSixInstructions = (props) => {
   //   const dataSources = props.dataSource;
   // };
 
-  const finish = (values) => {
+  const onClickHandler = (values) => {
     // submitHandler(values);
   };
 
@@ -32,7 +32,7 @@ const BulkRecordsStepSixInstructions = (props) => {
   return (
     <>
       <div className="bulk-records__steps-action">
-        <Button type="primary" onClick={finish}>
+        <Button type="primary" onClick={onClickHandler}>
           Complete
         </Button>
       </div>

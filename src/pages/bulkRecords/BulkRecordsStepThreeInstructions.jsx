@@ -1,11 +1,38 @@
-import React, { useState } from "react";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import FormControl from "../../components/form/fields/FormControl";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { Button } from "antd";
 
 const BulkRecordsStepThreeInstructions = (props) => {
-  return <div></div>;
+  const [data, setData] = useState([]);
+  const [selectedExpenses, setSelectedExpenses] = useState([]);
+  useEffect(() => {
+    if (props.dataSource) {
+      setData(props.dataSource);
+    }
+    if (props.selectedExpenses) {
+      setSelectedExpenses(props.selectedExpenses);
+    }
+  }, [props.selectedExpenses, props.dataSource]);
+
+  const handleOnClick = () => {
+    selectedExpenses.map((item) => {
+      data[item].Amount *= -1;
+    });
+    props.setDataSource(data);
+    props.setCurrent(3);
+  };
+
+  return (
+    <div className="bulk-records__steps-action">
+      <Button
+        type="primary"
+        onClick={() => {
+          handleOnClick();
+        }}
+      >
+        Next
+      </Button>
+    </div>
+  );
 };
 
 export default BulkRecordsStepThreeInstructions;

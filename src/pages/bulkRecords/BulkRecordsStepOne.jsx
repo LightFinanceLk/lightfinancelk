@@ -3,21 +3,50 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
 import HtmlTableToJson from "html-table-to-json";
+import { message } from "antd";
+import csv from "csvtojson";
 
 const BulkRecordsStepOne = (props) => {
   const initialValues = {
-    html: "",
+    rawData: "",
   };
   const validationSchema = Yup.object({
-    html: Yup.string().required("Required"),
+    rawData: Yup.string().required("Required"),
   });
   const submitHandler = (values) => {
-    if (props.rawDataType === "html") {
-      const jsonTables = HtmlTableToJson.parse(values.html);
-      if (jsonTables.results[0]) {
-        const data = jsonTables.results[0];
+    let isError = false;
+    const capitalize = (str) => {
+      const words = str.split(" ");
+      const capitalizedWords = words.map((word) => {
+        return word && word.charAt(0).toUpperCase() + word.slice(1);
+      });
+      return capitalizedWords.join();
+    };
+    const createColumns = (rawColumns) => {
+      let columns = [];
+      try {
+        columns = rawColumns.filter((item) => item !== "");
+        columns = columns.map((item) => {
+          let altItem = {};
+          item !== ""
+            ? (altItem = {
+                title: capitalize(item).replace(/[^a-zA-Z]/g, ""),
+                dataIndex: item.replace(/[^a-zA-Z]/g, "").toLowerCase(),
+                key: item.replace(/[^a-zA-Z]/g, "").toLowerCase(),
+              })
+            : (altItem = null);
+          return altItem;
+        });
+        props.setDataColumns(columns);
+      } catch (error) {
+        isError = true;
+        message.error(`Error in creating table columns`);
+      }
+    };
+    const createDataSource = (rawDataSource) => {
+      try {
         let dataSource = [];
-        dataSource = data.map((item, index) => {
+        dataSource = rawDataSource.map((item, index) => {
           let altItem = Object.fromEntries(
             Object.entries(item).filter(([key, value]) => {
               return key.replace(/[^a-zA-Z]/g, "") !== "";
@@ -26,7 +55,7 @@ const BulkRecordsStepOne = (props) => {
           Object.keys(altItem).forEach((key) => {
             const temp = altItem[key];
             delete altItem[key];
-            altItem[key.replace(/[^a-zA-Z]/g, "")] = temp;
+            altItem[key.replace(/[^a-zA-Z]/g, "").toLowerCase()] = temp;
           });
           return {
             ...altItem,
@@ -34,33 +63,49 @@ const BulkRecordsStepOne = (props) => {
           };
         });
         props.setDataSource(dataSource);
+      } catch (error) {
+        isError = true;
+        message.error(`Error in creating table rows`);
+      }
+    };
+
+    if (props.rawDataType === "html") {
+      const jsonTables = HtmlTableToJson.parse(values.rawData);
+      if (jsonTables.results[0]) {
+        createDataSource(jsonTables.results[0]);
+      } else {
+        message.error(
+          `Error in HTML <thead> markup. Please check and try again.`
+        );
       }
       if (jsonTables.headers[0]) {
-        const headers = jsonTables.headers[0];
-        let columns = [];
-        const capitalize = (str) => {
-          const words = str.split(" ");
-          const capitalizedWords = words.map((word) => {
-            return word && word.charAt(0).toUpperCase() + word.slice(1);
-          });
-          return capitalizedWords.join();
-        };
-        columns = headers.filter((item) => item !== "");
-        columns = columns.map((item) => {
-          let altItem = {};
-          item !== ""
-            ? (altItem = {
-                title: capitalize(item).replace(/[^a-zA-Z]/g, ""),
-                dataIndex: item.replace(/[^a-zA-Z]/g, ""),
-                key: item.replace(/[^a-zA-Z]/g, ""),
-              })
-            : (altItem = null);
-          return altItem;
-        });
-        props.setDataColumns(columns);
+        createColumns(jsonTables.headers[0]);
+      } else {
+        message.error(
+          `Error in HTML <tbody> markup. Please check and try again.`
+        );
       }
+    } else if (props.rawDataType === "csv") {
+      csv({
+        output: "json",
+        noheader: false,
+      })
+        .fromString(values.rawData)
+        .then((jsonObj) => {
+          if (jsonObj) {
+            createColumns(Object.keys(jsonObj[0]));
+            createDataSource(jsonObj);
+          } else {
+            message.error(`Error in CSV data. Please check and try again.`);
+          }
+        })
+        .catch(() => {
+          message.error(`Error in CSV data. Please check and try again.`);
+        });
     }
-    props.setCurrent(1);
+    if (!isError) {
+      props.setCurrent(1);
+    }
   };
   const onSubmit = (values) => {
     submitHandler(values);
@@ -78,7 +123,7 @@ const BulkRecordsStepOne = (props) => {
               <FormControl
                 control="textarea"
                 label={`Add ${props.rawDataType.toUpperCase()}`}
-                name="html"
+                name="rawData"
                 placeholder={
                   props.rawDataType === "html" ? (
                     `eg.

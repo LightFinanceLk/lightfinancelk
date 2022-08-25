@@ -20,9 +20,8 @@ const BulkRecordsStepFourInstructions = (props) => {
     const dateColumn = values.dateColumn;
     const dateFormat = values.dateFormatText;
     let errors = [];
-
     const updatedDataColumns = props.dataColumns.map((col) => {
-      if (col.title === dateColumn) {
+      if (col.key === dateColumn) {
         return {
           title: "Date",
           dataIndex: "Date",
@@ -37,8 +36,8 @@ const BulkRecordsStepFourInstructions = (props) => {
         if (key === dateColumn) {
           const value = item[key];
           delete item[key];
-          // item.Date = moment(value, dateFormat).format("DD/MM/YYYY");
-          item.Date = value;
+          item.Date = moment(value, dateFormat).format("DD/MM/YYYY");
+          // item.Date = value;
         }
       });
       return item;
@@ -47,20 +46,20 @@ const BulkRecordsStepFourInstructions = (props) => {
     props.setDataColumns(updatedDataColumns);
 
     props.dataSource.map((item) => {
-      if (!moment(item.Date, dateFormat, true).isValid()) {
+      if (!moment(item.Date, "DD/MM/YYYY", true).isValid()) {
         errors.push(item.Date);
       }
     });
 
-    if (errors.length > 0) {
-      message.error(`${errors.join(", ")} is/are not valid`);
-    } else {
-      updatedDataSource = updatedDataSource.map((item) => {
-        item.Date = moment(item.Date, dateFormat).format("DD/MM/YYYY");
-        return item;
-      });
+    if (!errors.length > 0) {
+      // updatedDataSource = updatedDataSource.map((item) => {
+      //   item.Date = moment(item.Date, dateFormat).format("DD/MM/YYYY");
+      //   return item;
+      // });
       props.setDataSource(updatedDataSource);
       props.setCurrent(4);
+    } else {
+      message.error(`${errors.join(", ")} is/are not valid`);
     }
   };
   const onSubmit = (values) => {
@@ -71,8 +70,8 @@ const BulkRecordsStepFourInstructions = (props) => {
     if (props.dataColumns) {
       let columns = [];
       props.dataColumns.map((col) => {
-        if (col.title && col.title !== "Amount") {
-          columns.push({ key: col.key, value: col.title });
+        if (col.key && col.key !== "Amount") {
+          columns.push({ key: col.key, value: col.key });
         }
       });
       setTableColumns([{ key: "Choose", value: "" }, ...columns]);

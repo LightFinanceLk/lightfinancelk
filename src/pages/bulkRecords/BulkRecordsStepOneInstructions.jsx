@@ -58,9 +58,6 @@ const BulkRecordsStepOneInstructions = (props) => {
               </a>
               . Root level tag should be a table.
             </p>
-            <ul>
-              <t> </t>
-            </ul>
             <dl>
               <dt>in Chrome</dt>
               <dd>

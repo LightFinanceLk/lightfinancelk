@@ -109,7 +109,6 @@ const BulkRecordsStepFour = (props) => {
       });
       setColumns(temp);
     }
-    console.log(columns);
   }, [props.dataColumns, props.dataSource]);
 
   const handleSave = (row) => {

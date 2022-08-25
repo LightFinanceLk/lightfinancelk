@@ -40,7 +40,7 @@ const steps = [
   },
   {
     title: "Select Categories",
-    content: "When the Categories are selected, click Complete.",
+    content: "",
   },
 ];
 
@@ -52,6 +52,7 @@ const BulkRecordsPage = () => {
   const [amountColumn, setAmountColumn] = useState("");
   const [dateColumn, setDateColumn] = useState("");
   const [descriptionColumn, setDescriptionColumn] = useState("");
+  const [selectedExpenses, setSelectedExpenses] = useState([]);
 
   useEffect(() => {
     if (amountColumn !== "") {
@@ -95,36 +96,45 @@ const BulkRecordsPage = () => {
             </Steps>
             <div className="bulk-records__title">
               <h3>{steps[current].title}</h3>
-              <p>
+              <>
                 {current === 2 ? (
                   <>
-                    Click on the
-                    <label class="ant-checkbox-wrapper">
-                      <span class="ant-checkbox">
-                        <input
-                          type="checkbox"
-                          class="ant-checkbox-input"
-                          value=""
-                        />
-                        <span class="ant-checkbox-inner"></span>
-                      </span>
-                    </label>
-                    button to change amount to an expense value.
-                    <label class="ant-checkbox-wrapper">
-                      <span class="ant-checkbox ant-checkbox-checked">
-                        <input
-                          type="checkbox"
-                          class="ant-checkbox-input"
-                          value=""
-                        />
-                        <span class="ant-checkbox-inner"></span>
-                      </span>
-                    </label>
+                    <p>
+                      Click on the
+                      <label className="ant-checkbox-wrapper">
+                        <span className="ant-checkbox">
+                          <input
+                            type="checkbox"
+                            className="ant-checkbox-input"
+                            value=""
+                          />
+                          <span className="ant-checkbox-inner"></span>
+                        </span>
+                      </label>
+                      button to change amount to an expense value.
+                      <label className="ant-checkbox-wrapper">
+                        <span className="ant-checkbox ant-checkbox-checked">
+                          <input
+                            type="checkbox"
+                            className="ant-checkbox-input"
+                            value=""
+                          />
+                          <span className="ant-checkbox-inner"></span>
+                        </span>
+                      </label>
+                    </p>
+                  </>
+                ) : current === 5 ? (
+                  <>
+                    <p>
+                      When the Categories are selected, click "Complete" button.
+                    </p>
+                    <p>(Selecting Categories is not mandatory)</p>
                   </>
                 ) : (
-                  `${steps[current].content}`
+                  <p>{steps[current].content}</p>
                 )}
-              </p>
+              </>
             </div>
             <div className="bulk-records__steps-instructions">
               {current === 0 ? (
@@ -145,13 +155,16 @@ const BulkRecordsPage = () => {
               {current === 2 ? (
                 <BulkRecordsStepThreeInstructions
                   dataColumns={dataColumns}
+                  dataSource={dataSource}
                   setCurrent={setCurrent}
+                  setDataSource={setDataSource}
+                  selectedExpenses={selectedExpenses}
                 />
               ) : null}
               {current === 3 ? (
                 <BulkRecordsStepFourInstructions
-                  dataColumns={dataColumns}
                   setCurrent={setCurrent}
+                  dataColumns={dataColumns}
                   dataSource={dataSource}
                   setDataSource={setDataSource}
                   setDataColumns={setDataColumns}
@@ -176,31 +189,6 @@ const BulkRecordsPage = () => {
                 />
               ) : null}
             </div>
-            <div className="bulk-records__steps-action">
-              {current === 2 && (
-                <Button type="primary" onClick={() => next()}>
-                  Next
-                </Button>
-              )}
-              {/* {current === steps.length - 1 && (
-                <Button
-                  type="primary"
-                  onClick={() => message.success("Processing complete!")}
-                >
-                  Done
-                </Button>
-              )} */}
-              {/* {current > 0 && (
-                <Button
-                  style={{
-                    margin: "0 8px",
-                  }}
-                  onClick={() => prev()}
-                >
-                  Previous
-                </Button>
-              )} */}
-            </div>
           </div>
           <div className="col-sm-8">
             <div className="bulk-records__steps-content">
@@ -223,6 +211,7 @@ const BulkRecordsPage = () => {
                   dataSource={dataSource}
                   setDataSource={setDataSource}
                   dataColumns={dataColumns}
+                  setSelectedExpenses={setSelectedExpenses}
                 />
               ) : null}
               {current === 3 ? (

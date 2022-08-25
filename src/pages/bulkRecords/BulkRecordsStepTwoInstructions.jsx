@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const BulkRecordsStepTwoInstructions = (props) => {
   const [areTwoColumns, setAreTwoColumns] = useState(false);
-  const [tableColumns, setTableColumns] = useState([]);
+  const [columnOptions, setColumnOptions] = useState([]);
 
   const switchChangeHandler = (checked) => {
     setAreTwoColumns(checked);
@@ -32,40 +32,43 @@ const BulkRecordsStepTwoInstructions = (props) => {
       return parseFloat(numberString, 2);
     };
     if (!multipleColumns) {
-      const updatedDataColumns = props.dataColumns.map((col) => {
-        if (col.title === values.incomeExpenseColumn) {
-          return {
-            title: "Amount",
-            dataIndex: "Amount",
-            key: "Amount",
-          };
-        }
-        return col;
-      });
-      let updatedDataSource = props.dataSource;
-      updatedDataSource = updatedDataSource.map((item) => {
-        Object.keys(item).forEach((key) => {
-          if (key === values.incomeExpenseColumn) {
-            const value = item[key];
-            delete item[key];
-            item.Amount = toFloatingPointNumber(value);
-            return item;
+      try {
+        const updatedDataColumns = props.dataColumns.map((col) => {
+          if (col.key === values.incomeExpenseColumn) {
+            return {
+              title: "Amount",
+              dataIndex: "Amount",
+              key: "Amount",
+            };
           }
+          return col;
         });
-        return item;
-      });
-
-      if (warning) {
-        message.warning({
-          content: `We found some data we weren't expecting in column set as "Amount". We have removed special characters. \n
-        ${warning.join(", ")}`,
-          duration: 10,
+        let updatedDataSource = props.dataSource;
+        updatedDataSource = updatedDataSource.map((item) => {
+          Object.keys(item).forEach((key) => {
+            if (key === values.incomeExpenseColumn) {
+              const value = item[key];
+              delete item[key];
+              item.Amount = toFloatingPointNumber(value);
+              return item;
+            }
+          });
+          return item;
         });
+        props.setDataSource(updatedDataSource);
+        props.setDataColumns(updatedDataColumns);
+        props.setCurrent(2);
+        if (warning) {
+          message.warning({
+            content: `We found some data we weren't expecting in column set as "Amount". We have removed special characters. \n
+          ${warning.join(", ")}`,
+            duration: 10,
+          });
+        }
+      } catch (error) {
+        message.error(`The selected field is not suitable for amount column`);
       }
-      props.setDataSource(updatedDataSource);
-      props.setDataColumns(updatedDataColumns);
-      props.setCurrent(2);
-    } else {
+    } else if (multipleColumns) {
       props.dataColumns.map((col) => {});
     }
   };
@@ -84,7 +87,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
       dataSources.push({ key: dataSource.title, value: dataSource.key });
       return null;
     });
-    setTableColumns(dataSources);
+    setColumnOptions(dataSources);
   }, [props.dataSource, props.dataColumns]);
 
   return (
@@ -115,7 +118,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
                     name="incomeExpenseColumn"
                     options={[
                       { key: "Select Income Expenses Column", value: "" },
-                      ...tableColumns,
+                      ...columnOptions,
                     ]}
                   />
                   <div className="lf-auth-form__button-wrapper">
@@ -124,7 +127,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
                       type="submit"
                       disabled={!formik.isValid}
                     >
-                      Submit
+                      Next
                     </button>
                   </div>
                 </Form>
@@ -165,7 +168,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
                       name="incomeColumn"
                       options={[
                         { key: "Select Income Column", value: "" },
-                        ...tableColumns,
+                        ...columnOptions,
                       ]}
                     />
                     <FormControl
@@ -174,7 +177,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
                       name="expenseColumn"
                       options={[
                         { key: "Select Expenses Column", value: "" },
-                        ...tableColumns,
+                        ...columnOptions,
                       ]}
                     />
                   </>
@@ -184,7 +187,7 @@ const BulkRecordsStepTwoInstructions = (props) => {
                       type="submit"
                       disabled={!formik.isValid}
                     >
-                      Submit
+                      Next
                     </button>
                   </div>
                 </Form>

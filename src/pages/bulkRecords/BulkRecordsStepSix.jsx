@@ -1,13 +1,13 @@
 import {
   Form,
   Input,
-  InputNumber,
   Popconfirm,
   Table,
   Typography,
   TreeSelect,
+  message,
 } from "antd";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import categories from "../../util/categories";
 
 const EditableCell = ({
@@ -80,8 +80,7 @@ const BulkRecordsStepSix = (props) => {
           value: `${category}-${item}`,
         });
       });
-      console.log(children);
-      treeData.push({ title: category, value: category, children });
+      treeData.push({ title: category, value: `${category}-`, children });
     }
     setTreeData(treeData);
   }, [props.dataColumns, props.dataSource]);
@@ -121,7 +120,7 @@ const BulkRecordsStepSix = (props) => {
         setEditingKey("");
       }
     } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
+      message.error(`Validation Failed`);
     }
   };
 
@@ -214,7 +213,6 @@ const BulkRecordsStepSix = (props) => {
     if (col.dataIndex === "operation") {
       return col;
     }
-
     return {
       ...col,
       onCell: (record) => ({

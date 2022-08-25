@@ -7,12 +7,8 @@ const BulkRecordsStepThree = (props) => {
   const [columns, setColumns] = useState([]);
 
   const onSelectChange = (keys) => {
-    let data = props.dataSource;
-    keys.map((item) => {
-      data[item].Amount *= -1;
-    });
-    props.setDataSource(data);
     setSelectedRowKeys(keys);
+    props.setSelectedExpenses(keys);
   };
 
   const rowSelection = {

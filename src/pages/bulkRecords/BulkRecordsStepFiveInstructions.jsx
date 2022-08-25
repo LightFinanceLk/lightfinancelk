@@ -12,15 +12,17 @@ const BulkRecordsStepFiveInstructions = (props) => {
     let updatedDataColumns = props.dataColumns.filter((col) => {
       // remove unnecessary columns
       if (
-        col.title === descriptionColumn ||
-        col.title === "Amount" ||
-        col.title === "Date"
+        col.key === descriptionColumn ||
+        col.key === "Amount" ||
+        col.key === "Date"
       ) {
         return true;
       }
     });
     updatedDataColumns = updatedDataColumns.map((col) => {
-      if (col.title === descriptionColumn) {
+      console.log(descriptionColumn);
+      console.log(col.key);
+      if (col.key === descriptionColumn) {
         return {
           title: "Description",
           dataIndex: "Description",
@@ -64,8 +66,8 @@ const BulkRecordsStepFiveInstructions = (props) => {
     if (props.dataColumns) {
       let columns = [];
       props.dataColumns.map((col) => {
-        if (col.title && col.title !== "Amount" && col.title !== "Date") {
-          columns.push({ key: col.key, value: col.title });
+        if (col.key && col.key !== "Amount" && col.key !== "Date") {
+          columns.push({ key: col.key, value: col.key });
         }
       });
       setTableColumns([{ key: "Choose", value: "" }, ...columns]);
@@ -79,7 +81,7 @@ const BulkRecordsStepFiveInstructions = (props) => {
           descriptionColumn: "",
         }}
         validationSchema={Yup.object({
-          descriptionColumn: Yup.string().required("Required"),
+          descriptionColumn: Yup.string(),
         })}
         onSubmit={onSubmit}
       >
