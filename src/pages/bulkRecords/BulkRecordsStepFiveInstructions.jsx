@@ -98,7 +98,7 @@ const BulkRecordsStepFiveInstructions = (props) => {
                   type="submit"
                   disabled={!formik.isValid}
                 >
-                  Submit
+                  Next
                 </button>
               </div>
             </Form>

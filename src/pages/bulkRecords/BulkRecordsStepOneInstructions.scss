@@ -1,9 +1,19 @@
+@import "../../assets/scss/bootstrap";
+
 .bulk-record-step-1-inst {
   img {
-    width: 50px;
-    border: 10px solid transparent;
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+    }
     &.active {
-      border-color: red;
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
     }
   }
+}
+
+.bulk-record-step-1-details {
+  margin-top: 40px;
 }

@@ -16,17 +16,13 @@ const BulkRecordsStepOne = (props) => {
       const jsonTables = HtmlTableToJson.parse(values.html);
       if (jsonTables.results[0]) {
         const data = jsonTables.results[0];
-        // console.log(data);
         let dataSource = [];
-
         dataSource = data.map((item, index) => {
-          // console.log(item);
           let altItem = Object.fromEntries(
             Object.entries(item).filter(([key, value]) => {
               return key.replace(/[^a-zA-Z]/g, "") !== "";
             })
           );
-
           Object.keys(altItem).forEach((key) => {
             const temp = altItem[key];
             delete altItem[key];
@@ -50,7 +46,6 @@ const BulkRecordsStepOne = (props) => {
           return capitalizedWords.join();
         };
         columns = headers.filter((item) => item !== "");
-        // console.log(columns);
         columns = columns.map((item) => {
           let altItem = {};
           item !== ""
@@ -84,6 +79,42 @@ const BulkRecordsStepOne = (props) => {
                 control="textarea"
                 label={`Add ${props.rawDataType.toUpperCase()}`}
                 name="html"
+                placeholder={
+                  props.rawDataType === "html" ? (
+                    `eg.
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Amount</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>25/07/2022</td>
+                          <td>1000</td>
+                          <td>Salary</td>
+                        </tr>
+                        <tr>
+                          <td>28/07/2022</td>
+                          <td>500</td>
+                          <td>Doctor Fee</td>
+                        </tr>
+                      </tbody>
+                    </table>`
+                  ) : props.rawDataType === "csv" ? (
+                    `eg.
+                    Date,Amount,Description
+                    25/07/2022,1000,Salary
+                    28/07/2022,500,Doctor Fee
+                    `
+                  ) : props.rawDataType === "json" ? (
+                    <></>
+                  ) : (
+                    ""
+                  )
+                }
               />
               <div className="lf-auth-form__button-wrapper">
                 <button

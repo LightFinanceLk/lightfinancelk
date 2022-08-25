@@ -19,27 +19,28 @@ const { Step } = Steps;
 const steps = [
   {
     title: "Add Raw Data",
-    content: "Add raw data into the text field to begin the process..",
+    content:
+      "Select raw data type and copy your data into the text input field",
   },
   {
     title: "Select Amount Column",
-    content: "Select Amount Column",
+    content: "",
   },
   {
     title: "Select Income Expenses",
-    content: "Select Income Expenses",
+    content: ``,
   },
   {
     title: "Select Date Column",
-    content: "Select Date Column",
+    content: "",
   },
   {
-    title: "Optional",
-    content: "Select Date Column",
+    title: "Select Optional Column",
+    content: "",
   },
   {
-    title: "Categories",
-    content: "Select Date Column",
+    title: "Select Categories",
+    content: "When the Categories are selected, click Complete.",
   },
 ];
 
@@ -94,73 +95,102 @@ const BulkRecordsPage = () => {
             </Steps>
             <div className="bulk-records__title">
               <h3>{steps[current].title}</h3>
-              <p>{steps[current].content}</p>
-              <div className="bulk-records__steps-instructions">
-                {current === 0 ? (
-                  <BulkRecordsStepOneInstructions
-                    setRawDataType={setRawDataType}
-                    rawDataType={rawDataType}
-                  />
-                ) : null}
-                {current === 1 ? (
-                  <BulkRecordsStepTwoInstructions
-                    dataColumns={dataColumns}
-                    dataSource={dataSource}
-                    setDataSource={setDataSource}
-                    setDataColumns={setDataColumns}
-                    setCurrent={setCurrent}
-                  />
-                ) : null}
+              <p>
                 {current === 2 ? (
-                  <BulkRecordsStepThreeInstructions
-                    dataColumns={dataColumns}
-                    setCurrent={setCurrent}
-                  />
-                ) : null}
-                {current === 3 ? (
-                  <BulkRecordsStepFourInstructions
-                    dataColumns={dataColumns}
-                    setCurrent={setCurrent}
-                    dataSource={dataSource}
-                    setDataSource={setDataSource}
-                    setDataColumns={setDataColumns}
-                  />
-                ) : null}
-                {current === 4 ? (
-                  <BulkRecordsStepFiveInstructions
-                    dataColumns={dataColumns}
-                    setCurrent={setCurrent}
-                    dataSource={dataSource}
-                    setDataSource={setDataSource}
-                    setDataColumns={setDataColumns}
-                  />
-                ) : null}
-                {current === 5 ? (
-                  <BulkRecordsStepSixInstructions
-                    dataColumns={dataColumns}
-                    setCurrent={setCurrent}
-                    dataSource={dataSource}
-                    setDataSource={setDataSource}
-                    setDataColumns={setDataColumns}
-                  />
-                ) : null}
-              </div>
+                  <>
+                    Click on the
+                    <label class="ant-checkbox-wrapper">
+                      <span class="ant-checkbox">
+                        <input
+                          type="checkbox"
+                          class="ant-checkbox-input"
+                          value=""
+                        />
+                        <span class="ant-checkbox-inner"></span>
+                      </span>
+                    </label>
+                    button to change amount to an expense value.
+                    <label class="ant-checkbox-wrapper">
+                      <span class="ant-checkbox ant-checkbox-checked">
+                        <input
+                          type="checkbox"
+                          class="ant-checkbox-input"
+                          value=""
+                        />
+                        <span class="ant-checkbox-inner"></span>
+                      </span>
+                    </label>
+                  </>
+                ) : (
+                  `${steps[current].content}`
+                )}
+              </p>
+            </div>
+            <div className="bulk-records__steps-instructions">
+              {current === 0 ? (
+                <BulkRecordsStepOneInstructions
+                  setRawDataType={setRawDataType}
+                  rawDataType={rawDataType}
+                />
+              ) : null}
+              {current === 1 ? (
+                <BulkRecordsStepTwoInstructions
+                  dataColumns={dataColumns}
+                  dataSource={dataSource}
+                  setDataSource={setDataSource}
+                  setDataColumns={setDataColumns}
+                  setCurrent={setCurrent}
+                />
+              ) : null}
+              {current === 2 ? (
+                <BulkRecordsStepThreeInstructions
+                  dataColumns={dataColumns}
+                  setCurrent={setCurrent}
+                />
+              ) : null}
+              {current === 3 ? (
+                <BulkRecordsStepFourInstructions
+                  dataColumns={dataColumns}
+                  setCurrent={setCurrent}
+                  dataSource={dataSource}
+                  setDataSource={setDataSource}
+                  setDataColumns={setDataColumns}
+                />
+              ) : null}
+              {current === 4 ? (
+                <BulkRecordsStepFiveInstructions
+                  dataColumns={dataColumns}
+                  setCurrent={setCurrent}
+                  dataSource={dataSource}
+                  setDataSource={setDataSource}
+                  setDataColumns={setDataColumns}
+                />
+              ) : null}
+              {current === 5 ? (
+                <BulkRecordsStepSixInstructions
+                  dataColumns={dataColumns}
+                  setCurrent={setCurrent}
+                  dataSource={dataSource}
+                  setDataSource={setDataSource}
+                  setDataColumns={setDataColumns}
+                />
+              ) : null}
             </div>
             <div className="bulk-records__steps-action">
-              {current < steps.length - 1 && (
+              {current === 2 && (
                 <Button type="primary" onClick={() => next()}>
                   Next
                 </Button>
               )}
-              {current === steps.length - 1 && (
+              {/* {current === steps.length - 1 && (
                 <Button
                   type="primary"
                   onClick={() => message.success("Processing complete!")}
                 >
                   Done
                 </Button>
-              )}
-              {current > 0 && (
+              )} */}
+              {/* {current > 0 && (
                 <Button
                   style={{
                     margin: "0 8px",
@@ -169,7 +199,7 @@ const BulkRecordsPage = () => {
                 >
                   Previous
                 </Button>
-              )}
+              )} */}
             </div>
           </div>
           <div className="col-sm-8">

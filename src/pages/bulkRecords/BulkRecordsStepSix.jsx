@@ -144,6 +144,7 @@ const BulkRecordsStepSix = (props) => {
     {
       title: "Category",
       dataIndex: "operation",
+      width: 250,
       render: (_, record) => {
         return (
           <TreeSelect
@@ -162,6 +163,7 @@ const BulkRecordsStepSix = (props) => {
     {
       title: "Edit",
       dataIndex: "operation",
+      width: 120,
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
@@ -196,6 +198,7 @@ const BulkRecordsStepSix = (props) => {
     {
       title: "Delete",
       dataIndex: "operation",
+      width: 120,
       render: (_, record) =>
         props.dataSource.length >= 1 ? (
           <Popconfirm

@@ -47,13 +47,9 @@ const BulkRecordsStepFourInstructions = (props) => {
     props.setDataColumns(updatedDataColumns);
 
     props.dataSource.map((item) => {
-      console.log(item.Date);
       if (!moment(item.Date, dateFormat, true).isValid()) {
-        console.log("not valid");
         errors.push(item.Date);
       }
-      console.log(item.Date);
-      console.log("-----------------------");
     });
 
     if (errors.length > 0) {
@@ -100,136 +96,97 @@ const BulkRecordsStepFourInstructions = (props) => {
                 options={tableColumns}
               />
 
-              <div>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Input</th>
-                      <th>Example</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <code>YYYY</code>
-                      </td>
-                      <td>
-                        <code>2014</code>
-                      </td>
-                      <td>4 digit year</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>YY</code>
-                      </td>
-                      <td>
-                        <code>14</code>
-                      </td>
-                      <td>2 digit year</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>M</code>
-                      </td>
-                      <td>
-                        <code>1, 12</code>
-                      </td>
-                      <td>Month number</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>MM</code>
-                      </td>
-                      <td>
-                        <code>01, 12</code>
-                      </td>
-                      <td>Month number</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>MMM</code>
-                      </td>
-                      <td>
-                        <code>Jan</code>
-                      </td>
-                      <td>Month name</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>MMMM</code>
-                      </td>
-                      <td>
-                        <code>December</code>
-                      </td>
-                      <td>Month name</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>D</code>
-                      </td>
-                      <td>
-                        <code>1, 31</code>
-                      </td>
-                      <td>Day of month</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>DD</code>
-                      </td>
-                      <td>
-                        <code>01, 31</code>
-                      </td>
-                      <td>Day of month</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <code>Do</code>
-                      </td>
-                      <td>
-                        <code>1st, 31st</code>
-                      </td>
-                      <td>Day of month with ordinal</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Examples</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{moment().format("DD-MM-YYYY")}</td>
-                      <td>DD-MM-YYYY</td>
-                    </tr>
-                    <tr>
-                      <td>{moment().format("MM/DD/YYYY")}</td>
-                      <td>MM/DD/YYYY</td>
-                    </tr>
-                    <tr>
-                      <td>{moment().format("DD MMM YY")}</td>
-                      <td>DD MMM YY</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
               <FormControl
                 control="input"
                 type="text"
-                label={`Mention your date format`}
+                label={`Type your date format`}
                 name="dateFormatText"
+                placeholder="DD-MM-YYYY"
               />
+
+              <div className="bulk-records__example-table">
+                <div className="row">
+                  <div className="col">
+                    <table className="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>Input</th>
+                          <th>Example</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>YYYY</td>
+                          <td>2014</td>
+                        </tr>
+                        <tr>
+                          <td>YY</td>
+                          <td>14</td>
+                        </tr>
+                        <tr>
+                          <td>M</td>
+                          <td>1, 12</td>
+                        </tr>
+                        <tr>
+                          <td>MM</td>
+                          <td>01, 12</td>
+                        </tr>
+                        <tr>
+                          <td>MMM</td>
+                          <td>Jan</td>
+                        </tr>
+                        <tr>
+                          <td>MMMM</td>
+                          <td>December</td>
+                        </tr>
+                        <tr>
+                          <td>D</td>
+                          <td>1, 31</td>
+                        </tr>
+                        <tr>
+                          <td>DD</td>
+                          <td>01, 31</td>
+                        </tr>
+                        <tr>
+                          <td>Do</td>
+                          <td>1st, 31st</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="col">
+                    <table className="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th colSpan={2}>Date Format Examples</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{moment().format("DD-MM-YYYY")}</td>
+                          <td>DD-MM-YYYY</td>
+                        </tr>
+                        <tr>
+                          <td>{moment().format("MM/DD/YYYY")}</td>
+                          <td>MM/DD/YYYY</td>
+                        </tr>
+                        <tr>
+                          <td>{moment().format("DD MMM YY")}</td>
+                          <td>DD MMM YY</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
               <div className="lf-auth-form__button-wrapper">
                 <button
                   className="btn btn-primary lf-auth-form__submit-button"
                   type="submit"
                   disabled={!formik.isValid}
                 >
-                  Submit
+                  Next
                 </button>
               </div>
             </Form>

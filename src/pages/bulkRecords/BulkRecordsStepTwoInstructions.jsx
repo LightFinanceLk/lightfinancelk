@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch } from "antd";
+import { Switch, message } from "antd";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
@@ -14,14 +14,21 @@ const BulkRecordsStepTwoInstructions = (props) => {
   };
 
   const submitHandler = (values, multipleColumns) => {
+    let warning = [];
     const toFloatingPointNumber = (value) => {
       let charArr = value.split("");
       let numberString = "";
+      let isWarning = false;
       charArr.map((char) => {
         if (char.match(/^[\.0-9]*$/)) {
           numberString += char;
+        } else {
+          isWarning = true;
         }
       });
+      if (isWarning) {
+        warning.push(value);
+      }
       return parseFloat(numberString, 2);
     };
     if (!multipleColumns) {
@@ -47,6 +54,14 @@ const BulkRecordsStepTwoInstructions = (props) => {
         });
         return item;
       });
+
+      if (warning) {
+        message.warning({
+          content: `We found some data we weren't expecting in column set as "Amount". We have removed special characters. \n
+        ${warning.join(", ")}`,
+          duration: 10,
+        });
+      }
       props.setDataSource(updatedDataSource);
       props.setDataColumns(updatedDataColumns);
       props.setCurrent(2);
