@@ -16,6 +16,22 @@ const createRecord = async (data) => {
   );
 };
 
-const recordApi = { createRecord };
+const createBulkRecords = async (uid, records) => {
+  console.log(records, "axon data");
+  return axios.post(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/`,
+    records,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("userData")).token
+        }`,
+      },
+    }
+  );
+};
+
+const recordApi = { createRecord, createBulkRecords };
 
 export default recordApi;

@@ -2,7 +2,7 @@ import { useFormikContext, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import FormControl from "../../fields/FormControl";
-import categories from "./categories";
+import categories from "../../../../util/categories";
 import RadioButtons from "../../fields/RadioButtons";
 import DatePickerControl from "../../fields/DatePicker";
 import moment from "moment";

@@ -27,8 +27,8 @@ $font-family-base: "Lato", sans-serif;
 
 // https://huemint.com/bootstrap-basic/
 
-$primary: #1a2f40;
-$secondary: #da473a;
+$primary: #004e48;
+$secondary: #039c73;
 $success: #2ca963;
 $info: #eacbc1;
 $warning: #e6cc2b;
@@ -53,7 +53,7 @@ $dark: #030405;
 @import "~bootstrap/scss/images";
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/grid";
-// @import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/tables";
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/transitions";
