@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import HeaderDropDown from "./shared/header/HeaderDropDown";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +13,7 @@ const Header = () => {
 
   const logoutHandler = (e) => {
     e.preventDefault();
+    localStorage.removeItem("user");
     dispatch(authActions.logout());
     navigate("/login");
   };
@@ -56,10 +56,10 @@ const Header = () => {
                 </li>
               </ul>
               <ul className="nav col-12 col-lg-auto mb-md-0">
-                <li style={{ "margin-left": "auto" }}>
+                <li style={{ marginLeft: "auto" }}>
                   <NavLink to="/profile">
                     <span className="nav-link px-2 link-secondary">
-                      {/* Hello {isAuth ? "authenticated" : "not authenticated"} !!{" "} */}
+                      Hello {isAuth ? "authenticated" : "not authenticated"} !!{" "}
                       <FontAwesomeIcon icon={faUserGear} />
                     </span>
                   </NavLink>

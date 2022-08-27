@@ -15,27 +15,27 @@ import AdvisorCard from "./AdvisorCard";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const uId = useSelector((state) => state.auth.uId);
+  // const uId = useSelector((state) => state.auth.uId);
 
-  const getUserAccounts = async () => {
-    try {
-      const res = await userApi.getAccountsByUserId(uId);
-      if (res.data && res.data.userAccount) {
-        const resUserAccounts = res.data.userAccount;
-        dispatch(accountActions.getAccounts(resUserAccounts));
-      }
-    } catch (e) {
-      let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
-      message.error({
-        content: errorMsg[0].replace(": ", ""),
-        duration: 6,
-      });
-    }
-  };
+  // const getUserAccounts = async () => {
+  //   try {
+  //     const res = await userApi.getAccountsByUserId(uId);
+  //     if (res.data && res.data.userAccount) {
+  //       const resUserAccounts = res.data.userAccount;
+  //       dispatch(accountActions.getAccounts(resUserAccounts));
+  //     }
+  //   } catch (e) {
+  //     let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
+  //     message.error({
+  //       content: errorMsg[0].replace(": ", ""),
+  //       duration: 6,
+  //     });
+  //   }
+  // };
 
-  useEffect(() => {
-    getUserAccounts();
-  }, [uId]);
+  // useEffect(() => {
+  //   getUserAccounts();
+  // }, [uId]);
 
   return (
     <>

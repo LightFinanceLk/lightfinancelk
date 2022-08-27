@@ -6,7 +6,7 @@ const InitPasswordPage = () => {
   const navigate = useNavigate();
 
   const resetHandler = async (formData) => {
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    const storedUserData = JSON.parse(localStorage.getItem("user"));
     try {
       const res = await userApi.updatePassword(
         storedUserData.uId,
@@ -14,7 +14,7 @@ const InitPasswordPage = () => {
       );
       if (res) {
         localStorage.setItem(
-          "userData",
+          "user",
           JSON.stringify({ ...storedUserData, initPassword: false })
         );
         navigate("/");

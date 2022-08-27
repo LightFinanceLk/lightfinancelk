@@ -10,13 +10,13 @@ const SignUpPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-    if (storedUserData && storedUserData.token) {
-      dispatch(authActions.login(storedUserData));
-      navigate("/");
-    }
-  }, [dispatch, navigate]);
+  // useEffect(() => {
+  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUserData && storedUserData.token) {
+  //     dispatch(authActions.login(storedUserData));
+  //     navigate("/");
+  //   }
+  // }, [dispatch, navigate]);
 
   const signUpHandler = async (formData) => {
     let data = { ...formData, initPassword: true, role: "USER" };
