@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import HeaderDropDown from "./shared/header/HeaderDropDown";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import logo from "./../assets/img/logo.png";
 
 const Header = () => {
@@ -19,18 +21,17 @@ const Header = () => {
   return (
     <>
       {isAuth && (
-        <header className="p-3 mb-3 border-bottom header">
-          <div className="container">
-            <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <header className="border-bottom header">
+          <div className="container-fluid">
+            <div className="d-md-flex flex-wrap align-items-center justify-content-center justify-content-lg-start header__wrapper">
               <Link
                 to="/"
-                className="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
+                className="d-md-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
               >
-                <figure className="figure">
-                  <img src={logo} alt="" className="header__logo img-fluid" />
+                <figure className="figure header__logo">
+                  <img src={logo} alt="" className=" img-fluid" />
                 </figure>
               </Link>
-
               <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li>
                   <NavLink to="/">
@@ -54,30 +55,25 @@ const Header = () => {
                   </NavLink>
                 </li>
               </ul>
-
-              <div className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <button type="button" className="btn btn-primary">
-                  + Record
-                </button>
-              </div>
-
-              {isAuth ? "authenticated" : "not authenticated"}
-              <HeaderDropDown>
-                <li>
+              <ul className="nav col-12 col-lg-auto mb-md-0">
+                <li style={{ "margin-left": "auto" }}>
                   <NavLink to="/profile">
-                    <span className="dropdown-item">Settings</span>
+                    <span className="nav-link px-2 link-secondary">
+                      {/* Hello {isAuth ? "authenticated" : "not authenticated"} !!{" "} */}
+                      <FontAwesomeIcon icon={faUserGear} />
+                    </span>
                   </NavLink>
                 </li>
                 <li>
                   <button
-                    className="dropdown-item"
+                    className="px-2 btn btn-outline-primary"
                     href="#"
                     onClick={logoutHandler}
                   >
                     Log Out
                   </button>
                 </li>
-              </HeaderDropDown>
+              </ul>
             </div>
           </div>
         </header>

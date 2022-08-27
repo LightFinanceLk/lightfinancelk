@@ -9,7 +9,7 @@ form {
     width: 15px;
     height: 15px;
     border-radius: 15px;
-    top: 0;
+    top: -2px;
     left: -1px;
     position: relative;
     background-color: #d1d3d1;
@@ -65,7 +65,7 @@ form {
     margin: 50px 0;
     padding: 40px;
     background: #fff;
-    border: solid 10px #fafafa;
+    border: solid 10px $secondary;
     > p {
       @include small-text;
       margin-bottom: 40px;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import authApi from "../../api/authApi";
 import SignUpForm from "../../components/form/forms/SignUpForm";
-import { notification } from "antd";
+import { message } from "antd";
 
 const SignUpPage = () => {
   const dispatch = useDispatch();
@@ -19,24 +19,22 @@ const SignUpPage = () => {
   }, [dispatch, navigate]);
 
   const signUpHandler = async (formData) => {
-    let data = { ...formData, initPassword: true };
+    let data = { ...formData, initPassword: true, role: "USER" };
     try {
       const res = await authApi.signUp(JSON.stringify(data));
       if (res) {
         navigate("/login");
-        notification.success({
-          message: "Successful",
-          description:
+        message.success({
+          content:
             "Your account is created successfully, Please log in to your account. The password is emailed.",
-          duration: 20,
+          duration: 6,
         });
       }
     } catch (e) {
       let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
-      notification.error({
-        message: "Error",
-        description: errorMsg[0].replace(": ", ""),
-        duration: 20,
+      message.error({
+        content: errorMsg[0].replace(": ", ""),
+        duration: 6,
       });
     }
   };

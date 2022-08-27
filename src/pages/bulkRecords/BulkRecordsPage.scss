@@ -1,4 +1,5 @@
-@import "../../assets/scss/bootstrap";
+@import "../../assets/scss/bootstrap-common";
+@import "~bootstrap/scss/buttons";
 
 @mixin checkBox {
   .ant-checkbox-inner {

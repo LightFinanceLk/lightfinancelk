@@ -36,6 +36,7 @@ const LoginPage = () => {
         token: userData.token,
         uId: user.userId,
         initPassword: user.initPassword,
+        role: user.role,
       };
       localStorage.setItem("userData", JSON.stringify(persistData));
       dispatch(authActions.login(persistData));
