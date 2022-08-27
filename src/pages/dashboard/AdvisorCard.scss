@@ -1,0 +1,49 @@
+@import "../../assets/scss/bootstrap-common";
+
+.lf-c-advisor {
+  &__details {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: $light;
+    border-radius: 5px;
+    figure {
+      margin: 0 10px 0 0;
+      img {
+        width: 70px;
+        height: 70px;
+        object-fit: scale-down;
+      }
+    }
+    p {
+      margin-bottom: 0;
+      &:nth-of-type(1) {
+        font-size: 14px;
+      }
+      &:nth-of-type(2) {
+        font-size: 12px;
+      }
+    }
+  }
+  &__meetings {
+    margin-top: 20px;
+    table {
+      thead {
+        tr {
+          th {
+            padding-bottom: 15px;
+          }
+        }
+      }
+      td {
+        font-size: 12px;
+        &:nth-of-type(3) {
+          max-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

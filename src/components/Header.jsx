@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import HeaderDropDown from "./shared/header/HeaderDropDown";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
-import logo from "./../assets/img/logo.png";
+import logo from "./../assets/img/logo2.png";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,15 +19,15 @@ const Header = () => {
   return (
     <>
       {isAuth && (
-        <header className="p-3 mb-3 border-bottom header">
-          <div className="container">
+        <header className="border-bottom header">
+          <div className="container-fluid">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <Link
                 to="/"
                 className="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
               >
-                <figure className="figure">
-                  <img src={logo} alt="" className="header__logo img-fluid" />
+                <figure className="figure header__logo">
+                  <img src={logo} alt="" className=" img-fluid" />
                 </figure>
               </Link>
 

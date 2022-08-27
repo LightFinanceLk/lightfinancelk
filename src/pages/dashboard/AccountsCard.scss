@@ -1,0 +1,21 @@
+.lf-c-accounts {
+  &__item {
+    display: flex;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: gray;
+    border-radius: 5px;
+  }
+  &__item-name {
+    flex: 2;
+    p {
+      margin: 0;
+    }
+  }
+  &__item-balance {
+    flex: 1;
+  }
+  &__item-link {
+    flex: 0 0 auto;
+  }
+}
