@@ -8,7 +8,7 @@ const getDataByUserId = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -22,7 +22,7 @@ const getAccountsByUserId = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -37,7 +37,7 @@ const updateDataByUserId = async (userId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -51,7 +51,7 @@ const deleteProfile = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -66,7 +66,7 @@ const updatePassword = async (userId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -78,9 +78,7 @@ const resetPassword = async (data) => {
   return axios.post(`users/resetPassword`, data, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem("userData")).token
-      }`,
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
     },
   });
 };

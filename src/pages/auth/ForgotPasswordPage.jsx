@@ -6,16 +6,16 @@ import ForgotPasswordForm from "../../components/form/forms/ForgotPasswordForm";
 import userApi from "../../api/userApi";
 
 const ForgotPasswordPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-    if (storedUserData && storedUserData.token) {
-      dispatch(authActions.login(storedUserData));
-      navigate("/");
-    }
-  }, [dispatch, navigate]);
+  // useEffect(() => {
+  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
+  //   if (storedUserData && storedUserData.token) {
+  //     dispatch(authActions.login(storedUserData));
+  //     navigate("/");
+  //   }
+  // }, [dispatch, navigate]);
 
   const resetHandler = async (formData) => {
     try {

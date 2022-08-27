@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
@@ -9,50 +9,39 @@ import jwt from "jwt-decode";
 let logoutTimer;
 
 const LoginPage = () => {
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-    if (storedUserData && storedUserData.token) {
-      dispatch(authActions.login(storedUserData));
-      if (storedUserData.initPassword) {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser && storedUser.initPassword) {
+      if (storedUser.initPassword) {
         navigate("/reset-password");
-      } else {
-        navigate("/");
       }
     }
-    if (userData) {
-      const user = jwt(userData.token);
-      const remainingTime =
-        (user.exp - new Date(new Date()).getTime() / 1000) * 1000;
-      clearTimeout(logoutTimer);
-      logoutTimer = setTimeout(() => {
-        dispatch(authActions.logout());
-        navigate("/login");
-        clearTimeout(logoutTimer);
-      }, remainingTime);
-      const persistData = {
-        token: userData.token,
-        uId: user.userId,
-        initPassword: user.initPassword,
-        role: user.role,
-      };
-      localStorage.setItem("userData", JSON.stringify(persistData));
-      dispatch(authActions.login(persistData));
-      if (persistData.initPassword) {
-        navigate("/reset-password");
-      } else {
-        navigate("/");
-      }
-    }
-  }, [dispatch, navigate, userData]);
+  }, []);
 
   const loginHandler = async (formData) => {
     try {
       const res = await authApi.login(JSON.stringify(formData));
       if (res.data) {
-        setUserData(res.data);
+        const user = jwt(res.data.token);
+        const persistData = {
+          token: res.data.token,
+          uId: user.userId,
+          initPassword: user.initPassword,
+          role: user.role,
+          expiry: Date.now() + 3600000,
+        };
+        localStorage.setItem("user", JSON.stringify(persistData));
+        dispatch(authActions.login(persistData));
+        if (persistData.initPassword) {
+          navigate("/reset-password");
+        } else {
+          navigate(from, { replace: true });
+        }
       }
     } catch (e) {
       console.log(e);

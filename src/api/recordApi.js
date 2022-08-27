@@ -9,7 +9,7 @@ const createRecord = async (data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }
@@ -25,7 +25,7 @@ const createBulkRecords = async (uid, records) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("userData")).token
+          JSON.parse(localStorage.getItem("user")).token
         }`,
       },
     }

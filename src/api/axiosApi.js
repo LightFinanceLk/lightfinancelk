@@ -4,12 +4,12 @@ import config from "../config";
 const axiosApi = axios.create({
   baseURL: `${config.api.BASE_URL}${config.api.API_PREFIX}`,
   headers:
-    JSON.parse(localStorage.getItem("userData")) &&
-    JSON.parse(localStorage.getItem("userData")).token
+    JSON.parse(localStorage.getItem("user")) &&
+    JSON.parse(localStorage.getItem("user")).token
       ? {
           "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userData")).token
+            JSON.parse(localStorage.getItem("user")).token
           }`,
         }
       : {

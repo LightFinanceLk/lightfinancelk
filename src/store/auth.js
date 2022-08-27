@@ -4,6 +4,8 @@ const initialAuthState = {
   isAuthenticated: false,
   token: null,
   uId: null,
+  role: null,
+  expiry: null,
 };
 
 const authSlice = createSlice({
@@ -15,13 +17,14 @@ const authSlice = createSlice({
       state.token = res.payload.token;
       state.uId = res.payload.uId;
       state.role = res.payload.role;
+      state.expiry = res.payload.expiry;
     },
     logout(state) {
       state.isAuthenticated = false;
       state.token = null;
       state.uId = null;
       state.role = null;
-      localStorage.removeItem("userData");
+      state.expiry = null;
     },
   },
 });
