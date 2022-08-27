@@ -1,0 +1,43 @@
+$border-radius: 0;
+$border-radius-sm: 0;
+$border-radius-lg: 0;
+$border-radius-pill: 0;
+
+$font-family-base: "Lato", sans-serif;
+
+// $primary: #1266f1;
+// $secondary: #b23cfd;
+// $success: #00b74a;
+// $info: #39c0ed;
+// $warning: #ffa900;
+// $danger: #f93154;
+// $light: #9fa6b2;
+// $dark: #262626;
+
+// $theme-colors: (
+//     "light":      #191653,
+//     "dark":       #fffdff,
+//     "primary":    #12b9b5,
+//     "secondary":  #0095a2,
+//     "info":       #475083,
+//     "success":    #00af4a,
+//     "warning":    #f1ca00,
+//     "danger":     #f90034,
+// );
+
+// https://huemint.com/bootstrap-basic/
+
+$primary: #0a4da6;
+$secondary: #30bfa5;
+$success: #2ca963;
+$info: #eacbc1;
+$warning: #e6cc2b;
+$danger: #f5171a;
+$light: #f2f2f2;
+$dark: #030405;
+
+// scss-d~bootstrap/scss/ocs-start import-stack
+// Config~bootstrap/scss/uration
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";

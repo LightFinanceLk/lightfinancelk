@@ -1,0 +1,107 @@
+.lf-profile-form {
+  $this: ".lf-profile-form";
+
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // min-height: 100vh;
+  &__inner {
+    margin: 50px auto;
+    padding: 40px;
+    background: #fff;
+    border: solid 10px $secondary;
+    > p {
+      @include small-text;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+  }
+  &__welcome-msg {
+    text-align: center;
+    p {
+      margin-bottom: 40px;
+      font-size: 18px;
+      font-weight: $font-weight-bold;
+      &:nth-of-type(2) {
+        margin-top: -20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+    }
+  }
+  // &__logo {
+  //   display: flex;
+  //   justify-content: center;
+  //   img {
+  //     width: 250px;
+  //   }
+  // }
+  &__button-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    a,
+    div {
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+  &__submit-button {
+    clear: both;
+  }
+  input {
+    font-size: 14px;
+  }
+  &__password-fields {
+    .row {
+      > div {
+        position: relative;
+        padding-right: 40px;
+      }
+    }
+  }
+  &__password-visibility {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    font-size: 20px;
+  }
+  // &--login {
+  //   #{$this}__button-wrapper {
+  //     > div {
+  //       &:last-of-type {
+  //         margin-top: 20px;
+  //       }
+  //     }
+  //   }
+  //   #{$this}__submit-button {
+  //     margin-bottom: 10px;
+  //   }
+  // }
+  // &--signup {
+  //   #{$this}__submit-button {
+  //     margin-bottom: 30px;
+  //   }
+  // }
+  // &--reset-pw {
+  //   #{$this}__submit-button {
+  //     margin-bottom: 30px;
+  //   }
+  // }
+}
+
+@include media-breakpoint-down(md) {
+  .lf-profile-form {
+    &__inner {
+      width: 90%;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .lf-profile-form {
+    &__inner {
+      width: 800px;
+    }
+  }
+}

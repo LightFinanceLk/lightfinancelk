@@ -1,0 +1,39 @@
+@import "../../assets/scss/bootstrap-common";
+
+.lf-dashboard {
+  .row {
+    > div {
+      margin-bottom: 24px;
+    }
+  }
+  &__card {
+    position: relative;
+    min-height: 400px;
+    height: 100%;
+    padding: 15px 15px 40px;
+    border-radius: 10px;
+    background-color: white;
+  }
+  &__card-title {
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid $light;
+    font-weight: $font-weight-bold;
+    color: $primary;
+  }
+  &__card-content {
+    height: 100%;
+  }
+}
+
+.lf-c-more-link {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 14px;
+  font-weight: $font-weight-bold;
+  svg {
+    margin-left: 10px;
+    height: 13px;
+  }
+}

@@ -1,0 +1,19 @@
+@import "../../assets/scss/bootstrap-common";
+
+.bulk-record-step-1-inst {
+  img {
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+    }
+    &.active {
+      box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.bulk-record-step-1-details {
+  margin-top: 40px;
+}

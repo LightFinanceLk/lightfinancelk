@@ -1,0 +1,26 @@
+.ant-message {
+  .ant-message-notice-content {
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    .ant-message-custom-content {
+      padding: 10px 30px;
+    }
+    .ant-message-info {
+      background-color: $blue-100;
+    }
+    .ant-message-success {
+      background-color: $teal-200;
+    }
+    .ant-message-error {
+      background-color: $red-100;
+    }
+    .ant-message-warning {
+      background-color: $yellow-100;
+    }
+  }
+  .ant-message-notice .anticon {
+    top: -2px;
+  }
+}

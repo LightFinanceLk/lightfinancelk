@@ -1,0 +1,185 @@
+@import "../../assets/scss/bootstrap-common";
+@import "~bootstrap/scss/buttons";
+
+@mixin checkBox {
+  .ant-checkbox-inner {
+    background-color: #2ca963;
+    border-color: #2ca963;
+    &:after {
+      opacity: 1;
+      transform: rotate(0) scale(1) translate(0, -1px);
+      width: 8px;
+      height: 2px;
+      transition: none;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 2px;
+      display: table;
+      opacity: 1;
+      transform: rotate(90deg) scale(1) translate(0, -1px);
+      width: 8px;
+      height: 2px;
+      transition: none;
+      border: 2px solid #fff;
+      border-top: 0;
+      border-left: 0;
+    }
+  }
+  .ant-checkbox-checked {
+    .ant-checkbox-inner {
+      background-color: #da473a;
+      border-color: #da473a;
+      &:after {
+        transform: rotate(0) scale(1) translate(0, -1px);
+        width: 8px;
+        height: 2px;
+        transition: none;
+      }
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.bulk-records {
+  textarea {
+    &.form-control {
+      min-height: 400px;
+    }
+  }
+  &__steps {
+    &.ant-steps {
+      padding: 20px 60px;
+    }
+  }
+  &__title {
+    @include checkBox;
+    text-align: center;
+    h3 {
+      font-size: 26px;
+      margin: 40px 30px 30px;
+    }
+    .ant-checkbox-wrapper {
+      margin: 0 10px;
+    }
+  }
+  &__steps-instructions {
+    padding: 20px 60px;
+    &:not(form) {
+      label {
+        display: inline-block;
+        margin-right: 15px;
+        margin-bottom: 30px;
+        font-size: 16px;
+        font-weight: $font-weight-bold;
+      }
+    }
+    form {
+      label {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  &__steps-content {
+    min-height: 200px;
+    margin: 16px 40px 16px 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px dashed #e9e9e9;
+    border-radius: 2px;
+  }
+
+  &__steps-action {
+    margin: 24px 60px 0;
+    .ant-btn-primary {
+      @extend .btn;
+      @extend .btn-primary;
+      height: auto;
+      width: 100%;
+    }
+  }
+  &__income-expense-table {
+    th {
+      .ant-checkbox-checked {
+        .ant-checkbox-inner {
+          background-color: #1a2f40;
+          border-color: #1a2f40;
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: #1a2f40;
+          }
+        }
+        &::after {
+          border-color: #1a2f40;
+          &:hover,
+          &:focus,
+          &:active {
+            background-color: #1a2f40;
+          }
+        }
+      }
+      .ant-checkbox {
+        &:hover,
+        &:focus,
+        &:active {
+          .ant-checkbox-inner {
+            border-color: #1a2f40;
+          }
+        }
+      }
+      .ant-checkbox-indeterminate .ant-checkbox-inner:after {
+        background-color: #1a2f40;
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #1a2f40;
+        }
+      }
+    }
+    td {
+      @include checkBox;
+    }
+  }
+  .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+    background-color: $secondary;
+  }
+  .ant-steps-item-process,
+  .ant-steps-item-finish {
+    .ant-steps-item-icon {
+      border-color: $secondary;
+    }
+    .ant-steps-icon {
+      .anticon {
+        color: $secondary;
+      }
+    }
+  }
+  .ant-steps-item-finish
+    > .ant-steps-item-container
+    > .ant-steps-item-content
+    > .ant-steps-item-title:after {
+    background-color: $secondary;
+  }
+  .ant-switch-checked {
+    background-color: $secondary;
+  }
+  .ant-table-cell {
+    a {
+      color: $danger;
+      text-decoration: none;
+      &.ant-typography {
+        color: $success;
+      }
+    }
+    a:not([href]):not([class]),
+    a:not([href]):not([class]):hover {
+      color: $danger;
+    }
+  }
+}

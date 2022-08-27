@@ -1,0 +1,181 @@
+form {
+  .error {
+    @extend .invalid-feedback;
+    display: block;
+    clear: both;
+  }
+  input[type="radio"]:after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid white;
+  }
+
+  select,
+  input,
+  textarea {
+    &.form-control {
+      font-size: 14px;
+    }
+  }
+
+  input[type="radio"]:checked:after {
+    background-color: $secondary;
+  }
+}
+
+.lf-radio-input {
+  @include clearfix;
+  margin-bottom: 15px;
+  label {
+    &:nth-of-type(1) {
+      display: block;
+    }
+    &:not(:first-of-type) {
+      float: left;
+      display: inline-block;
+      margin-left: 5px;
+      margin-right: 15px;
+      line-height: 13px;
+      font-size: 13px;
+    }
+  }
+  input {
+    float: left;
+    display: inline-block;
+  }
+  .error {
+    // class name applied from component
+    margin-top: 1.7rem;
+  }
+}
+
+@mixin lfAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__inner {
+    margin: 50px 0;
+    padding: 40px;
+    background: #fff;
+    border: solid 10px $secondary;
+    > p {
+      @include small-text;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+  }
+  &__logo {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 250px;
+    }
+  }
+  &__button-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    a,
+    div {
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+  &__submit-button {
+    clear: both;
+  }
+  input,
+  select,
+  option {
+    font-size: 14px;
+  }
+}
+
+.lf-auth-form {
+  @include lfAccount();
+  $this: ".lf-auth-form";
+  min-height: 100vh;
+  &__welcome-msg {
+    text-align: center;
+    p {
+      &:nth-of-type(1) {
+        margin-bottom: 0;
+        font-size: 36px;
+        font-weight: $font-weight-bold;
+      }
+      &:nth-of-type(2) {
+        margin-bottom: 30px;
+        font-size: 18px;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+  &--login {
+    #{$this}__button-wrapper {
+      > div {
+        &:last-of-type {
+          margin-top: 20px;
+        }
+      }
+    }
+    #{$this}__submit-button {
+      margin-bottom: 10px;
+    }
+  }
+  &--signup {
+    #{$this}__submit-button {
+      margin-bottom: 30px;
+    }
+  }
+  &--reset-pw {
+    #{$this}__submit-button {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.lf-account-form {
+  $this: ".lf-account-form";
+  @include lfAccount();
+  &__welcome-msg {
+    text-align: center;
+    p {
+      margin-bottom: 30px;
+      font-size: 18px;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .lf-auth-form {
+    &__inner {
+      width: 90%;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .lf-auth-form {
+    $this: ".lf-auth-form";
+    &--login,
+    &--reset-pw {
+      #{$this}__inner {
+        width: 440px;
+      }
+    }
+    &--signup {
+      #{$this}__inner {
+        width: 800px;
+      }
+    }
+  }
+}
