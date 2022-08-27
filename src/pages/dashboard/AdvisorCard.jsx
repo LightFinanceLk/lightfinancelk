@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./AdvisorCard.scss";
 import {
   faAngleDoubleRight,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import "./AdvisorCard.scss";
 import logo from "../../assets/img/logo.png";
 
 const AdvisorCard = () => {

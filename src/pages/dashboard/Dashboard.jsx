@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import accountApi from "../../api/accountApi";
 import { accountActions } from "../../store/account";
 import userApi from "../../api/userApi";
-import { notification } from "antd";
+import { message } from "antd";
 import "./Dashboard.scss";
 import AccountsCard from "./AccountsCard";
 import SummaryCard from "./SummaryCard";
@@ -26,10 +26,9 @@ const Dashboard = () => {
       }
     } catch (e) {
       let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
-      notification.error({
-        message: "Error",
-        description: errorMsg[0].replace(": ", ""),
-        duration: 20,
+      message.error({
+        content: errorMsg[0].replace(": ", ""),
+        duration: 6,
       });
     }
   };

@@ -9,7 +9,7 @@
     margin: 50px auto;
     padding: 40px;
     background: #fff;
-    border: solid 10px #f5f2ea;
+    border: solid 10px $secondary;
     > p {
       @include small-text;
       margin-bottom: 40px;
