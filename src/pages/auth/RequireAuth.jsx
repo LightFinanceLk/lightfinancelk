@@ -24,7 +24,7 @@ const RequireAuth = ({ allowedRoles }) => {
   if (user) {
     const persistData = {
       token: user.token,
-      uId: user.userId,
+      userId: user.userId,
       initPassword: user.initPassword,
       role: user.role,
       expiry: user.expiry,

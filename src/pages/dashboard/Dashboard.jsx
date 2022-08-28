@@ -15,11 +15,11 @@ import AdvisorCard from "./AdvisorCard";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const uId = useSelector((state) => state.auth.uId);
+  // const userId = useSelector((state) => state.auth.userId);
 
   // const getUserAccounts = async () => {
   //   try {
-  //     const res = await userApi.getAccountsByUserId(uId);
+  //     const res = await userApi.getAccountsByUserId(userId);
   //     if (res.data && res.data.userAccount) {
   //       const resUserAccounts = res.data.userAccount;
   //       dispatch(accountActions.getAccounts(resUserAccounts));
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   // useEffect(() => {
   //   getUserAccounts();
-  // }, [uId]);
+  // }, [userId]);
 
   return (
     <>

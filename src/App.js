@@ -5,7 +5,6 @@ import LoginPage from "./pages/auth/LoginPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import InitPasswordPage from "./pages/auth/InitPasswordPage";
-import ProfilePage from "./pages/user/ProfilePage";
 import CreateAccountPage from "./pages/account/CreateAccountPage";
 import AccountPage from "./pages/account/AccountPage";
 import CreateRecordPage from "./pages/record/CreateRecordPage";
@@ -15,6 +14,9 @@ import RequireAuth from "./pages/auth/RequireAuth";
 import DashboardWrapper from "./pages/dashboard/DashboardWrapper";
 import "./App.scss";
 import CreateAdvisor from "./pages/advisor/CreateAdvisor";
+import AdvisorDetailsPage from "./pages/advisor/AdvisorDetailsPage";
+import UserDetailsPage from "./pages/user/UserDetailsPage";
+import ProfileWrapper from "./pages/profile/ProfileWrapper";
 
 const ROLES = {
   User: "2022",
@@ -43,6 +45,14 @@ function App() {
         {/** Protected Routes - ADMIN */}
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="advisor/create" element={<CreateAdvisor />} />
+          <Route path="advisor/:aid" element={<AdvisorDetailsPage />} />
+        </Route>
+
+        {/** Protected Routes - ADMIN and ADVISOR*/}
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Advisor]} />}
+        >
+          <Route path="user/:uid" element={<UserDetailsPage />} />
         </Route>
 
         {/** Protected Routes - ALL USERS */}
@@ -54,7 +64,7 @@ function App() {
           }
         >
           <Route path="/" element={<DashboardWrapper />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="profile" element={<ProfileWrapper />} />
           <Route path="reset-password" element={<InitPasswordPage />} />
         </Route>
 

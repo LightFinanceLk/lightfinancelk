@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import userApi from "../../api/userApi";
-import UpdatePasswordForm from "../../components/form/forms/UpdatePasswordForm";
+import UpdatePasswordForm from "../../components/form/forms/auth/UpdatePasswordForm";
 
 const InitPasswordPage = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const InitPasswordPage = () => {
     const storedUserData = JSON.parse(localStorage.getItem("user"));
     try {
       const res = await userApi.updatePassword(
-        storedUserData.uId,
+        storedUserData.userId,
         JSON.stringify(formData)
       );
       if (res) {

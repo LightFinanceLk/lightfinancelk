@@ -21,7 +21,7 @@ const AdvisorCard = () => {
         </div>
       </div>
       <div className="lf-c-advisor__meetings">
-        <table class="table table-sm table-striped">
+        <table className="table table-sm table-striped">
           <thead>
             <tr>
               <th colSpan={3}>Up Coming Meetings</th>

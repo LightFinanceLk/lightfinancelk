@@ -2,10 +2,10 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import FormControl from "../fields/FormControl";
-import DatePickerControl from "../fields/DatePicker";
-import RadioButtons from "../fields/RadioButtons";
-import logo from "./../../../assets/img/logo.png";
+import FormControl from "../../fields/FormControl";
+import DatePickerControl from "../../fields/DatePicker";
+import RadioButtons from "../../fields/RadioButtons";
+import logo from "../../../../assets/img/logo.png";
 
 const SignUpForm = (props) => {
   const initialValues = {
@@ -17,6 +17,7 @@ const SignUpForm = (props) => {
     email: "",
     phone: "",
     occupation: "",
+    city: "",
   };
 
   const phoneRegExp =
@@ -35,6 +36,7 @@ const SignUpForm = (props) => {
       .min(10, "Phone number should be 10 digits")
       .max(10, "Phone number should be 10 digits"),
     occupation: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
   });
   const genderOptions = [
     { key: "Male", value: "male" },
@@ -127,6 +129,14 @@ const SignUpForm = (props) => {
                         type="text"
                         label="Occupation"
                         name="occupation"
+                      />
+                    </div>
+                    <div className="col-sm-6">
+                      <FormControl
+                        control="input"
+                        type="text"
+                        label="Nearest City"
+                        name="city"
                       />
                     </div>
                   </div>

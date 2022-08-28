@@ -23,7 +23,7 @@ const SpendingByCategoryCard = () => {
           <div style={{ width: "91.4355%" }}>
             <div
               style={{
-                "background-color": "rgb(244, 67, 54)",
+                backgroundColor: "rgb(244, 67, 54)",
                 width: "calc(100%)",
               }}
             ></div>
@@ -39,7 +39,7 @@ const SpendingByCategoryCard = () => {
           <div style={{ width: "91.4355%" }}>
             <div
               style={{
-                "background-color": "rgb(244, 67, 54)",
+                backgroundColor: "rgb(244, 67, 54)",
                 width: "calc(100%)",
               }}
             ></div>
@@ -55,7 +55,7 @@ const SpendingByCategoryCard = () => {
           <div style={{ width: "91.4355%" }}>
             <div
               style={{
-                "background-color": "rgb(244, 67, 54)",
+                backgroundColor: "rgb(244, 67, 54)",
                 width: "calc(100%)",
               }}
             ></div>
@@ -71,7 +71,7 @@ const SpendingByCategoryCard = () => {
           <div style={{ width: "91.4355%" }}>
             <div
               style={{
-                "background-color": "rgb(244, 67, 54)",
+                backgroundColor: "rgb(244, 67, 54)",
                 width: "calc(100%)",
               }}
             ></div>

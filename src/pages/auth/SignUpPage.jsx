@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import authApi from "../../api/authApi";
-import SignUpForm from "../../components/form/forms/SignUpForm";
+import SignUpForm from "../../components/form/forms/auth/SignUpForm";
 import { message } from "antd";
 
 const SignUpPage = () => {

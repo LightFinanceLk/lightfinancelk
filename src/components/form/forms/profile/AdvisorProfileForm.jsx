@@ -1,14 +1,44 @@
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import FormControl from "../fields/FormControl";
-import DatePickerControl from "../fields/DatePicker";
-import RadioButtons from "../fields/RadioButtons";
+import userApi from "../../../../api/userApi";
+import FormControl from "../../fields/FormControl";
+import DatePickerControl from "../../fields/DatePicker";
+import RadioButtons from "../../fields/RadioButtons";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { message } from "antd";
 
-const ProfileForm = (props) => {
+const AdvisorProfileForm = (props) => {
   const [initialValues, setInitialValues] = useState({});
   const [dob, setDob] = useState(moment(props.date).format("YYYY/MM/DD"));
+  const userId = useSelector((state) => state.auth.userId);
+
+  useEffect(() => {
+    const gerUserDataById = async (userId) => {
+      try {
+        const res = await userApi.getDataByUserId(userId);
+        console.log(res, "res");
+        if (res) {
+          setInitialValues(res.data.user);
+          setDob(() => {
+            return res.data.user.dob;
+          });
+        }
+      } catch (e) {
+        // console.log(e);
+        message.error({
+          content: "Error, User data was not fetched successfully.",
+        });
+      }
+    };
+    gerUserDataById(userId);
+    console.log(initialValues, "init");
+  }, [userId]);
+
+  const URL =
+    /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+(\/)?.([\w\?[a-zA-Z-_%\/@?]+)*([^\/\w\?[a-zA-Z0-9_-]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/;
+
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
@@ -16,31 +46,28 @@ const ProfileForm = (props) => {
     gender: Yup.string().required("Required"),
     maritalStatus: Yup.string().required("Required"),
     phone: Yup.string().required("Required"),
-    occupation: Yup.string().required("Required"),
+    title: Yup.string(),
+    headline: Yup.string(),
+    description: Yup.string(),
+    linkedIn: Yup.string().matches(URL, "Enter correct URI"),
   });
+
   const genderOptions = [
     { key: "Male", value: "male" },
     { key: "Female", value: "female" },
   ];
+
   const maritalStatusOptions = [
     { key: "Married", value: "married" },
     { key: "Single", value: "single" },
     { key: "Divorced", value: "divorced" },
     { key: "Widowed", value: "widowed" },
   ];
+
   const onSubmit = (values) => {
     props.submitHandler(values);
   };
-  useEffect(() => {
-    setInitialValues(() => {
-      return { ...props.initialValues.user };
-    });
-    setDob(() => {
-      if (props.initialValues.user && props.initialValues.user.dob) {
-        return props.initialValues.user.dob;
-      }
-    });
-  }, [props.initialValues.user]);
+
   return (
     <>
       {initialValues && Object.keys(initialValues).length !== 0 && (
@@ -78,10 +105,28 @@ const ProfileForm = (props) => {
                         <div className="col-sm-6">
                           <FormControl
                             control="input"
-                            type="email"
-                            label="Email Address"
-                            name="email"
-                            disabled
+                            type="text"
+                            label="Your titles"
+                            name="title"
+                            placeholder="eg: AAT, MBCS"
+                          />
+                        </div>
+                        <div className="col-sm-6">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            label="Headline"
+                            name="headline"
+                            placeholder="eg: Financial Advisor"
+                          />
+                        </div>
+                        <div className="col-sm-12">
+                          <FormControl
+                            control="textarea"
+                            type="text"
+                            label="Description"
+                            name="description"
+                            placeholder="Mention what you have to tell to your clients"
                           />
                         </div>
                         <div className="col-sm-6">
@@ -90,6 +135,15 @@ const ProfileForm = (props) => {
                             type="text"
                             label="Phone Number"
                             name="phone"
+                          />
+                        </div>
+                        <div className="col-sm-6">
+                          <FormControl
+                            control="input"
+                            type="text"
+                            label="LinkedIn Profile URI"
+                            name="linkedIn"
+                            placeholder="eg: https://www.linkedin.com/<profile-name>"
                           />
                         </div>
                         <div className="col-sm-6">
@@ -113,14 +167,6 @@ const ProfileForm = (props) => {
                             date={dob}
                           ></DatePickerControl>
                         </div>
-                        <div className="col-sm-6">
-                          <FormControl
-                            control="input"
-                            type="text"
-                            label="Occupation"
-                            name="occupation"
-                          />
-                        </div>
                       </div>
                     </div>
                     <div className="lf-profile-form__button-wrapper">
@@ -143,4 +189,4 @@ const ProfileForm = (props) => {
   );
 };
 
-export default ProfileForm;
+export default AdvisorProfileForm;

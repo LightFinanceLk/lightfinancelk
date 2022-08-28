@@ -2,7 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
-import LoginForm from "../../components/form/forms/LoginForm";
+import LoginForm from "../../components/form/forms/auth/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
 import { message } from "antd";
@@ -29,7 +29,7 @@ const LoginPage = () => {
         const user = jwt(res.data.token);
         const persistData = {
           token: res.data.token,
-          uId: user.userId,
+          userId: user.userId,
           initPassword: user.initPassword,
           role: user.role,
           expiry: Date.now() + 3600000,

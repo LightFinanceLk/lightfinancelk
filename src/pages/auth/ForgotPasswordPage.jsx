@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
-import ForgotPasswordForm from "../../components/form/forms/ForgotPasswordForm";
+import ForgotPasswordForm from "../../components/form/forms/auth/ForgotPasswordForm";
 import userApi from "../../api/userApi";
 
 const ForgotPasswordPage = () => {

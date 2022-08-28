@@ -16,7 +16,7 @@ const createRecord = async (data) => {
   );
 };
 
-const createBulkRecords = async (uid, records) => {
+const createBulkRecords = async (userId, records) => {
   console.log(records, "axon data");
   return axios.post(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/`,

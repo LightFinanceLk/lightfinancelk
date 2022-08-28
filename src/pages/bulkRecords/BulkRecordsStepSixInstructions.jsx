@@ -9,7 +9,7 @@ import { Button } from "antd";
 import recordApi from "../../api/recordApi";
 
 const BulkRecordsStepSixInstructions = (props) => {
-  const uId = useSelector((state) => state.auth.uId);
+  const userId = useSelector((state) => state.auth.userId);
   // const [tableColumns, setTableColumns] = useState([]);
 
   // const submitHandler = (values) => {
@@ -20,7 +20,7 @@ const BulkRecordsStepSixInstructions = (props) => {
     try {
       console.log("reset data", values);
       const res = await recordApi.createBulkRecords(
-        uId,
+        userId,
         JSON.stringify(values)
       );
       if (res) {
