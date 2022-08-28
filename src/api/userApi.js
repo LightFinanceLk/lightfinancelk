@@ -15,6 +15,20 @@ const getDataByUserId = async (userId) => {
   );
 };
 
+const getUsersByUserRole = async (userRole) => {
+  return axios.get(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/users/role/${userRole}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+};
+
 const getAccountsByUserId = async (userId) => {
   return axios.get(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/users/${userId}/accounts`,
@@ -85,6 +99,7 @@ const resetPassword = async (data) => {
 
 const userApi = {
   getDataByUserId,
+  getUsersByUserRole,
   getAccountsByUserId,
   updateDataByUserId,
   updatePassword,

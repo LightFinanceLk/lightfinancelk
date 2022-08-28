@@ -14,6 +14,7 @@ import PermissionDenied from "./pages/auth/PermissionDenied";
 import RequireAuth from "./pages/auth/RequireAuth";
 import DashboardWrapper from "./pages/dashboard/DashboardWrapper";
 import "./App.scss";
+import CreateAdvisor from "./pages/advisor/CreateAdvisor";
 
 const ROLES = {
   User: "2022",
@@ -37,6 +38,11 @@ function App() {
           <Route path="account/create" element={<CreateAccountPage />} />
           <Route path="record/create" element={<CreateRecordPage />} />
           <Route path="record/create-bulk" element={<BulkRecordsPage />} />
+        </Route>
+
+        {/** Protected Routes - ADMIN */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route path="advisor/create" element={<CreateAdvisor />} />
         </Route>
 
         {/** Protected Routes - ALL USERS */}

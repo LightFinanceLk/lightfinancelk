@@ -2,12 +2,11 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import FormControl from "../fields/FormControl";
-import DatePickerControl from "../fields/DatePicker";
-import RadioButtons from "../fields/RadioButtons";
-import logo from "./../../../assets/img/logo.png";
+import FormControl from "../../fields/FormControl";
+import DatePickerControl from "../../fields/DatePicker";
+import RadioButtons from "../../fields/RadioButtons";
 
-const SignUpForm = (props) => {
+const CreateAdvisorForm = (props) => {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -16,7 +15,7 @@ const SignUpForm = (props) => {
     maritalStatus: "",
     email: "",
     phone: "",
-    occupation: "",
+    city: "",
   };
 
   const phoneRegExp =
@@ -34,7 +33,7 @@ const SignUpForm = (props) => {
       .matches(phoneRegExp, "Phone number is not valid")
       .min(10, "Phone number should be 10 digits")
       .max(10, "Phone number should be 10 digits"),
-    occupation: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
   });
   const genderOptions = [
     { key: "Male", value: "male" },
@@ -50,14 +49,11 @@ const SignUpForm = (props) => {
     props.submitHandler(values);
   };
   return (
-    <div className="lf-auth-form lf-auth-form--signup">
+    <div className="lf-auth-form lf-auth-form--advisor">
       <div className="lf-auth-form__inner">
-        <figure className="figure lf-auth-form__logo">
-          <img src={logo} alt="" className=" img-fluid" />
-        </figure>
         <div className="lf-auth-form__welcome-msg">
-          <p>Welcome!</p>
-          <p>Let's create Your account.</p>
+          <p></p>
+          <p>Let's create Advisor account.</p>
         </div>
         <Formik
           initialValues={initialValues}
@@ -99,18 +95,19 @@ const SignUpForm = (props) => {
                         type="text"
                         label="Phone Number"
                         name="phone"
+                        placeholder="eg. 0771234567"
                       />
                     </div>
                     <div className="col-sm-6">
                       <RadioButtons
-                        label="Are you a"
+                        label="Gender"
                         name="gender"
                         options={genderOptions}
                       ></RadioButtons>
                     </div>
                     <div className="col-sm-6">
                       <RadioButtons
-                        label="Are you"
+                        label="Marital Status"
                         name="maritalStatus"
                         options={maritalStatusOptions}
                       ></RadioButtons>
@@ -125,8 +122,8 @@ const SignUpForm = (props) => {
                       <FormControl
                         control="input"
                         type="text"
-                        label="Occupation"
-                        name="occupation"
+                        label="City"
+                        name="city"
                       />
                     </div>
                   </div>
@@ -139,10 +136,6 @@ const SignUpForm = (props) => {
                   >
                     Submit
                   </button>
-                  <div>
-                    Login instead?
-                    <Link to="/"> Login</Link>
-                  </div>
                 </div>
               </Form>
             );
@@ -153,4 +146,4 @@ const SignUpForm = (props) => {
   );
 };
 
-export default SignUpForm;
+export default CreateAdvisorForm;

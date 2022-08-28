@@ -1,8 +1,12 @@
 @import "bootstrap-common";
 
+body {
+  height: auto;
+}
+
 main {
-  min-height: 100vh;
   &:not(.authenticated) {
+    min-height: 100vh;
     display: flex;
     align-items: center;
   }
