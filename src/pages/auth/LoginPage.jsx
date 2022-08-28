@@ -5,15 +5,14 @@ import { authActions } from "../../store/auth";
 import LoginForm from "../../components/form/forms/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
-
-let logoutTimer;
+import { message } from "antd";
 
 const LoginPage = () => {
-  // const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser && storedUser.initPassword) {
@@ -44,7 +43,11 @@ const LoginPage = () => {
         }
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
+      message.error({
+        content: "Login failed, Please try again later.",
+        duration: 6,
+      });
     }
   };
 

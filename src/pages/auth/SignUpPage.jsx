@@ -19,7 +19,7 @@ const SignUpPage = () => {
   // }, [dispatch, navigate]);
 
   const signUpHandler = async (formData) => {
-    let data = { ...formData, initPassword: true, role: "USER" };
+    let data = { ...formData, initPassword: true, role: "2022" };
     try {
       const res = await authApi.signUp(JSON.stringify(data));
       if (res) {

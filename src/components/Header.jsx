@@ -10,6 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const userRole = useSelector((state) => state.auth.role);
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -40,20 +41,24 @@ const Header = () => {
                     </span>
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/account/create">
-                    <span className="nav-link px-2 link-secondary">
-                      Accounts
-                    </span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/record/create-bulk">
-                    <span className="nav-link px-2 link-secondary">
-                      Records
-                    </span>
-                  </NavLink>
-                </li>
+                {userRole === "2022" && (
+                  <>
+                    <li>
+                      <NavLink to="/account/create">
+                        <span className="nav-link px-2 link-secondary">
+                          Accounts
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/record/create-bulk">
+                        <span className="nav-link px-2 link-secondary">
+                          Records
+                        </span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
               <ul className="nav col-12 col-lg-auto mb-md-0">
                 <li style={{ marginLeft: "auto" }}>

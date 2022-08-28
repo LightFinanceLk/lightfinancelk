@@ -177,5 +177,11 @@ form {
         width: 800px;
       }
     }
+    &--advisor {
+      min-height: calc(100vh - 260px);
+      #{$this}__inner {
+        width: 800px;
+      }
+    }
   }
 }
