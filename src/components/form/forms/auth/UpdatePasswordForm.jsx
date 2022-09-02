@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
-import FormControl from "../fields/FormControl";
+import FormControl from "../../fields/FormControl";
 import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
 import { message } from "antd";
 
@@ -17,11 +17,9 @@ const UpdatePasswordForm = (props) => {
     newPassword: Yup.string()
       .required("Required")
       .min(6, "Password is too short. Minimum 6 characters."),
-    confirmedNewPassword: Yup.string().required("Required"),
-    // confirmedNewPassword: Yup.string().oneOf(
-    //   [Yup.ref("newPassword"), null],
-    //   "Passwords must match"
-    // ),
+    confirmedNewPassword: Yup.string()
+      .required("Required")
+      .oneOf([Yup.ref("newPassword"), null], "Passwords must match"),
   });
 
   const togglePasswordVisibility = () => {
@@ -33,6 +31,7 @@ const UpdatePasswordForm = (props) => {
     resetForm();
     props.changePasswordHandler(values);
   };
+
   return (
     <div className="lf-profile-form">
       <div className="lf-profile-form__inner">

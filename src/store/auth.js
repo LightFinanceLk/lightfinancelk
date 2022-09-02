@@ -3,9 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialAuthState = {
   isAuthenticated: false,
   token: null,
-  uId: null,
+  userId: null,
+  id: null,
   role: null,
   expiry: null,
+  initPassword: null,
 };
 
 const authSlice = createSlice({
@@ -15,16 +17,23 @@ const authSlice = createSlice({
     login(state, res) {
       state.isAuthenticated = true;
       state.token = res.payload.token;
-      state.uId = res.payload.uId;
+      state.userId = res.payload.userId;
+      state.id = res.payload.id;
       state.role = res.payload.role;
       state.expiry = res.payload.expiry;
+      state.initPassword = res.payload.initPassword;
     },
     logout(state) {
       state.isAuthenticated = false;
       state.token = null;
-      state.uId = null;
+      state.userId = null;
+      state.id = null;
       state.role = null;
       state.expiry = null;
+      state.initPassword = null;
+    },
+    initPassword(state, res) {
+      state.initPassword = res.payload.initPassword;
     },
   },
 });

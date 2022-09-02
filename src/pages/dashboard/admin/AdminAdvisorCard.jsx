@@ -4,38 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { Table } from "antd";
 import { useEffect, useState } from "react";
-import userApi from "../../api/userApi";
+import userApi from "../../../api/userApi";
 import { message } from "antd";
+import moment from "moment";
 
-const AdminAdvisorCard = () => {
+const AdminAdvisorCard = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const getAdvisors = async () => {
-      try {
-        const res = await userApi.getUsersByUserRole("1974");
-        if (res.data) {
-          const advisors = res.data.users;
-          const advisorsArr = advisors.map((advisor, index) => {
-            return {
-              key: index,
-              name: `${advisor.firstName} ${advisor.lastName}`,
-              noOfClients: 98,
-              noOfMeetings: 5,
-              link: `/advisor/${advisor.id}`,
-            };
-          });
-          setData(advisorsArr);
-        }
-      } catch (e) {
-        // console.log(e);
-        message.error({
-          content: "Fetching advisors failed.",
-          duration: 6,
-        });
-      }
-    };
-    getAdvisors();
-  }, []);
+    if (props.advisors) {
+      const advisors = props.advisors.map((advisor) => {
+        return { ...advisor, link: advisor.link.replace("user", "advisor") };
+      });
+      setData(advisors);
+    }
+  }, [props]);
 
   const columns = [
     {
@@ -48,7 +30,7 @@ const AdminAdvisorCard = () => {
     },
     {
       title: "Area",
-      dataIndex: "area",
+      dataIndex: "city",
       sorter: {
         compare: (a, b) => a.chinese - b.chinese,
         multiple: 2,
@@ -88,7 +70,14 @@ const AdminAdvisorCard = () => {
     console.log("params", pagination, filters, sorter, extra);
   };
 
-  return <Table columns={columns} dataSource={data} onChange={onChange} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={data}
+      onChange={onChange}
+      pagination={{ defaultPageSize: 5 }}
+    />
+  );
 };
 
 export default AdminAdvisorCard;

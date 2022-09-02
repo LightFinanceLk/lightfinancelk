@@ -2,7 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
-import LoginForm from "../../components/form/forms/LoginForm";
+import LoginForm from "../../components/form/forms/auth/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
 import { message } from "antd";
@@ -27,16 +27,24 @@ const LoginPage = () => {
       const res = await authApi.login(JSON.stringify(formData));
       if (res.data) {
         const user = jwt(res.data.token);
+        console.log(user);
         const persistData = {
           token: res.data.token,
-          uId: user.userId,
+          id: user.id,
+          userId: user.userId,
           initPassword: user.initPassword,
           role: user.role,
           expiry: Date.now() + 3600000,
         };
-        localStorage.setItem("user", JSON.stringify(persistData));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            token: res.data.token,
+            expiry: Date.now() + 3600000,
+          })
+        );
         dispatch(authActions.login(persistData));
-        if (persistData.initPassword) {
+        if (user.initPassword) {
           navigate("/reset-password");
         } else {
           navigate(from, { replace: true });

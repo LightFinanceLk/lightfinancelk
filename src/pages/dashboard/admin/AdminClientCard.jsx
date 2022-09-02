@@ -8,48 +8,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Table } from "antd";
 import { useEffect, useState } from "react";
-import userApi from "../../api/userApi";
+import userApi from "../../../api/userApi";
 import { message } from "antd";
 import moment from "moment";
 import "./AdminClientCard.scss";
 
-import male from "../../assets/img/male.png";
-import female from "../../assets/img/female.png";
+import male from "../../../assets/img/male.png";
+import female from "../../../assets/img/female.png";
 
-const AdminClientCard = () => {
+const AdminClientCard = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const getClients = async () => {
-      try {
-        const res = await userApi.getUsersByUserRole("2022");
-        if (res.data) {
-          const clients = res.data.users;
-          const clientsArr = clients.map((client, index) => {
-            console.log(client);
-            const age = moment().diff(client.dob, "years", false);
-            return {
-              key: index,
-              name: `${client.firstName} ${client.lastName}`,
-              noOfClients: 98,
-              noOfMeetings: 5,
-              age,
-              area: client.city,
-              link: `/user/${client.id}`,
-              gender: client.gender,
-            };
-          });
-          setData(clientsArr);
-        }
-      } catch (e) {
-        // console.log(e);
-        message.error({
-          content: "Fetching clients failed.",
-          duration: 6,
-        });
-      }
-    };
-    getClients();
-  }, []);
+    if (props.clients) {
+      setData(props.clients);
+    }
+  }, [props]);
 
   const columns = [
     {
@@ -73,7 +46,7 @@ const AdminClientCard = () => {
     },
     {
       title: "Area",
-      dataIndex: "area",
+      dataIndex: "city",
     },
     {
       title: "",
@@ -95,7 +68,12 @@ const AdminClientCard = () => {
 
   return (
     <div className="lf-admin-client-card">
-      <Table columns={columns} dataSource={data} onChange={onChange} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        onChange={onChange}
+        pagination={{ defaultPageSize: 5 }}
+      />
     </div>
   );
 };

@@ -7,11 +7,11 @@ import CreateAccountForm from "../../components/form/forms/account/CreateAccount
 
 const CreateAccountPage = () => {
   const navigate = useNavigate();
-  const uId = useSelector((state) => state.auth.uId);
+  const userId = useSelector((state) => state.auth.userId);
   const submitHandler = async (data) => {
     console.log(data);
     try {
-      const res = await accountApi.createAccount(uId, JSON.stringify(data));
+      const res = await accountApi.createAccount(userId, JSON.stringify(data));
       if (res) {
         navigate("/");
         notification.success({

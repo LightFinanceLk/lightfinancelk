@@ -6,7 +6,7 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import "./AdvisorCard.scss";
-import logo from "../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 
 const AdvisorCard = () => {
   return (
@@ -21,7 +21,7 @@ const AdvisorCard = () => {
         </div>
       </div>
       <div className="lf-c-advisor__meetings">
-        <table class="table table-sm table-striped">
+        <table className="table table-sm table-striped">
           <thead>
             <tr>
               <th colSpan={3}>Up Coming Meetings</th>

@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormControl from "../fields/FormControl";
+import FormControl from "../../fields/FormControl";
 const nanoidGenerate = require("nanoid-esm/generate");
 
 const DeleteProfileForm = (props) => {

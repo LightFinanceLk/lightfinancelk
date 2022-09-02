@@ -1,21 +1,31 @@
 import { useNavigate } from "react-router-dom";
 import userApi from "../../api/userApi";
-import UpdatePasswordForm from "../../components/form/forms/UpdatePasswordForm";
+import { authActions } from "../../store/auth";
+import UpdatePasswordForm from "../../components/form/forms/auth/UpdatePasswordForm";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 
 const InitPasswordPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.auth.id);
+
+  // useState(()=>{
+
+  // },[id])
 
   const resetHandler = async (formData) => {
-    const storedUserData = JSON.parse(localStorage.getItem("user"));
+    console.log(id);
     try {
-      const res = await userApi.updatePassword(
-        storedUserData.uId,
-        JSON.stringify(formData)
-      );
+      const res = await userApi.updatePassword(id, JSON.stringify(formData));
       if (res) {
+        dispatch(authActions.initPassword(false));
         localStorage.setItem(
           "user",
-          JSON.stringify({ ...storedUserData, initPassword: false })
+          JSON.stringify({
+            token: res.data.token,
+            expiry: Date.now() + 3600000,
+          })
         );
         navigate("/");
       }
@@ -24,9 +34,13 @@ const InitPasswordPage = () => {
     }
   };
   return (
-    <UpdatePasswordForm
-      changePasswordHandler={resetHandler}
-    ></UpdatePasswordForm>
+    <>
+      {id && (
+        <UpdatePasswordForm
+          changePasswordHandler={resetHandler}
+        ></UpdatePasswordForm>
+      )}
+    </>
   );
 };
 

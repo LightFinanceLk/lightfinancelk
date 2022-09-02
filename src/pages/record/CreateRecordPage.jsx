@@ -10,7 +10,7 @@ import CreateRecordForm from "../../components/form/forms/record/CreateRecordFor
 const CreateRecordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const uId = useSelector((state) => state.auth.uId);
+  const userId = useSelector((state) => state.auth.userId);
   const uAccounts = useSelector((state) => state.account.accounts);
 
   const [userAccounts, setUserAccounts] = useState([]);
