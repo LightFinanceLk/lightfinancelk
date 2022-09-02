@@ -3,13 +3,19 @@ import { message } from "antd";
 import { useDispatch } from "react-redux";
 import authApi from "../../api/authApi";
 import { authActions } from "../../store/auth";
+import jwt from "jwt-decode";
 
 const RequireAuth = ({ allowedRoles }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const now = Date.now();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const localData = JSON.parse(localStorage.getItem("user"));
+  let user = {};
+
+  if (localData) {
+    user = jwt(localData.token);
+  }
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -21,20 +27,22 @@ const RequireAuth = ({ allowedRoles }) => {
     navigate("/login");
   };
 
-  if (user) {
+  if (Object.keys(user).length > 0) {
     const persistData = {
-      token: user.token,
+      token: localData.token,
       userId: user.userId,
-      initPassword: user.initPassword,
+      id: user.id,
       role: user.role,
-      expiry: user.expiry,
+      expiry: localData.expiry,
+      initPassword: user.initPassword,
     };
     if (persistData.initPassword) {
       navigate("/reset-password");
     }
     dispatch(authActions.login(persistData));
   }
-  if (user && user.expiry < now) {
+
+  if (localData && localData.expiry < now) {
     logout();
   } else {
     const isUserRole = user
@@ -44,7 +52,7 @@ const RequireAuth = ({ allowedRoles }) => {
       : false;
     return isUserRole ? (
       <Outlet />
-    ) : user ? (
+    ) : Object.keys(user).length > 0 ? (
       <Navigate to="/unauthorized" state={{ from: location }} replace />
     ) : (
       <Navigate to="/login" state={{ from: location }} replace />

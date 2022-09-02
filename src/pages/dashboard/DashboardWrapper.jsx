@@ -1,22 +1,30 @@
-import Dashboard from "./Dashboard";
-import DashboardAdmin from "./DashboardAdmin";
-import DashboardAdvisor from "./DashboardAdvisor";
+import Dashboard from "./user/Dashboard";
+import DashboardAdmin from "./admin/DashboardAdmin";
+import DashboardAdvisor from "./advisor/DashboardAdvisor";
+import { useSelector } from "react-redux";
 
 const DashboardWrapper = () => {
+  // useSelector((state) => {
+  //   console.log(state);
+  // });
+  const role = useSelector((state) => state.auth.role);
   const ROLES = {
     User: "2022",
     Admin: "1986",
     Advisor: "1974",
   };
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.role === ROLES.Admin ? (
-    <DashboardAdmin />
-  ) : user?.role === ROLES.Advisor ? (
-    <DashboardAdvisor />
-  ) : user?.role === ROLES.User ? (
-    <Dashboard />
-  ) : null;
+  return (
+    <>
+      {role && role === ROLES.Admin ? (
+        <DashboardAdmin />
+      ) : role && role === ROLES.Advisor ? (
+        <DashboardAdvisor />
+      ) : role && role === ROLES.User ? (
+        <Dashboard />
+      ) : null}
+    </>
+  );
 };
 
 export default DashboardWrapper;

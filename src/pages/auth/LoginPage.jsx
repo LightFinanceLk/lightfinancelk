@@ -27,16 +27,24 @@ const LoginPage = () => {
       const res = await authApi.login(JSON.stringify(formData));
       if (res.data) {
         const user = jwt(res.data.token);
+        console.log(user);
         const persistData = {
           token: res.data.token,
+          id: user.id,
           userId: user.userId,
           initPassword: user.initPassword,
           role: user.role,
           expiry: Date.now() + 3600000,
         };
-        localStorage.setItem("user", JSON.stringify(persistData));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            token: res.data.token,
+            expiry: Date.now() + 3600000,
+          })
+        );
         dispatch(authActions.login(persistData));
-        if (persistData.initPassword) {
+        if (user.initPassword) {
           navigate("/reset-password");
         } else {
           navigate(from, { replace: true });

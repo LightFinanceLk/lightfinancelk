@@ -6,7 +6,7 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import "./AdvisorCard.scss";
-import logo from "../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 
 const AdvisorCard = () => {
   return (

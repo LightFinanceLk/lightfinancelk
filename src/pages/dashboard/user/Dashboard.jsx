@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import accountApi from "../../api/accountApi";
-import { accountActions } from "../../store/account";
-import userApi from "../../api/userApi";
+import accountApi from "../../../api/accountApi";
+import { accountActions } from "../../../store/account";
+import userApi from "../../../api/userApi";
 import { message } from "antd";
 import "./Dashboard.scss";
 import AccountsCard from "./AccountsCard";

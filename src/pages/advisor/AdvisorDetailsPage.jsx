@@ -1,20 +1,23 @@
-import React from "react";
+import { useParams } from "react-router-dom";
+import AdvisorClients from "../../components/advisor/AdvisorClients";
 import AdvisorDetails from "../../components/advisor/AdvisorDetails";
 
 const AdvisorDetailsPage = () => {
+  const { aid } = useParams();
   return (
     <div className="lf-detail-page">
-      <AdvisorDetails></AdvisorDetails>
+      <AdvisorDetails aid={aid}></AdvisorDetails>
       <div className="fluid-container">
         <div className="row">
-          <div className="col-sm-12">
+          <div className="col-sm-6">
             <div className="lf-detail-page__meetings">
-              <h4>Meetings</h4>
+              <h5>Up Coming Meetings</h5>
             </div>
           </div>
-          <div className="col-sm-12">
+          <div className="col-sm-6">
             <div className="lf-detail-page__clients">
-              <h4>Clients</h4>
+              <h5>Clients</h5>
+              <AdvisorClients aid={aid}></AdvisorClients>
             </div>
           </div>
         </div>
