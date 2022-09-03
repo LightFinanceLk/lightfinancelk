@@ -6,7 +6,7 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import InitPasswordPage from "./pages/auth/InitPasswordPage";
 import CreateAccountPage from "./pages/account/CreateAccountPage";
-import AccountPage from "./pages/account/AccountPage";
+import AccountsPage from "./pages/account/AccountsPage";
 import CreateRecordPage from "./pages/record/CreateRecordPage";
 import BulkRecordsPage from "./pages/bulkRecords/BulkRecordsPage";
 import PermissionDenied from "./pages/auth/PermissionDenied";
@@ -36,7 +36,7 @@ function App() {
 
         {/** Protected Routes - USER */}
         <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-          <Route path="account" element={<AccountPage />} />
+          <Route path="account" element={<AccountsPage />} />
           <Route path="account/create" element={<CreateAccountPage />} />
           <Route path="record/create" element={<CreateRecordPage />} />
           <Route path="record/create-bulk" element={<BulkRecordsPage />} />

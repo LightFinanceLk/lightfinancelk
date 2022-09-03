@@ -44,7 +44,7 @@ const Header = () => {
                 {userRole === "2022" && (
                   <>
                     <li>
-                      <NavLink to="/account/create">
+                      <NavLink to="/account">
                         <span className="nav-link px-2 link-secondary">
                           Accounts
                         </span>
