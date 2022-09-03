@@ -18,7 +18,6 @@ const DashboardAdmin = () => {
       const res = await userApi.getUsersByUserRole("1974");
       if (res.data) {
         const advisors = res.data.users;
-        console.log(advisors);
         const advisorsArr = advisors.map((user, index) => {
           const advisor = user.user;
           const age = moment().diff(advisor.dob, "years", false);
@@ -26,8 +25,8 @@ const DashboardAdmin = () => {
             ...advisor,
             key: index,
             name: `${advisor.firstName} ${advisor.lastName}`,
-            noOfClients: 98,
-            noOfMeetings: 5,
+            noOfClients: 0,
+            noOfMeetings: 0,
             age,
             link: `/user/${advisor._id}`,
           };
@@ -55,8 +54,8 @@ const DashboardAdmin = () => {
             ...client,
             key: index,
             name: `${client.firstName} ${client.lastName}`,
-            noOfClients: 98,
-            noOfMeetings: 5,
+            noOfClients: 0,
+            noOfMeetings: 0,
             age,
             link: `/user/${client._id}`,
           };

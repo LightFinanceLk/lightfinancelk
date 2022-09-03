@@ -15,6 +15,34 @@ const getDataByUserId = async (userId) => {
   );
 };
 
+const getMeetingsByAdvisorId = async (advisorId) => {
+  return axios.get(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/users/advisors/${advisorId}/meetings`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+};
+
+const getMeetingsByUserId = async (userId) => {
+  return axios.get(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/users/${userId}/meetings`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+};
+
 const getUsersByUserRole = async (userRole) => {
   return axios.get(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/users/role/${userRole}`,
@@ -99,6 +127,8 @@ const resetPassword = async (data) => {
 
 const userApi = {
   getDataByUserId,
+  getMeetingsByAdvisorId,
+  getMeetingsByUserId,
   getUsersByUserRole,
   getAccountsByUserId,
   updateDataByUserId,

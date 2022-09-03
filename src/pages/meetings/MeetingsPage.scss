@@ -1,0 +1,9 @@
+@import "../../assets/scss/bootstrap-common";
+
+.lf-meetings-page {
+  > h3 {
+    + p {
+      margin-bottom: 50px;
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import authApi from "../../api/authApi";
+import userApi from "../../api/userApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
+import { userActions } from "../../store/user";
 import LoginForm from "../../components/form/forms/auth/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
@@ -21,6 +23,16 @@ const LoginPage = () => {
       }
     }
   }, []);
+
+  const setProfileData = async (id) => {
+    try {
+      const res = await userApi.getDataByUserId(id);
+      if (res.data && res.data.user) {
+        console.log(res.data.user, "data");
+        dispatch(userActions.getUser(res.data.user));
+      }
+    } catch (error) {}
+  };
 
   const loginHandler = async (formData) => {
     try {
@@ -44,6 +56,11 @@ const LoginPage = () => {
           })
         );
         dispatch(authActions.login(persistData));
+        try {
+          setProfileData(user.userId);
+        } catch (error) {
+          // console.log(error);
+        }
         if (user.initPassword) {
           navigate("/reset-password");
         } else {
