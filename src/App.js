@@ -17,6 +17,7 @@ import CreateAdvisor from "./pages/advisor/CreateAdvisor";
 import AdvisorDetailsPage from "./pages/advisor/AdvisorDetailsPage";
 import UserDetailsPage from "./pages/user/UserDetailsPage";
 import ProfileWrapper from "./pages/profile/ProfileWrapper";
+import MeetingsPage from "./pages/meetings/MeetingsPage";
 
 const ROLES = {
   User: "2022",
@@ -45,7 +46,6 @@ function App() {
         {/** Protected Routes - ADMIN */}
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="advisor/create" element={<CreateAdvisor />} />
-          <Route path="advisor/:aid" element={<AdvisorDetailsPage />} />
         </Route>
 
         {/** Protected Routes - ADMIN and ADVISOR*/}
@@ -53,6 +53,18 @@ function App() {
           element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.Advisor]} />}
         >
           <Route path="user/:uid" element={<UserDetailsPage />} />
+        </Route>
+
+        {/** Protected Routes - ADMIN and USER*/}
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.Admin, ROLES.User]} />}
+        >
+          <Route path="advisor/:aid" element={<AdvisorDetailsPage />} />
+        </Route>
+
+        {/** Protected Routes - ADVISOR */}
+        <Route element={<RequireAuth allowedRoles={[ROLES.Advisor]} />}>
+          <Route path="meetings" element={<MeetingsPage />} />
         </Route>
 
         {/** Protected Routes - ALL USERS */}

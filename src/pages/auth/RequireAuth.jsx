@@ -20,7 +20,7 @@ const RequireAuth = ({ allowedRoles }) => {
   const logout = () => {
     localStorage.removeItem("user");
     message.warning({
-      content: "Sorry... Session Expired, Please log in again.",
+      content: "Session Expired. Please log in again.",
       duration: 6,
     });
     dispatch(authActions.logout());

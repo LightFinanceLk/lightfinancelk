@@ -10,14 +10,65 @@ import moment from "moment";
 
 const AdminAdvisorCard = (props) => {
   const [data, setData] = useState([]);
+  const [advisorClientData, setAdvisorClientData] = useState([]);
+
+  const getMeetingsData = async (aId) => {
+    try {
+      const res = await userApi.getMeetingsByAdvisorId(aId);
+      if (res.data) {
+        let users = [];
+        let meetings = [];
+        const advisorMeetings = res.data.advisorMeetings.filter((m) => {
+          return m.userId && m.userId !== "";
+        });
+
+        advisorMeetings.map((m) => {
+          users.push(m.userId);
+          meetings.push(m._id);
+        });
+
+        let uniqueUsers = [...new Set(users)];
+
+        setAdvisorClientData([
+          ...advisorClientData,
+          {
+            advisorId: aId,
+            users: uniqueUsers.length,
+            meetings: meetings.length,
+          },
+        ]);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (props.advisors) {
       const advisors = props.advisors.map((advisor) => {
+        getMeetingsData(advisor._id);
         return { ...advisor, link: advisor.link.replace("user", "advisor") };
       });
       setData(advisors);
     }
   }, [props]);
+
+  useEffect(() => {
+    if (advisorClientData.length) {
+      let advisors = data;
+      advisors.map((advisor, index) => {
+        let advisorId = advisor._id;
+        advisorClientData.map((advisorData) => {
+          if (advisorData.advisorId === advisorId) {
+            advisors[index] = {
+              ...advisors[index],
+              noOfClients: advisorData.users,
+              noOfMeetings: advisorData.meetings,
+            };
+          }
+        });
+        setData(advisors);
+      });
+    }
+  }, [advisorClientData]);
 
   const columns = [
     {
@@ -37,19 +88,11 @@ const AdminAdvisorCard = (props) => {
       },
     },
     {
-      title: "No of Clients",
-      dataIndex: "noOfClients",
+      title: "Age",
+      dataIndex: "age",
       sorter: {
         compare: (a, b) => a.chinese - b.chinese,
         multiple: 3,
-      },
-    },
-    {
-      title: "New Meetings",
-      dataIndex: "noOfMeetings",
-      sorter: {
-        compare: (a, b) => a.chinese - b.chinese,
-        multiple: 4,
       },
     },
     {

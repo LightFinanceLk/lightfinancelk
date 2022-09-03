@@ -1,0 +1,44 @@
+@import "../../assets/scss/bootstrap-common";
+
+.lf-meeting {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+  background-color: white;
+  border-radius: 5px;
+
+  &__date {
+    display: flex;
+    flex: 20%;
+    p {
+      margin: 0;
+      padding-left: 10px;
+    }
+  }
+  &__time-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 80%;
+    button {
+      width: 100%;
+    }
+  }
+  &__time {
+    margin: 5px 15px;
+    width: calc(100% / 6 - 40px);
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .lf-meeting {
+    &__time-wrapper {
+      justify-content: flex-start;
+      margin: 10px;
+    }
+    &__time {
+      max-width: 120px;
+      min-width: 120px;
+    }
+  }
+}
