@@ -6,18 +6,20 @@ import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import InitPasswordPage from "./pages/auth/InitPasswordPage";
 import CreateAccountPage from "./pages/account/CreateAccountPage";
+import EditAccountPage from "./pages/account/EditAccountPage";
 import AccountsPage from "./pages/account/AccountsPage";
+import AccountPage from "./pages/account/AccountPage";
 import CreateRecordPage from "./pages/record/CreateRecordPage";
 import BulkRecordsPage from "./pages/bulkRecords/BulkRecordsPage";
 import PermissionDenied from "./pages/auth/PermissionDenied";
 import RequireAuth from "./pages/auth/RequireAuth";
 import DashboardWrapper from "./pages/dashboard/DashboardWrapper";
-import "./App.scss";
 import CreateAdvisor from "./pages/advisor/CreateAdvisor";
 import AdvisorDetailsPage from "./pages/advisor/AdvisorDetailsPage";
 import UserDetailsPage from "./pages/user/UserDetailsPage";
 import ProfileWrapper from "./pages/profile/ProfileWrapper";
 import MeetingsPage from "./pages/meetings/MeetingsPage";
+import "./App.scss";
 
 const ROLES = {
   User: "2022",
@@ -39,6 +41,8 @@ function App() {
         <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
           <Route path="account" element={<AccountsPage />} />
           <Route path="account/create" element={<CreateAccountPage />} />
+          <Route path="account/edit/:aid" element={<EditAccountPage />} />
+          <Route path="account/:aid" element={<AccountPage />} />
           <Route path="record/create" element={<CreateRecordPage />} />
           <Route path="record/create-bulk" element={<BulkRecordsPage />} />
         </Route>

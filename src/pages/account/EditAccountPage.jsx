@@ -1,21 +1,25 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import accountApi from "../../api/accountApi";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import CreateAccountForm from "../../components/form/forms/account/CreateAccountForm";
+import EditAccountForm from "../../components/form/forms/account/EditAccountForm";
 
-const CreateAccountPage = () => {
+const EditAccountPage = () => {
+  const { aid } = useParams();
   const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
+
+  const [account, setAccount] = useState(null);
+
   const submitHandler = async (data) => {
     try {
-      const res = await accountApi.createAccount(userId, JSON.stringify(data));
+      const res = await accountApi.updateAccount(aid, JSON.stringify(data));
       if (res) {
-        navigate("/account");
+        navigate(`/account/${aid}`);
         message.success({
           content: "Your account is created successfully.",
         });
@@ -28,6 +32,22 @@ const CreateAccountPage = () => {
       });
     }
   };
+
+  useEffect(() => {
+    getAccounts(aid);
+  }, [userId, aid]);
+
+  const getAccounts = async (uId) => {
+    try {
+      const res = await accountApi.getAccountById(uId);
+      if (res.data) {
+        setAccount(res.data.account);
+      }
+    } catch (error) {
+      // console.log(error);
+    }
+  };
+
   return (
     <div className="lf-accounts">
       <div className="container-fluid">
@@ -35,7 +55,7 @@ const CreateAccountPage = () => {
           <div className="col-sm-3">
             <div className="lf-accounts__left">
               <h3>Accounts</h3>
-              <NavLink to="/account">
+              <NavLink to={`/account/${aid}`}>
                 <span className="btn btn-outline-secondary">
                   <FontAwesomeIcon icon={faChevronLeft} /> Back
                 </span>
@@ -44,9 +64,10 @@ const CreateAccountPage = () => {
           </div>
           <div className="col-sm-9">
             <div className="lf-accounts__right">
-              <CreateAccountForm
+              <EditAccountForm
+                initialValues={account}
                 submitHandler={submitHandler}
-              ></CreateAccountForm>
+              ></EditAccountForm>
             </div>
           </div>
         </div>
@@ -55,4 +76,4 @@ const CreateAccountPage = () => {
   );
 };
 
-export default CreateAccountPage;
+export default EditAccountPage;
