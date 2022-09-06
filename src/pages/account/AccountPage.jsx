@@ -12,6 +12,7 @@ import { message, Popconfirm } from "antd";
 import Account from "../../components/account/Account";
 import accountApi from "../../api/accountApi";
 import "./Account.scss";
+import AccountRecords from "./AccountRecords";
 
 const AccountPage = () => {
   const { aid } = useParams();
@@ -92,6 +93,9 @@ const AccountPage = () => {
                         <FontAwesomeIcon icon={faPlus} /> Create Bulk Record
                       </span>
                     </NavLink>
+                  </div>
+                  <div className="lf-accounts__records">
+                    <AccountRecords aid={aid} />
                   </div>
                 </div>
               </div>
