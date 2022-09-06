@@ -115,16 +115,6 @@ const updatePassword = async (userId, data) => {
   );
 };
 
-const resetPassword = async (data) => {
-  // recheck this?????
-  return axios.post(`users/resetPassword`, data, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${JSON.parse(localStorage.getItem("user")).token}`,
-    },
-  });
-};
-
 const userApi = {
   getDataByUserId,
   getMeetingsByAdvisorId,
@@ -134,7 +124,6 @@ const userApi = {
   updateDataByUserId,
   updatePassword,
   deleteProfile,
-  resetPassword,
 };
 
 export default userApi;

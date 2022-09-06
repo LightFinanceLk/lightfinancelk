@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
@@ -11,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userRole = useSelector((state) => state.auth.role);
+  const firstName = useSelector((state) => state.user.firstName);
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -64,7 +65,7 @@ const Header = () => {
                 <li style={{ marginLeft: "auto" }}>
                   <NavLink to="/profile">
                     <span className="nav-link px-2 link-secondary">
-                      Hello {isAuth ? "authenticated" : "not authenticated"} !!{" "}
+                      Hello {isAuth ? firstName : ""} !!{" "}
                       <FontAwesomeIcon icon={faUserGear} />
                     </span>
                   </NavLink>

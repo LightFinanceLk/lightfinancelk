@@ -44,9 +44,6 @@ const AdvisorDetails = (props) => {
       }
     } catch (e) {
       // console.log(e);
-      message.error({
-        content: "Error, User data was not fetched successfully.",
-      });
     }
   };
 

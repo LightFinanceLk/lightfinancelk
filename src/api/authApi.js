@@ -25,6 +25,18 @@ const login = async (data) => {
   );
 };
 
-const authApi = { signUp, login };
+const resetPassword = async (data) => {
+  return axios.post(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/auth/resetPassword`,
+    data,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+const authApi = { signUp, login, resetPassword };
 
 export default authApi;

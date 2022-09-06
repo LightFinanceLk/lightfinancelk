@@ -27,9 +27,6 @@ const AdvisorProfileForm = (props) => {
         }
       } catch (e) {
         // console.log(e);
-        message.error({
-          content: "Error, User data was not fetched successfully.",
-        });
       }
     };
     gerUserDataById(userId);

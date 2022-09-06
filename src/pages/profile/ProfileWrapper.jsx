@@ -12,6 +12,7 @@ import { message } from "antd";
 const ProfileWrapper = () => {
   const [initialValues, setInitialValues] = useState({});
   const userId = useSelector((state) => state.auth.userId);
+  const id = useSelector((state) => state.auth.id);
   const userRole = useSelector((state) => state.auth.role);
 
   const dispatch = useDispatch();
@@ -32,9 +33,6 @@ const ProfileWrapper = () => {
         }
       } catch (e) {
         // console.log(e);
-        message.error({
-          content: "Error, User data was not fetched successfully.",
-        });
       }
     };
     gerUserDataById(userId);
@@ -43,10 +41,7 @@ const ProfileWrapper = () => {
 
   const changePasswordHandler = async (formData) => {
     try {
-      const res = await userApi.updatePassword(
-        userId,
-        JSON.stringify(formData)
-      );
+      const res = await userApi.updatePassword(id, JSON.stringify(formData));
       if (res) {
         message.success({
           content: "Password was updated successfully.",
@@ -62,9 +57,10 @@ const ProfileWrapper = () => {
 
   const DeleteProfileHandler = async (formData) => {
     try {
-      console.log("reset data", formData);
-      const res = await userApi.deleteProfile(userId, JSON.stringify(formData));
-      if (res) {
+      const res = await userApi.deleteProfile(id, JSON.stringify(formData));
+      if (res.data) {
+        console.log("awaaa");
+        localStorage.removeItem("user");
         dispatch(authActions.logout());
         message.success({
           content: "Account was deleted successfully.",

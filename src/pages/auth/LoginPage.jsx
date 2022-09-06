@@ -84,9 +84,9 @@ const LoginPage = () => {
         }
       }
     } catch (e) {
-      // console.log(e);
+      let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
       message.error({
-        content: "Login failed, Please try again later.",
+        content: errorMsg[0].replace(": ", ""),
         duration: 6,
       });
     }
