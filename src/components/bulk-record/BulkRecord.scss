@@ -1,23 +1,20 @@
 @import "../../assets/scss/bootstrap-common";
 
-.account {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.bulk-record {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
   margin: 0 0 20px;
+  padding: 20px;
   background-color: white;
   border-radius: 10px;
-  transition: all ease-in-out 0.15s;
-  > a {
+
+  &__account {
     display: flex;
-    width: 100%;
-    padding: 20px;
-    > div {
-      display: flex;
-      align-items: center;
-    }
+    flex-direction: row;
+    align-items: center;
   }
-  &__icon {
+  &__account-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,30 +27,32 @@
       font-size: 30px;
     }
   }
-  &__icon-color {
+  &__account-icon-color {
     width: 50px;
     height: 50px;
     opacity: 0.5;
     border-radius: 10px;
   }
-  &__type {
-    flex: 1;
-    p {
-      margin: 0;
-      font-size: 15px;
-    }
+  &__account-name {
+    color: $dark;
+    font-size: 1.2rem;
+  }
+  &__account-type {
+    margin: 0 0 0 15px;
+    font-size: 15px;
+  }
+  &__details {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
   }
   &__name {
     flex: 4;
     color: $dark;
     font-size: 1.2rem;
   }
-  &__amount {
-    text-align: right;
-    font-size: 1.5rem;
-    color: $dark;
-  }
-  &:hover {
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+  &__action {
+    flex: 4;
+    color: $danger;
   }
 }

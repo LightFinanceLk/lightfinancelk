@@ -51,9 +51,9 @@ const Header = () => {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/record/create-bulk">
+                      <NavLink to="/record/bulk-records">
                         <span className="nav-link px-2 link-secondary">
-                          Records
+                          Bulk Records
                         </span>
                       </NavLink>
                     </li>

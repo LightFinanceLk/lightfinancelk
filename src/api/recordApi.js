@@ -16,10 +16,10 @@ const createRecord = async (data) => {
   );
 };
 
-const createBulkRecords = async (userId, records) => {
+const createBulkRecords = async (accountId, records) => {
   console.log(records, "axon data");
   return axios.post(
-    `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/`,
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/${accountId}`,
     records,
     {
       headers: {
@@ -32,6 +32,40 @@ const createBulkRecords = async (userId, records) => {
   );
 };
 
-const recordApi = { createRecord, createBulkRecords };
+const getBulkRecordsByAccountId = async (accountId) => {
+  return axios.get(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/${accountId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+};
+
+const deleteBulkRecordsById = async (bulkRecordId) => {
+  console.log(bulkRecordId);
+  return axios.delete(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/${bulkRecordId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+};
+
+const recordApi = {
+  createRecord,
+  createBulkRecords,
+  getBulkRecordsByAccountId,
+  deleteBulkRecordsById,
+};
 
 export default recordApi;

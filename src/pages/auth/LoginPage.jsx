@@ -1,9 +1,11 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import authApi from "../../api/authApi";
 import userApi from "../../api/userApi";
+import accountApi from "../../api/accountApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import { userActions } from "../../store/user";
+import { accountActions } from "../../store/account";
 import LoginForm from "../../components/form/forms/auth/LoginForm";
 import { useEffect, useState } from "react";
 import jwt from "jwt-decode";
@@ -34,6 +36,15 @@ const LoginPage = () => {
     } catch (error) {}
   };
 
+  const setAccountData = async (id) => {
+    try {
+      const res = await userApi.getAccountsByUserId(id);
+      if (res.data) {
+        dispatch(accountActions.getAccounts(res.data.userAccount));
+      }
+    } catch (error) {}
+  };
+
   const loginHandler = async (formData) => {
     try {
       const res = await authApi.login(JSON.stringify(formData));
@@ -58,6 +69,11 @@ const LoginPage = () => {
         dispatch(authActions.login(persistData));
         try {
           setProfileData(user.userId);
+        } catch (error) {
+          // console.log(error);
+        }
+        try {
+          setAccountData(user.userId);
         } catch (error) {
           // console.log(error);
         }

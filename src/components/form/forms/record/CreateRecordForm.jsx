@@ -113,7 +113,9 @@ const CreateRecordForm = (props) => {
     accountId: Yup.string().required("Required"),
     amount: Yup.number("Amount should be a number").required("Required"),
     category: Yup.string().required("Required"),
+    subCategory: Yup.string(),
     date: Yup.string().required("Required"),
+    description: Yup.string(),
   });
 
   const transactionTypeOptions = [
@@ -128,7 +130,7 @@ const CreateRecordForm = (props) => {
   return (
     categoryOptions &&
     props.userAccounts !== [] && (
-      <div className="lf-account-form">
+      <div className="lf-account-form lf-account-form--create-record">
         <div className="lf-account-form__inner">
           <div className="lf-account-form__welcome-msg">
             <p>Let's record a Transaction.</p>
@@ -192,7 +194,14 @@ const CreateRecordForm = (props) => {
                           name="amount"
                         />
                       </div>
-                      <div className="col-sm-6">show currency here....</div>
+                      <div className="col-sm-6">
+                        <FormControl
+                          control="input"
+                          type="text"
+                          label="Description"
+                          name="description"
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="lf-account-form__button-wrapper">

@@ -31,7 +31,6 @@ const CreateAccountForm = (props) => {
   const currencyOptions = [
     { key: "Choose", value: "" },
     { key: "LKR", value: "lkr" },
-    { key: "USD", value: "usd" },
   ];
   const onSubmit = (values) => {
     props.submitHandler(values);

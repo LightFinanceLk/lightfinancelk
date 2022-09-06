@@ -33,13 +33,13 @@ const CreateAccountPage = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-3">
-            <div className="lf-accounts__left">
-              <h3>Accounts</h3>
+            <div className="lf-accounts__left justify-content-start d-flex">
               <NavLink to="/account">
-                <span className="btn btn-outline-secondary">
-                  <FontAwesomeIcon icon={faChevronLeft} /> Back
+                <span className="btn btn-outline-secondary btn-sm me-3">
+                  <FontAwesomeIcon icon={faChevronLeft} />
                 </span>
               </NavLink>
+              <h3>Accounts</h3>
             </div>
           </div>
           <div className="col-sm-9">

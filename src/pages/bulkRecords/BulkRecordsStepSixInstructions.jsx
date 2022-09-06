@@ -10,18 +10,33 @@ import recordApi from "../../api/recordApi";
 
 const BulkRecordsStepSixInstructions = (props) => {
   const userId = useSelector((state) => state.auth.userId);
-  // const [tableColumns, setTableColumns] = useState([]);
 
-  // const submitHandler = (values) => {
-  //   const dataSources = props.dataSource;
-  // };
+  const toCamelCase = (str) => {
+    return str
+      .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+      })
+      .replace(/\s+/g, "");
+  };
+
   const createBulkRecordsHandler = async (values) => {
     console.log(values);
     try {
-      console.log("reset data", values);
+      let submitValues = values.map((value) => {
+        return {
+          amount: value.Amount,
+          recordType: value.Amount > 0 ? "income" : "expense",
+          date: value.Date,
+          description: value.Description,
+          accountId: props.accountId,
+          category: value.category ? toCamelCase(value.category) : "",
+          subCategory: value.subCategory ? toCamelCase(value.subCategory) : "",
+        };
+      });
+      console.log("submitValues", submitValues);
       const res = await recordApi.createBulkRecords(
-        userId,
-        JSON.stringify(values)
+        props.accountId,
+        JSON.stringify(submitValues)
       );
       if (res) {
         // TODO validate res to res.length
@@ -35,18 +50,6 @@ const BulkRecordsStepSixInstructions = (props) => {
   const onClickHandler = () => {
     createBulkRecordsHandler(props.dataSource);
   };
-
-  // useEffect(() => {
-  //   if (props.dataColumns) {
-  //     let columns = [];
-  //     props.dataColumns.map((col) => {
-  //       if (col.title && col.title !== "Amount" && col.title !== "Date") {
-  //         columns.push({ key: col.key, value: col.title });
-  //       }
-  //     });
-  //     setTableColumns([{ key: "Choose", value: "" }, ...columns]);
-  //   }
-  // }, []);
 
   return (
     <>
