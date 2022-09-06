@@ -20,6 +20,8 @@ import UserDetailsPage from "./pages/user/UserDetailsPage";
 import ProfileWrapper from "./pages/profile/ProfileWrapper";
 import MeetingsPage from "./pages/meetings/MeetingsPage";
 import "./App.scss";
+import BulkRecordListPage from "./pages/bulkRecords/BulkRecordListPage";
+import RecordPage from "./pages/record/RecordPage";
 
 const ROLES = {
   User: "2022",
@@ -43,8 +45,13 @@ function App() {
           <Route path="account/create" element={<CreateAccountPage />} />
           <Route path="account/edit/:aid" element={<EditAccountPage />} />
           <Route path="account/:aid" element={<AccountPage />} />
-          <Route path="record/create" element={<CreateRecordPage />} />
-          <Route path="record/create-bulk" element={<BulkRecordsPage />} />
+          <Route path="record/create/:aid" element={<CreateRecordPage />} />
+          <Route path="record/:rid" element={<RecordPage />} />
+          <Route
+            path="record/create-bulk-record"
+            element={<BulkRecordsPage />}
+          />
+          <Route path="record/bulk-records" element={<BulkRecordListPage />} />
         </Route>
 
         {/** Protected Routes - ADMIN */}

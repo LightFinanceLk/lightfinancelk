@@ -6,11 +6,13 @@ import {
   faChevronLeft,
   faPenToSquare,
   faTrashCan,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { message, Popconfirm } from "antd";
 import Account from "../../components/account/Account";
 import accountApi from "../../api/accountApi";
 import "./Account.scss";
+import AccountRecords from "./AccountRecords";
 
 const AccountPage = () => {
   const { aid } = useParams();
@@ -49,13 +51,13 @@ const AccountPage = () => {
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm-3">
-                <div className="lf-accounts__left">
-                  <h3>Accounts</h3>
+                <div className="lf-accounts__left justify-content-start d-flex">
                   <NavLink to="/account">
-                    <span className="btn btn-outline-secondary">
-                      <FontAwesomeIcon icon={faChevronLeft} /> Back
+                    <span className="btn btn-outline-secondary btn-sm me-3">
+                      <FontAwesomeIcon icon={faChevronLeft} />
                     </span>
                   </NavLink>
+                  <h3>Accounts</h3>
                 </div>
               </div>
               <div className="col-sm-9">
@@ -80,6 +82,21 @@ const AccountPage = () => {
                     </Popconfirm>
                   </div>
                   <Account account={account} />
+                  <div className="lf-accounts__buttons">
+                    <NavLink to={`/record/create/${aid}`}>
+                      <span className="btn btn-outline-secondary mb-4 mt-4">
+                        <FontAwesomeIcon icon={faPlus} /> Create Record
+                      </span>
+                    </NavLink>
+                    <NavLink to={`/record/create-bulk-record`}>
+                      <span className="btn btn-outline-secondary mb-4 mt-4 ms-4">
+                        <FontAwesomeIcon icon={faPlus} /> Create Bulk Record
+                      </span>
+                    </NavLink>
+                  </div>
+                  <div className="lf-accounts__records">
+                    <AccountRecords aid={aid} />
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,50 +3,52 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import Account from "../../components/account/Account";
 import userApi from "../../api/userApi";
-import "./AccountsPage.scss";
+import BulkRecord from "../../components/bulk-record/BulkRecord";
 
-const AccountsPage = () => {
+const BulkRecordListPage = () => {
   const userId = useSelector((state) => state.auth.userId);
+  const [userAccounts, setUserAccounts] = useState([]);
 
-  const [accounts, setAccounts] = useState([]);
-
-  const getAccounts = async (uId) => {
+  const getUserAccounts = async () => {
     try {
-      const res = await userApi.getAccountsByUserId(uId);
+      const res = await userApi.getAccountsByUserId(userId);
       if (res.data) {
-        setAccounts(res.data.userAccount);
+        console.log(res.data);
+        setUserAccounts(res.data.userAccount);
       }
     } catch (error) {
       // console.log(error);
     }
   };
-
   useEffect(() => {
-    getAccounts(userId);
+    getUserAccounts();
   }, [userId]);
-
   return (
     <>
-      {accounts && (
+      {userAccounts && (
         <div className="lf-accounts">
           <div className="container-fluid">
             <div className="row">
               <div className="col-sm-3">
                 <div className="lf-accounts__left d-flex align-items-center flex-column">
-                  <h3>Accounts</h3>
-                  <NavLink to="/account/create">
+                  <h3>Bulk Records</h3>
+                  <NavLink to="/record/create-bulk-record">
                     <span className="btn btn-outline-secondary">
-                      <FontAwesomeIcon icon={faPlus} /> Add Account
+                      <FontAwesomeIcon icon={faPlus} /> Add Bulk Record
                     </span>
                   </NavLink>
                 </div>
               </div>
               <div className="col-sm-9">
                 <div className="lf-accounts__right">
-                  {accounts.map((account) => {
-                    return <Account account={account} />;
+                  {userAccounts.map((account) => {
+                    return (
+                      <BulkRecord
+                        account={account}
+                        getUserAccounts={getUserAccounts}
+                      />
+                    );
                   })}
                 </div>
               </div>
@@ -58,4 +60,4 @@ const AccountsPage = () => {
   );
 };
 
-export default AccountsPage;
+export default BulkRecordListPage;

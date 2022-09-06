@@ -141,12 +141,12 @@ const BulkRecordsStepTwoInstructions = (props) => {
 
   return (
     <div>
-      <label>Income and Expenses are in two columns</label>
       <Switch
         onChange={switchChangeHandler}
         checkedChildren="Yes"
         unCheckedChildren="No"
       />
+      <label>Income and Expenses are in two columns</label>
       {!areTwoColumns ? (
         <>
           <Formik

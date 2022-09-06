@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Formik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
 import HtmlTableToJson from "html-table-to-json";
@@ -7,14 +8,30 @@ import { message } from "antd";
 import csv from "csvtojson";
 
 const BulkRecordsStepOne = (props) => {
+  const uAccounts = useSelector((state) => state.account.accounts);
+  const [userAccounts, setUserAccounts] = useState([]);
   const initialValues = {
     rawData: "",
+    accountId: "",
   };
+  useEffect(() => {
+    if (uAccounts.length) {
+      let userAccounts = [{ key: "Choose", value: "" }];
+      uAccounts.map((account) => {
+        userAccounts.push({ key: account.accountName, value: account._id });
+      });
+      console.log(userAccounts);
+      setUserAccounts(userAccounts);
+    }
+  }, [uAccounts]);
+
   const validationSchema = Yup.object({
     rawData: Yup.string().required("Required"),
+    accountId: Yup.string().required("Required"),
   });
   const submitHandler = (values) => {
     let isError = false;
+    props.setAccountId(values.accountId);
     const capitalize = (str) => {
       const words = str.split(" ");
       const capitalizedWords = words.map((word) => {
@@ -144,6 +161,14 @@ const BulkRecordsStepOne = (props) => {
         {(formik) => {
           return (
             <Form>
+              <div className="col-sm-6">
+                <FormControl
+                  control="select"
+                  label="Account Name"
+                  name="accountId"
+                  options={userAccounts}
+                />
+              </div>
               <FormControl
                 control="textarea"
                 name="rawData"

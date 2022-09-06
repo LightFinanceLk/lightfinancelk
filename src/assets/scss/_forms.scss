@@ -143,7 +143,7 @@ form {
 }
 
 .lf-account-form {
-  $this: ".lf-account-form";
+  $this: &;
   @include lfAccount();
   &__welcome-msg {
     text-align: center;
@@ -181,6 +181,14 @@ form {
       min-height: calc(100vh - 260px);
       #{$this}__inner {
         width: 800px;
+      }
+    }
+  }
+  .lf-account-form {
+    $this: &;
+    &--create-record {
+      #{$this}__inner {
+        width: 700px;
       }
     }
   }

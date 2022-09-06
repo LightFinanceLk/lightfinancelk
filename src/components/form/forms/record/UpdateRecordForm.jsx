@@ -1,5 +1,6 @@
 import { useFormikContext, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import FormControl from "../../fields/FormControl";
 import categories from "../../../../util/categories";
@@ -12,7 +13,7 @@ const AutoUpdateForm = (props) => {
 
   useEffect(() => {
     if (values.category !== "") {
-      let index;
+      let index = 0;
       Object.keys(categories).map((el, i) => {
         if (
           el
@@ -42,11 +43,12 @@ const AutoUpdateForm = (props) => {
       ]);
       props.setIsSubCategoryEnabled(false);
     }
-  }, [values]);
+  }, [values, props.initialValues]);
   return null;
 };
 
-const CreateRecordForm = (props) => {
+const UpdateRecordForm = (props) => {
+  const uAccounts = useSelector((state) => state.account.accounts);
   const [categoryOptions, setCategoryOptions] = useState([
     {
       key: "Choose",
@@ -60,7 +62,10 @@ const CreateRecordForm = (props) => {
     },
   ]);
   const [isSubCategoryEnabled, setIsSubCategoryEnabled] = useState(true);
+
   const [userAccounts, setUserAccounts] = useState([]);
+
+  const [initialValues, setInitialValues] = useState({});
 
   useEffect(() => {
     let cat = Object.keys(categories);
@@ -87,26 +92,23 @@ const CreateRecordForm = (props) => {
         value: "",
       },
     ];
-    props.userAccounts.map((account) => {
+    uAccounts.map((account) => {
       userAccounts.push({ key: account.accountName, value: account._id });
     });
-    setUserAccounts(userAccounts);
-  }, [props.userAccounts]);
 
-  const initialValues = {
-    recordType: "expense",
-    accountId: "",
-    amount: "",
-    // currency: "",
-    category: "",
-    subCategory: "",
-    date: "",
-    // payee: "",
-    // note: "",
-    // paymentType: "",
-    // paymentStatus: "",
-    // place: "",
-  };
+    setUserAccounts(userAccounts);
+
+    setInitialValues({
+      recordType: props.initialValues.recordType,
+      accountId: props.initialValues.accountId,
+      amount: props.initialValues.amount,
+      category: props.initialValues.category || "",
+      subCategory: props.initialValues.subCategory || "",
+      date: props.initialValues.date,
+      description: props.initialValues.description || "",
+    });
+    console.log(initialValues, "initialValues");
+  }, [props.initialValues, uAccounts]);
 
   const validationSchema = Yup.object({
     recordType: Yup.string().required("Required"),
@@ -128,12 +130,13 @@ const CreateRecordForm = (props) => {
   };
 
   return (
-    categoryOptions &&
-    props.userAccounts !== [] && (
+    categoryOptions !== {} &&
+    userAccounts.length &&
+    initialValues !== {} && (
       <div className="lf-account-form lf-account-form--create-record">
         <div className="lf-account-form__inner">
           <div className="lf-account-form__welcome-msg">
-            <p>Let's record a Transaction.</p>
+            <p>Let's update a Transaction.</p>
           </div>
           <Formik
             initialValues={initialValues}
@@ -210,12 +213,13 @@ const CreateRecordForm = (props) => {
                       type="submit"
                       disabled={!formik.isValid}
                     >
-                      Create Record
+                      Update Record
                     </button>
                   </div>
                   <AutoUpdateForm
                     setSubCategoryOptions={setSubCategoryOptions}
                     setIsSubCategoryEnabled={setIsSubCategoryEnabled}
+                    initialValues={initialValues}
                   ></AutoUpdateForm>
                 </Form>
               );
@@ -227,4 +231,4 @@ const CreateRecordForm = (props) => {
   );
 };
 
-export default CreateRecordForm;
+export default UpdateRecordForm;

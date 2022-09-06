@@ -28,7 +28,7 @@ const DatePickerControl = (props) => {
               name={name}
               format={dateFormat}
               onChange={(val) => setFieldValue(name, val)}
-              placeholder={date}
+              placeholder="Select"
               disabledDate={(current) => {
                 let customDate = moment().add(1, "days").format("YYYY-MM-DD");
                 return current && current > moment(customDate, "YYYY-MM-DD");
