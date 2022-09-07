@@ -1,0 +1,53 @@
+@mixin image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  background-color: #ffffff;
+}
+
+.lf-profile-image {
+  $this: &;
+  position: relative;
+  width: 200px;
+  img {
+    @include image;
+  }
+  &__control {
+    &:hover {
+      #{$this}__control-btn {
+        display: block;
+      }
+    }
+    #{$this}__control-btn {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+.lf-image-upload {
+  position: relative;
+  &__preview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    img {
+      @include image;
+    }
+  }
+  &__buttons {
+    position: absolute;
+    bottom: 0;
+    button {
+      margin-right: 15px;
+    }
+  }
+}

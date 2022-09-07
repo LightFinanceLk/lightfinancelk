@@ -21,7 +21,7 @@ const EditAccountPage = () => {
       if (res) {
         navigate(`/account/${aid}`);
         message.success({
-          content: "Your account is created successfully.",
+          content: "Your account is updated successfully.",
         });
       }
     } catch (e) {

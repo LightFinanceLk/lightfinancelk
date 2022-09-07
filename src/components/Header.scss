@@ -1,0 +1,13 @@
+.header {
+  &__profile-image {
+    display: inline-block;
+    padding: 0 20px 0 0;
+    border-radius: 50%;
+    img {
+      height: 38px;
+      width: 38px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+}

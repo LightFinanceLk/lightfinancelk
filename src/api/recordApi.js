@@ -8,7 +8,7 @@ const getRecordsById = async (rid) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -22,7 +22,7 @@ const getRecordsByAccountId = async (aid) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -37,7 +37,7 @@ const createRecord = async (data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -51,7 +51,7 @@ const deleteRecord = async (rId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -67,7 +67,7 @@ const createBulkRecords = async (accountId, records) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -81,7 +81,7 @@ const getBulkRecordsByAccountId = async (accountId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -96,7 +96,7 @@ const deleteBulkRecordsById = async (bulkRecordId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }

@@ -8,7 +8,7 @@ const getDataByUserId = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -22,7 +22,7 @@ const getMeetingsByAdvisorId = async (advisorId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -36,7 +36,7 @@ const getMeetingsByUserId = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -50,7 +50,7 @@ const getUsersByUserRole = async (userRole) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -64,7 +64,7 @@ const getAccountsByUserId = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -79,7 +79,7 @@ const updateDataByUserId = async (userId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -93,7 +93,7 @@ const deleteProfile = async (userId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -108,7 +108,22 @@ const updatePassword = async (userId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
+        }`,
+      },
+    }
+  );
+};
+
+const updateProfileImage = async (userId, data) => {
+  return axios.post(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/users/updateProfileImage/${userId}`,
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -124,6 +139,7 @@ const userApi = {
   updateDataByUserId,
   updatePassword,
   deleteProfile,
+  updateProfileImage,
 };
 
 export default userApi;

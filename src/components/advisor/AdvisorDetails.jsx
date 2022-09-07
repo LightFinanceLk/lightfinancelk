@@ -6,15 +6,25 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faEdit,
+  faClose,
+} from "@fortawesome/free-solid-svg-icons";
+import ImageUpload from "../image-upload/ImageUpload.jsx";
+import config from "../../config";
+import linkedIn from "../../assets/img/linkedIn.png";
+import "./AdvisorDetails.scss";
 
 const AdvisorDetails = (props) => {
+  const currentUserId = useSelector((state) => state.auth.userId);
   const [userData, setUserData] = useState({});
+  const [showImageInput, setShowImageInput] = useState(true);
+  const [editor, setEditor] = useState(false);
 
   const getUserDataById = async (userId) => {
     try {
       const res = await userApi.getDataByUserId(userId);
-      console.log(res.data);
       if (res) {
         setUserData(res.data.user);
         if (
@@ -49,8 +59,11 @@ const AdvisorDetails = (props) => {
 
   useEffect(() => {
     const userId = props.aid;
+    setEditor(userId === currentUserId);
     getUserDataById(userId);
-  }, [props.aid]);
+    console.log(userData.image !== "");
+    setShowImageInput(userData.image === "");
+  }, [props]);
 
   return (
     <>
@@ -59,26 +72,71 @@ const AdvisorDetails = (props) => {
           <div className="fluid-container">
             <div className="row">
               <div className="col-sm-2">
-                <img src="..." className="img-thumbnail" alt="profile" />
+                <div className="lf-profile-image">
+                  {showImageInput && editor ? (
+                    <div className="lf-profile-image__control">
+                      <ImageUpload />
+                      <button
+                        className="btn btn-outline-secondary lf-profile-image__control-btn"
+                        onClick={() => {
+                          setShowImageInput(false);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faClose} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="lf-profile-image__control">
+                      <img
+                        src={`${config.api.BASE_URL}/${userData.image}`}
+                        alt=""
+                      />
+                      {editor && (
+                        <button
+                          className="btn btn-outline-secondary  lf-profile-image__control-btn"
+                          onClick={() => {
+                            setShowImageInput(true);
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="col-sm-10">
-                <h2>
-                  {userData.nameTitle} {userData.firstName} {userData.lastName}{" "}
-                  <small>{userData.title}</small>
-                  <a href={userData.linkedIn} target="_blank">
-                    <FontAwesomeIcon icon={faAngleRight} /> LinkedIn
-                  </a>
-                </h2>
-                <h5> {userData.headline}</h5>
-                <p>
-                  {userData.age}y {userData.city}
-                </p>
-                <p>
-                  <a href={`tel:${userData.phoneLink}`}> {userData.phone}</a>
-                </p>
+                <div className="lf-advisor-detail__content">
+                  <h2>
+                    {userData.nameTitle} {userData.firstName}{" "}
+                    {userData.lastName} <small>{userData.title}</small>
+                  </h2>
+                  {userData.linkedIn && (
+                    <a href={userData.linkedIn} target="_blank">
+                      <img src={linkedIn} alt="" className=" img-fluid" />
+                    </a>
+                  )}
+                  {userData.headline && <h5> {userData.headline}</h5>}
+                  <p>
+                    {userData.age && `${userData.age}y `}
+                    {userData.city && userData.city}
+                  </p>
+                  {userData.phone && (
+                    <p>
+                      <a href={`tel:${userData.phoneLink}`}>
+                        {" "}
+                        {userData.phone}
+                      </a>
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="col-sm-12">
-                <p>{userData.description}</p>
+              <div className="offset-sm-2 col-sm-10">
+                {userData.description && (
+                  <div className="lf-advisor-detail__content">
+                    <p>{userData.description}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

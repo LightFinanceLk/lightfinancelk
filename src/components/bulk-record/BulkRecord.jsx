@@ -51,11 +51,10 @@ const BulkRecord = (props) => {
     getBulkRecordsByAccountId(props.account._id);
   }, [props]);
 
-  const handleDelete = async (bulkRecordId) => {
+  const deleteBulkRecords = async (bId) => {
     try {
-      const res = await recordApi.deleteBulkRecordsById(bulkRecordId);
+      const res = await recordApi.deleteBulkRecordsById(bId);
       if (res.data) {
-        console.log(res.data);
         props.getUserAccounts();
         message.success({
           content: "Bulk Record is Deleted Successfully.",
@@ -66,6 +65,10 @@ const BulkRecord = (props) => {
         content: "Bulk Record is not Deleted Successfully. Try again later.",
       });
     }
+  };
+
+  const handleDelete = (bulkRecordId) => {
+    deleteBulkRecords(bulkRecordId);
   };
 
   return (

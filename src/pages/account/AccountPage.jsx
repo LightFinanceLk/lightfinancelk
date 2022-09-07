@@ -16,6 +16,7 @@ import AccountRecords from "./AccountRecords";
 
 const AccountPage = () => {
   const { aid } = useParams();
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.userId);
 
   const [account, setAccount] = useState(null);
@@ -31,9 +32,17 @@ const AccountPage = () => {
     }
   };
 
-  const confirm = (e) => {
-    console.log(e);
-    message.success("Click on Yes");
+  const confirm = async (e) => {
+    try {
+      const res = await accountApi.deleteAccount(aid);
+      if (res.data) {
+        message.success({
+          content: "Your account is deleted successfully.",
+        });
+      }
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   const cancel = (e) => {

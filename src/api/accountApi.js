@@ -1,6 +1,20 @@
 import axios from "axios";
 import config from "../config";
 
+const getAccountById = async (accountId) => {
+  return axios.get(
+    `${config.api.BASE_URL}${config.api.API_PREFIX}/accounts/${accountId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("lf-user")).token
+        }`,
+      },
+    }
+  );
+};
+
 const createAccount = async (userId, data) => {
   return axios.post(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/accounts/${userId}`,
@@ -9,7 +23,7 @@ const createAccount = async (userId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -24,27 +38,33 @@ const updateAccount = async (accountId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
   );
 };
 
-const getAccountById = async (accountId) => {
-  return axios.get(
+const deleteAccount = async (accountId, data) => {
+  console.log(accountId);
+  return axios.delete(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/accounts/${accountId}`,
     {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
   );
 };
 
-const accountApi = { createAccount, getAccountById, updateAccount };
+const accountApi = {
+  createAccount,
+  getAccountById,
+  updateAccount,
+  deleteAccount,
+};
 
 export default accountApi;

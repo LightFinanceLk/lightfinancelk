@@ -59,8 +59,7 @@ const ProfileWrapper = () => {
     try {
       const res = await userApi.deleteProfile(id, JSON.stringify(formData));
       if (res.data) {
-        console.log("awaaa");
-        localStorage.removeItem("user");
+        localStorage.removeItem("lf-user");
         dispatch(authActions.logout());
         message.success({
           content: "Account was deleted successfully.",

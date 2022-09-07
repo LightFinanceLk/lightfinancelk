@@ -12,6 +12,7 @@ const userSlice = createSlice({
     maritalStatus: "",
     occupation: "",
     phone: "",
+    image: "",
   },
   reducers: {
     getUser(state, res) {
@@ -24,6 +25,7 @@ const userSlice = createSlice({
       state.maritalStatus = res.payload.maritalStatus;
       state.occupation = res.payload.occupation;
       state.phone = res.payload.phone;
+      state.image = res.payload.image;
     },
   },
 });

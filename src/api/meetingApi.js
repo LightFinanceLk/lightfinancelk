@@ -9,7 +9,7 @@ const createMeeting = async (data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -24,7 +24,7 @@ const updateMeeting = async (meetingId, data) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }
@@ -38,7 +38,7 @@ const deleteMeeting = async (meetingId) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("lf-user")).token
         }`,
       },
     }

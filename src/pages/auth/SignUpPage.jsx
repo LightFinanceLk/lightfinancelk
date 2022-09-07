@@ -11,7 +11,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   // useEffect(() => {
-  //   const storedUserData = JSON.parse(localStorage.getItem("user"));
+  //   const storedUserData = JSON.parse(localStorage.getItem("lf-user"));
   //   if (storedUserData && storedUserData.token) {
   //     dispatch(authActions.login(storedUserData));
   //     navigate("/");

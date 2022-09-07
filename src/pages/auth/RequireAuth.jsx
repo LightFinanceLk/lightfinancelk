@@ -10,7 +10,7 @@ const RequireAuth = ({ allowedRoles }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const now = Date.now();
-  const localData = JSON.parse(localStorage.getItem("user"));
+  const localData = JSON.parse(localStorage.getItem("lf-user"));
   let user = {};
 
   if (localData) {
@@ -18,7 +18,7 @@ const RequireAuth = ({ allowedRoles }) => {
   }
 
   const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("lf-user");
     message.warning({
       content: "Session Expired. Please log in again.",
       duration: 6,

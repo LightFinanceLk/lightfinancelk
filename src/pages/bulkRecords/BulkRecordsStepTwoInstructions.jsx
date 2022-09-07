@@ -62,7 +62,6 @@ const BulkRecordsStepTwoInstructions = (props) => {
           message.warning({
             content: `We found some data we weren't expecting in column set as "Amount". We have removed special characters. \n
           ${warning.join(", ")}`,
-            duration: 10,
           });
         }
       } catch (error) {

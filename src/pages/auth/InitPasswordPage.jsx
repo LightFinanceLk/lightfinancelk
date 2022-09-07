@@ -21,7 +21,7 @@ const InitPasswordPage = () => {
       if (res) {
         dispatch(authActions.initPassword(false));
         localStorage.setItem(
-          "user",
+          "lf-user",
           JSON.stringify({
             token: res.data.token,
             expiry: Date.now() + 3600000,

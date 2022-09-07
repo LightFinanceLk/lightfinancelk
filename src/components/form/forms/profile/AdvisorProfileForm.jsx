@@ -18,7 +18,6 @@ const AdvisorProfileForm = (props) => {
     const gerUserDataById = async (userId) => {
       try {
         const res = await userApi.getDataByUserId(userId);
-        console.log(res, "res");
         if (res) {
           setInitialValues(res.data.user);
           setDob(() => {
@@ -30,7 +29,6 @@ const AdvisorProfileForm = (props) => {
       }
     };
     gerUserDataById(userId);
-    console.log(initialValues, "init");
   }, [userId]);
 
   const URL =

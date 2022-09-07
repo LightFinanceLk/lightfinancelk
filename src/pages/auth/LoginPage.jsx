@@ -18,7 +18,7 @@ const LoginPage = () => {
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(localStorage.getItem("lf-user"));
     if (storedUser && storedUser.initPassword) {
       if (storedUser.initPassword) {
         navigate("/reset-password");
@@ -60,7 +60,7 @@ const LoginPage = () => {
           expiry: Date.now() + 3600000,
         };
         localStorage.setItem(
-          "user",
+          "lf-user",
           JSON.stringify({
             token: res.data.token,
             expiry: Date.now() + 3600000,

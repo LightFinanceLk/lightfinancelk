@@ -6,7 +6,7 @@ const MeetingsPage = () => {
   return (
     <div className="lf-meetings-page">
       <h3>Meetings</h3>
-      <p>Book a meeting</p>
+      <p>Enable or Disable meetings</p>
       <Meetings />
     </div>
   );

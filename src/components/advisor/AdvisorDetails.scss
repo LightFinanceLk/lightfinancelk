@@ -1,0 +1,23 @@
+.lf-advisor-detail {
+  margin-bottom: 40px;
+  &__content {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background: white;
+    h2 {
+      margin-bottom: 20px;
+    }
+    > a {
+      display: inline-block;
+      width: 35px;
+      margin-bottom: 15px;
+    }
+    h5 {
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+  }
+}

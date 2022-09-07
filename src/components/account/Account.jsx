@@ -22,7 +22,7 @@ const Account = (props) => {
     creditCard: faCreditCard,
     savingsAccount: faPiggyBank,
     insurance: faCarBurst,
-    investment: faSackDollar,
+    investments: faSackDollar,
     loan: faMoneyBillTransfer,
   };
 
@@ -55,7 +55,7 @@ const Account = (props) => {
         </div>
         <div className="account__name">{account.accountName}</div>
         <div className="account__amount">
-          {account.currency} {account.amount}
+          {account.currency} {parseFloat(account.amount, 2)}
         </div>
       </NavLink>
     </div>

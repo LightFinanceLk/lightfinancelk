@@ -4,12 +4,13 @@ import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
 import { useEffect } from "react";
 import moment from "moment";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "antd";
 import recordApi from "../../api/recordApi";
 
 const BulkRecordsStepSixInstructions = (props) => {
-  const userId = useSelector((state) => state.auth.userId);
+  const navigate = useNavigate();
 
   const toCamelCase = (str) => {
     return str
@@ -20,7 +21,6 @@ const BulkRecordsStepSixInstructions = (props) => {
   };
 
   const createBulkRecordsHandler = async (values) => {
-    console.log(values);
     try {
       let submitValues = values.map((value) => {
         return {
@@ -33,14 +33,12 @@ const BulkRecordsStepSixInstructions = (props) => {
           subCategory: value.subCategory ? toCamelCase(value.subCategory) : "",
         };
       });
-      console.log("submitValues", submitValues);
       const res = await recordApi.createBulkRecords(
         props.accountId,
         JSON.stringify(submitValues)
       );
-      if (res) {
-        // TODO validate res to res.length
-        console.log(res);
+      if (res.data) {
+        navigate(`/account/${props.accountId}`);
       }
     } catch (e) {
       console.log(e);

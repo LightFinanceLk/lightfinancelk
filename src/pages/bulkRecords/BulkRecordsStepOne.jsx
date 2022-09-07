@@ -4,26 +4,37 @@ import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
 import HtmlTableToJson from "html-table-to-json";
+import userApi from "../../api/userApi";
+import { accountActions } from "../../store/account";
 import { message } from "antd";
 import csv from "csvtojson";
 
 const BulkRecordsStepOne = (props) => {
+  const dispatch = useDispatch();
   const uAccounts = useSelector((state) => state.account.accounts);
+  const userId = useSelector((state) => state.auth.userId);
   const [userAccounts, setUserAccounts] = useState([]);
   const initialValues = {
     rawData: "",
     accountId: "",
   };
+  const setAccountData = async (id) => {
+    try {
+      const res = await userApi.getAccountsByUserId(id);
+      if (res.data) {
+        dispatch(accountActions.getAccounts(res.data.userAccount));
+        let userAccounts = [{ key: "Choose", value: "" }];
+        res.data.userAccount.map((account) => {
+          userAccounts.push({ key: account.accountName, value: account._id });
+        });
+        console.log(userAccounts);
+        setUserAccounts(userAccounts);
+      }
+    } catch (error) {}
+  };
   useEffect(() => {
-    if (uAccounts.length) {
-      let userAccounts = [{ key: "Choose", value: "" }];
-      uAccounts.map((account) => {
-        userAccounts.push({ key: account.accountName, value: account._id });
-      });
-      console.log(userAccounts);
-      setUserAccounts(userAccounts);
-    }
-  }, [uAccounts]);
+    setAccountData(userId);
+  }, []);
 
   const validationSchema = Yup.object({
     rawData: Yup.string().required("Required"),

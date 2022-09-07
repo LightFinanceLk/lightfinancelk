@@ -5,6 +5,8 @@ import { authActions } from "../store/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import logo from "./../assets/img/logo.png";
+import "./Header.scss";
+import config from "../config";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -12,10 +14,12 @@ const Header = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userRole = useSelector((state) => state.auth.role);
   const firstName = useSelector((state) => state.user.firstName);
+  const lastName = useSelector((state) => state.user.lastName);
+  const profileImage = useSelector((state) => state.user.image);
 
   const logoutHandler = (e) => {
     e.preventDefault();
-    localStorage.removeItem("user");
+    localStorage.removeItem("lf-user");
     dispatch(authActions.logout());
     navigate("/login");
   };
@@ -64,9 +68,18 @@ const Header = () => {
               <ul className="nav col-12 col-lg-auto mb-md-0">
                 <li style={{ marginLeft: "auto" }}>
                   <NavLink to="/profile">
-                    <span className="nav-link px-2 link-secondary">
-                      Hello {isAuth ? firstName : ""} !!{" "}
-                      <FontAwesomeIcon icon={faUserGear} />
+                    <span className="header__profile-image">
+                      {profileImage ? (
+                        <img
+                          src={`${config.api.BASE_URL}/${profileImage}`}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          src={`https://ui-avatars.com/api/?name=${firstName}+${lastName}&background=random`}
+                          alt=""
+                        />
+                      )}
                     </span>
                   </NavLink>
                 </li>
