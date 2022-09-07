@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import AdminAdvisorCard from "./AdminAdvisorCard";
-import AdminClientCard from "./AdminClientCard";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { message } from "antd";
+import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AdvisorAssignCard from "./AdvisorAssignCard";
+import AdminAdvisorCard from "./AdminAdvisorCard";
+import AdminClientCard from "./AdminClientCard";
 import userApi from "../../../api/userApi";
-import { message } from "antd";
-import moment from "moment";
 
 const DashboardAdmin = () => {
   const [clients, setClients] = useState([]);
@@ -35,10 +35,6 @@ const DashboardAdmin = () => {
       }
     } catch (e) {
       // console.log(e);
-      message.error({
-        content: "Fetching advisors failed.",
-        duration: 6,
-      });
     }
   };
 
@@ -64,10 +60,6 @@ const DashboardAdmin = () => {
       }
     } catch (e) {
       // console.log(e);
-      message.error({
-        content: "Fetching clients failed.",
-        duration: 6,
-      });
     }
   };
 

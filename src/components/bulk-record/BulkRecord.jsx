@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import { Popconfirm, message } from "antd";
-import recordApi from "../../api/recordApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill1Wave,
   faMoneyCheckAlt,
@@ -12,7 +11,7 @@ import {
   faSackDollar,
   faMoneyBillTransfer,
 } from "@fortawesome/free-solid-svg-icons";
-import moment from "moment";
+import recordApi from "../../api/recordApi";
 import "./BulkRecord.scss";
 
 const BulkRecord = (props) => {

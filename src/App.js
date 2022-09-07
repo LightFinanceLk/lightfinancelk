@@ -19,9 +19,9 @@ import AdvisorDetailsPage from "./pages/advisor/AdvisorDetailsPage";
 import UserDetailsPage from "./pages/user/UserDetailsPage";
 import ProfileWrapper from "./pages/profile/ProfileWrapper";
 import MeetingsPage from "./pages/meetings/MeetingsPage";
-import "./App.scss";
 import BulkRecordListPage from "./pages/bulkRecords/BulkRecordListPage";
 import RecordPage from "./pages/record/RecordPage";
+import "./App.scss";
 
 const ROLES = {
   User: "2022",
@@ -100,7 +100,3 @@ function App() {
 }
 
 export default App;
-
-// {isauth && ()}
-
-// add to env GENERATE_SOURCEMAP=false

@@ -1,12 +1,12 @@
-import { useFormikContext, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useFormikContext, Form, Formik } from "formik";
 import * as Yup from "yup";
+import moment from "moment";
 import FormControl from "../../fields/FormControl";
 import categories from "../../../../util/categories";
 import RadioButtons from "../../fields/RadioButtons";
 import DatePickerControl from "../../fields/DatePicker";
-import moment from "moment";
 
 const AutoUpdateForm = (props) => {
   const { values } = useFormikContext();
@@ -107,7 +107,6 @@ const UpdateRecordForm = (props) => {
       date: props.initialValues.date,
       description: props.initialValues.description || "",
     });
-    console.log(initialValues, "initialValues");
   }, [props.initialValues, uAccounts]);
 
   const validationSchema = Yup.object({

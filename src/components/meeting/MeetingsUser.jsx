@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import MeetingUser from "./MeetingUser";
 import userApi from "../../api/userApi";
-import "./Meetings.scss";
 
 const MeetingsUser = () => {
   const role = useSelector((state) => state.auth.role);

@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/auth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import logo from "./../assets/img/logo.png";
-import "./Header.scss";
 import config from "../config";
+import "./Header.scss";
 
 const Header = () => {
   const dispatch = useDispatch();

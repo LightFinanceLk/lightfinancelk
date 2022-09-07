@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import FormControl from "../../components/form/fields/FormControl";
-import { useEffect } from "react";
-import moment from "moment";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import recordApi from "../../api/recordApi";
 

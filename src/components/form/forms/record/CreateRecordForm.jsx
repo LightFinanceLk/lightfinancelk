@@ -1,11 +1,11 @@
-import { useFormikContext, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { useFormikContext, Form, Formik } from "formik";
 import * as Yup from "yup";
+import moment from "moment";
 import FormControl from "../../fields/FormControl";
 import categories from "../../../../util/categories";
 import RadioButtons from "../../fields/RadioButtons";
 import DatePickerControl from "../../fields/DatePicker";
-import moment from "moment";
 
 const AutoUpdateForm = (props) => {
   const { values } = useFormikContext();
@@ -97,15 +97,10 @@ const CreateRecordForm = (props) => {
     recordType: "expense",
     accountId: "",
     amount: "",
-    // currency: "",
     category: "",
     subCategory: "",
     date: "",
-    // payee: "",
-    // note: "",
-    // paymentType: "",
-    // paymentStatus: "",
-    // place: "",
+    description: "",
   };
 
   const validationSchema = Yup.object({

@@ -1,22 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth";
+import { message } from "antd";
 import authApi from "../../api/authApi";
 import SignUpForm from "../../components/form/forms/auth/SignUpForm";
-import { message } from "antd";
 
 const SignUpPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const storedUserData = JSON.parse(localStorage.getItem("lf-user"));
-  //   if (storedUserData && storedUserData.token) {
-  //     dispatch(authActions.login(storedUserData));
-  //     navigate("/");
-  //   }
-  // }, [dispatch, navigate]);
 
   const signUpHandler = async (formData) => {
     let data = { ...formData, initPassword: true, role: "2022" };

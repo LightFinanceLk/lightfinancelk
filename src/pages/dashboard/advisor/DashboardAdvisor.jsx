@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import AdvisorDetails from "../../../components/advisor/AdvisorDetails";
 import AdvisorMeetings from "./AdvisorMeetings";
 

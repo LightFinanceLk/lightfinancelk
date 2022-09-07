@@ -1,34 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-// import accountApi from "../../api/accountApi";
-// import { accountActions } from "../../store/account";
-import recordApi from "../../api/recordApi";
-import { message, notification } from "antd";
-import CreateRecordForm from "../../components/form/forms/record/CreateRecordForm";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import "./Records.scss";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import recordApi from "../../api/recordApi";
+import CreateRecordForm from "../../components/form/forms/record/CreateRecordForm";
 
 const CreateRecordPage = () => {
   const { aid } = useParams();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  useSelector((state) => {
-    console.log(state);
-  });
-  const userId = useSelector((state) => state.auth.userId);
+
   const uAccounts = useSelector((state) => state.account.accounts);
 
   const [userAccounts, setUserAccounts] = useState([]);
 
   useEffect(() => {
-    console.log(uAccounts);
     setUserAccounts(uAccounts);
   }, [uAccounts]);
 
   const submitHandler = async (data) => {
-    console.log(data, "record");
     if (data.recordType === "expense") {
       data.amount = Math.abs(data.amount) * -1;
     } else {
@@ -46,7 +37,6 @@ const CreateRecordPage = () => {
       let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
       message.error({
         content: errorMsg[0].replace(": ", ""),
-        duration: 5,
       });
     }
   };

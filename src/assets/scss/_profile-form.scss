@@ -1,10 +1,5 @@
 .lf-profile-form {
   $this: ".lf-profile-form";
-
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // min-height: 100vh;
   &__inner {
     margin: 50px auto;
     padding: 40px;
@@ -29,13 +24,6 @@
       }
     }
   }
-  // &__logo {
-  //   display: flex;
-  //   justify-content: center;
-  //   img {
-  //     width: 250px;
-  //   }
-  // }
   &__button-wrapper {
     display: flex;
     flex-direction: column;
@@ -66,28 +54,6 @@
     top: 35px;
     font-size: 20px;
   }
-  // &--login {
-  //   #{$this}__button-wrapper {
-  //     > div {
-  //       &:last-of-type {
-  //         margin-top: 20px;
-  //       }
-  //     }
-  //   }
-  //   #{$this}__submit-button {
-  //     margin-bottom: 10px;
-  //   }
-  // }
-  // &--signup {
-  //   #{$this}__submit-button {
-  //     margin-bottom: 30px;
-  //   }
-  // }
-  // &--reset-pw {
-  //   #{$this}__submit-button {
-  //     margin-bottom: 30px;
-  //   }
-  // }
 }
 
 @include media-breakpoint-down(md) {

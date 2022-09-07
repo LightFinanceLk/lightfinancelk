@@ -9,7 +9,6 @@ const store = configureStore({
     auth: authReducer,
     account: accountReducer,
     user: userReducer,
-    // counter:counterReducer
   },
 });
 

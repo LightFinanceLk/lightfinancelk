@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, message } from "antd";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormControl from "../../components/form/fields/FormControl";
-import { useEffect } from "react";
 
 const BulkRecordsStepTwoInstructions = (props) => {
   const [areTwoColumns, setAreTwoColumns] = useState(false);
@@ -78,13 +77,11 @@ const BulkRecordsStepTwoInstructions = (props) => {
             if (key === values.incomeColumn && item[key] !== "") {
               const value = item[key];
               delete item[key];
-              // console.log(value, "value1");
               item.Amount = toFloatingPointNumber(value);
               return item;
             } else if (key === values.expenseColumn && item[key] !== "") {
               const value = item[key];
               delete item[key];
-              // console.log(value, "value2");
               item.Amount = toFloatingPointNumber(value) * -1;
               return item;
             }

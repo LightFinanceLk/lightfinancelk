@@ -1,6 +1,6 @@
-import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormControl from "../../fields/FormControl";
 import logo from "../../../../assets/img/logo.png";
@@ -14,7 +14,6 @@ const ForgotPasswordForm = (props) => {
   });
   const onSubmit = (values) => {
     props.submitHandler(values);
-    // console.log("Form data", values);
   };
   return (
     <div className="lf-auth-form lf-auth-form--reset-pw">
@@ -40,7 +39,6 @@ const ForgotPasswordForm = (props) => {
                   label="Email Address"
                   name="email"
                 />
-
                 <div className="lf-auth-form__button-wrapper">
                   <button
                     className="btn btn-primary lf-auth-form__submit-button"

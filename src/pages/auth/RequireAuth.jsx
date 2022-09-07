@@ -1,9 +1,8 @@
+import jwt from "jwt-decode";
 import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { useDispatch } from "react-redux";
-import authApi from "../../api/authApi";
 import { authActions } from "../../store/auth";
-import jwt from "jwt-decode";
 
 const RequireAuth = ({ allowedRoles }) => {
   const dispatch = useDispatch();

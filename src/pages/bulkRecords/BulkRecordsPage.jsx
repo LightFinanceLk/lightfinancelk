@@ -1,6 +1,5 @@
-import Reactt, { useState } from "react";
-import { Button, message, Steps, Table } from "antd";
-import "./BulkRecordsPage.scss";
+import React, { useState, useEffect } from "react";
+import { Steps, Table } from "antd";
 import BulkRecordsStepOne from "./BulkRecordsStepOne";
 import BulkRecordsStepTwo from "./BulkRecordsStepTwo";
 import BulkRecordsStepThree from "./BulkRecordsStepThree";
@@ -12,8 +11,8 @@ import BulkRecordsStepThreeInstructions from "./BulkRecordsStepThreeInstructions
 import BulkRecordsStepFourInstructions from "./BulkRecordsStepFourInstructions";
 import BulkRecordsStepFiveInstructions from "./BulkRecordsStepFiveInstructions";
 import BulkRecordsStepSixInstructions from "./BulkRecordsStepSixInstructions";
-import { useEffect } from "react";
 import BulkRecordsStepFour from "./BulkRecordsStepFour";
+import "./BulkRecordsPage.scss";
 
 const { Step } = Steps;
 const steps = [
@@ -51,7 +50,6 @@ const BulkRecordsPage = () => {
   const [dataColumns, setDataColumns] = useState([]);
   const [amountColumn, setAmountColumn] = useState("");
   const [dateColumn, setDateColumn] = useState("");
-  const [descriptionColumn, setDescriptionColumn] = useState("");
   const [selectedExpenses, setSelectedExpenses] = useState([]);
   const [accountId, setAccountId] = useState("");
 
@@ -67,14 +65,6 @@ const BulkRecordsPage = () => {
       setDataColumns(updatedTableColumns);
     }
   }, [amountColumn]);
-
-  const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const prev = () => {
-    setCurrent(current - 1);
-  };
 
   return (
     <>

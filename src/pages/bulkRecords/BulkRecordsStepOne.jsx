@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Form, Formik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormControl from "../../components/form/fields/FormControl";
+import { message } from "antd";
 import HtmlTableToJson from "html-table-to-json";
+import FormControl from "../../components/form/fields/FormControl";
 import userApi from "../../api/userApi";
 import { accountActions } from "../../store/account";
-import { message } from "antd";
 import csv from "csvtojson";
 
 const BulkRecordsStepOne = (props) => {
   const dispatch = useDispatch();
-  const uAccounts = useSelector((state) => state.account.accounts);
   const userId = useSelector((state) => state.auth.userId);
   const [userAccounts, setUserAccounts] = useState([]);
   const initialValues = {
@@ -27,7 +26,6 @@ const BulkRecordsStepOne = (props) => {
         res.data.userAccount.map((account) => {
           userAccounts.push({ key: account.accountName, value: account._id });
         });
-        console.log(userAccounts);
         setUserAccounts(userAccounts);
       }
     } catch (error) {}

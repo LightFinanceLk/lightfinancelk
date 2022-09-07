@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
@@ -11,12 +11,11 @@ import {
 import { message, Popconfirm } from "antd";
 import Account from "../../components/account/Account";
 import accountApi from "../../api/accountApi";
-import "./Account.scss";
 import AccountRecords from "./AccountRecords";
+import "./Account.scss";
 
 const AccountPage = () => {
   const { aid } = useParams();
-  const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.userId);
 
   const [account, setAccount] = useState(null);

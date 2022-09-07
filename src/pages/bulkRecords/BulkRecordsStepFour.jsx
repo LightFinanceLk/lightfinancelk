@@ -1,4 +1,4 @@
-import { Button, Form, Input, Popconfirm, Table } from "antd";
+import { Form, Input, Table } from "antd";
 import React, { useContext, useEffect, useRef, useState } from "react";
 const EditableContext = React.createContext(null);
 
@@ -44,8 +44,8 @@ const EditableCell = ({
       const values = await form.validateFields();
       toggleEdit();
       handleSave({ ...record, ...values });
-    } catch (errInfo) {
-      console.log("Save failed:", errInfo);
+    } catch (err) {
+      // console.log(err);
     }
   };
 
@@ -113,13 +113,9 @@ const BulkRecordsStepFour = (props) => {
 
   const handleSave = (row) => {
     const newData = [...data];
-    console.log(newData, "1");
     const index = newData.findIndex((item) => row.key === item.key);
     const item = newData[index];
     newData.splice(index, 1, { ...item, ...row });
-
-    console.log(newData, "2");
-
     setData(newData);
     props.setDataSource(newData);
   };

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import UserProfilePage from "./UserProfilePage";
-import userApi from "../../api/userApi";
+import { message } from "antd";
 import UpdatePasswordForm from "../../components/form/forms/auth/UpdatePasswordForm";
 import DeleteProfileForm from "../../components/form/forms/auth/DeleteProfileForm";
 import { authActions } from "../../store/auth";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import AdvisorProfilePage from "./AdvisorProfilePage";
-import { message } from "antd";
+import userApi from "../../api/userApi";
 
 const ProfileWrapper = () => {
   const [initialValues, setInitialValues] = useState({});
@@ -36,7 +36,6 @@ const ProfileWrapper = () => {
       }
     };
     gerUserDataById(userId);
-    console.log(initialValues);
   }, [userId]);
 
   const changePasswordHandler = async (formData) => {
@@ -48,7 +47,6 @@ const ProfileWrapper = () => {
         });
       }
     } catch (e) {
-      // console.log(e);
       message.error({
         content: "Error, Password was not updated successfully.",
       });
@@ -67,7 +65,6 @@ const ProfileWrapper = () => {
         navigate("/login");
       }
     } catch (e) {
-      // console.log(e);
       message.error({
         content: "Error, Account was not deleted successfully.",
       });

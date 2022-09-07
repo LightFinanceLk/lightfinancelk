@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import moment from "moment";
-import "./Meetings.scss";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Meeting from "../../components/meeting/Meeting";
@@ -26,7 +25,6 @@ const Meetings = () => {
 
   useEffect(() => {
     getMeetingsByAdvisorId();
-
     const days = [];
     let daysStartIndex = 0;
     const today = moment();
@@ -67,10 +65,6 @@ const Meetings = () => {
     } else {
       setFilledDateTimes([...filled]);
     }
-    console.log(disabled, "disabled");
-    console.log(filled, "filled");
-    console.log(disabledDateTimes, "disabledDateTimes");
-    console.log(filledDateTimes, "filledDateTimes");
   }, [advisorMeetings]);
 
   let times = [

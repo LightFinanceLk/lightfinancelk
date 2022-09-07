@@ -20,8 +20,6 @@ const BulkRecordsStepFiveInstructions = (props) => {
       }
     });
     updatedDataColumns = updatedDataColumns.map((col) => {
-      console.log(descriptionColumn);
-      console.log(col.key);
       if (col.key === descriptionColumn) {
         return {
           title: "Description",
@@ -31,7 +29,6 @@ const BulkRecordsStepFiveInstructions = (props) => {
       }
       return col;
     });
-    console.log(updatedDataColumns);
     let updatedDataSource = props.dataSource;
     updatedDataSource = updatedDataSource.map((item) => {
       Object.keys(item).forEach((key) => {

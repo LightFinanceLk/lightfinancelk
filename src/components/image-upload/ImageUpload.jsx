@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import userApi from "../../api/userApi.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faEdit, faFileImage } from "@fortawesome/free-solid-svg-icons";
+import userApi from "../../api/userApi.js";
 
 const ImageUpload = (props) => {
   const userId = useSelector((state) => state.auth.userId);

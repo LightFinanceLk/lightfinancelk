@@ -59,7 +59,6 @@ const deleteRecord = async (rId) => {
 };
 
 const createBulkRecords = async (accountId, records) => {
-  console.log(records, "axon data");
   return axios.post(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/${accountId}`,
     records,
@@ -89,7 +88,6 @@ const getBulkRecordsByAccountId = async (accountId) => {
 };
 
 const deleteBulkRecordsById = async (bulkRecordId) => {
-  console.log(bulkRecordId);
   return axios.delete(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/bulk-records/${bulkRecordId}`,
     {

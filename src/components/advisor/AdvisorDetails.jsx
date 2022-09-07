@@ -1,16 +1,9 @@
-import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
 import userApi from "../../api/userApi.js";
 import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
-import { message } from "antd";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleRight,
-  faEdit,
-  faClose,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faClose } from "@fortawesome/free-solid-svg-icons";
 import ImageUpload from "../image-upload/ImageUpload.jsx";
 import config from "../../config";
 import linkedIn from "../../assets/img/linkedIn.png";
@@ -18,6 +11,7 @@ import "./AdvisorDetails.scss";
 
 const AdvisorDetails = (props) => {
   const currentUserId = useSelector((state) => state.auth.userId);
+
   const [userData, setUserData] = useState({});
   const [showImageInput, setShowImageInput] = useState(true);
   const [editor, setEditor] = useState(false);
@@ -123,10 +117,7 @@ const AdvisorDetails = (props) => {
                   </p>
                   {userData.phone && (
                     <p>
-                      <a href={`tel:${userData.phoneLink}`}>
-                        {" "}
-                        {userData.phone}
-                      </a>
+                      <a href={`tel:${userData.phoneLink}`}>{userData.phone}</a>
                     </p>
                   )}
                 </div>

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Table } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowUpRightFromSquare,
-  faPerson,
-  faPersonDress,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import userApi from "../../api/userApi";
-import { message, Table } from "antd";
 import moment from "moment";
 import male from "../../assets/img/male.png";
 import female from "../../assets/img/female.png";
@@ -22,7 +18,6 @@ const AdvisorClients = (props) => {
         const advisorClients = clients.map((client) => {
           return client.advisor === props.aid;
         });
-        console.log(advisorClients, "advisorClients");
         const clientsArr = clients.map((user, index) => {
           const client = user.user;
           const age = moment().diff(client.dob, "years", false);
@@ -38,10 +33,6 @@ const AdvisorClients = (props) => {
       }
     } catch (e) {
       // console.log(e);
-      message.error({
-        content: "Fetching clients failed.",
-        duration: 6,
-      });
     }
   };
 
@@ -88,7 +79,7 @@ const AdvisorClients = (props) => {
   ];
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
 
   return (

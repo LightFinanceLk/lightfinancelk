@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import { Space, Table, Tag, Popconfirm, message } from "antd";
+import { NavLink } from "react-router-dom";
+import { Table, Popconfirm, message } from "antd";
 import recordApi from "../../api/recordApi.js";
 const { Column } = Table;
 

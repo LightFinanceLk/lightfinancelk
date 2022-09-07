@@ -1,9 +1,9 @@
-import { Form, Formik } from "formik";
 import React, { useState } from "react";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import { message } from "antd";
 import FormControl from "../../fields/FormControl";
 import { EyeInvisibleFilled, EyeFilled } from "@ant-design/icons";
-import { message } from "antd";
 
 const UpdatePasswordForm = (props) => {
   const [isPasswordSVisible, setIsPasswordVisible] = useState(true);

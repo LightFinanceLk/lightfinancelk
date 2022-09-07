@@ -37,7 +37,6 @@ const BulkRecordsStepFourInstructions = (props) => {
           const value = item[key];
           delete item[key];
           item.Date = moment(value, dateFormat).format("DD/MM/YYYY");
-          // item.Date = value;
         }
       });
       return item;
@@ -52,10 +51,6 @@ const BulkRecordsStepFourInstructions = (props) => {
     });
 
     if (!errors.length > 0) {
-      // updatedDataSource = updatedDataSource.map((item) => {
-      //   item.Date = moment(item.Date, dateFormat).format("DD/MM/YYYY");
-      //   return item;
-      // });
       props.setDataSource(updatedDataSource);
       props.setCurrent(4);
     } else {

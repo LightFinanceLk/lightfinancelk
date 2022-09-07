@@ -1,15 +1,14 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import jwt from "jwt-decode";
+import { message } from "antd";
 import authApi from "../../api/authApi";
 import userApi from "../../api/userApi";
-import accountApi from "../../api/accountApi";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import { userActions } from "../../store/user";
 import { accountActions } from "../../store/account";
 import LoginForm from "../../components/form/forms/auth/LoginForm";
-import { useEffect, useState } from "react";
-import jwt from "jwt-decode";
-import { message } from "antd";
 
 const LoginPage = () => {
   const dispatch = useDispatch();

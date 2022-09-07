@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+import { message } from "antd";
 import userApi from "../../api/userApi";
 import AdvisorProfileForm from "../../components/form/forms/profile/AdvisorProfileForm";
-import { authActions } from "../../store/auth";
-import { message } from "antd";
 
 const AdvisorProfilePage = () => {
   const userId = useSelector((state) => state.auth.userId);
@@ -21,7 +19,6 @@ const AdvisorProfilePage = () => {
         });
       }
     } catch (e) {
-      // console.log(e);
       message.error({
         content: "Error, Profile was not updated successfully.",
       });
@@ -33,8 +30,5 @@ const AdvisorProfilePage = () => {
     </div>
   );
 };
-
-// set date format
-// set currency and remove currency from account
 
 export default AdvisorProfilePage;

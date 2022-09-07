@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDoubleRight } from "@fortawesome/free-solid-svg-icons";
-import "./AdvisorMeetings.scss";
-import logo from "../../../assets/img/logo.png";
-import { useEffect } from "react";
 import userApi from "../../../api/userApi";
-import { useState } from "react";
+import "./AdvisorMeetings.scss";
 
 const AdvisorMeetings = () => {
   const userId = useSelector((state) => state.auth.userId);
@@ -17,14 +11,11 @@ const AdvisorMeetings = () => {
   const getUserMeetings = async (uId) => {
     try {
       const res = await userApi.getMeetingsByAdvisorId(uId);
-
       if (res.data) {
         console.log(res.data, "res data");
         const advisorMeetings = res.data.advisorMeetings;
         setAdvisorMeetings(advisorMeetings);
       }
-      // if (res.data) {
-      // }
     } catch (error) {}
   };
 

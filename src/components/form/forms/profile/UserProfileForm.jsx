@@ -1,10 +1,10 @@
-import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import moment from "moment";
 import FormControl from "../../fields/FormControl";
 import DatePickerControl from "../../fields/DatePicker";
 import RadioButtons from "../../fields/RadioButtons";
-import moment from "moment";
 
 const UserProfileForm = (props) => {
   const [initialValues, setInitialValues] = useState({});

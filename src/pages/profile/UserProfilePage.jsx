@@ -1,7 +1,7 @@
-import UserProfileForm from "../../components/form/forms/profile/UserProfileForm";
 import { useSelector } from "react-redux";
-import userApi from "../../api/userApi";
 import { message } from "antd";
+import UserProfileForm from "../../components/form/forms/profile/UserProfileForm";
+import userApi from "../../api/userApi";
 
 const UserProfilePage = (props) => {
   const userId = useSelector((state) => state.auth.userId);
@@ -18,7 +18,6 @@ const UserProfilePage = (props) => {
         });
       }
     } catch (e) {
-      // console.log(e);
       message.error({
         content: "Error, Profile was not updated successfully.",
       });
@@ -34,8 +33,5 @@ const UserProfilePage = (props) => {
     </>
   );
 };
-
-// set date format
-// set currency and remove currency from account
 
 export default UserProfilePage;

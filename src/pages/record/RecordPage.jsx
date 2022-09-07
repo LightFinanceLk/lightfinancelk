@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import CreateRecordForm from "../../components/form/forms/record/CreateRecordForm";
+import { NavLink, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import recordApi from "../../api/recordApi";
-import { message, notification } from "antd";
-import "./Records.scss";
 import UpdateRecordForm from "../../components/form/forms/record/UpdateRecordForm";
 
 const RecordPage = () => {
-  const navigate = useNavigate();
   const { rid } = useParams();
   const [record, setRecord] = useState({});
 
@@ -29,29 +24,7 @@ const RecordPage = () => {
     getRecord();
   }, [rid]);
 
-  const submitHandler = async (data) => {
-    console.log(data, "record");
-    // if (data.recordType === "expense") {
-    //   data.amount = Math.abs(data.amount) * -1;
-    // } else {
-    //   data.amount = Math.abs(data.amount);
-    // }
-    // try {
-    //   const res = await recordApi.createRecord(JSON.stringify(data));
-    //   if (res) {
-    //     navigate(`/account/${aid}`);
-    //     message.success({
-    //       content: "Your record is created successfully.",
-    //     });
-    //   }
-    // } catch (e) {
-    //   let errorMsg = e.response.data.match(/(?<=Error).*?(?=<br>)/);
-    //   message.error({
-    //     content: errorMsg[0].replace(": ", ""),
-    //     duration: 5,
-    //   });
-    // }
-  };
+  const submitHandler = async (data) => {};
 
   return (
     <>
@@ -74,7 +47,6 @@ const RecordPage = () => {
                   <UpdateRecordForm
                     initialValues={record}
                     submitHandler={submitHandler}
-                    // userAccounts={userAccounts}
                   ></UpdateRecordForm>
                 </div>
               </div>

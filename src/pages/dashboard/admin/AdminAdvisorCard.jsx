@@ -1,12 +1,9 @@
-import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Table } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import { Table } from "antd";
-import { useEffect, useState } from "react";
 import userApi from "../../../api/userApi";
-import { message } from "antd";
-import moment from "moment";
 
 const AdminAdvisorCard = (props) => {
   const [data, setData] = useState([]);
@@ -110,7 +107,7 @@ const AdminAdvisorCard = (props) => {
   ];
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
 
   return (

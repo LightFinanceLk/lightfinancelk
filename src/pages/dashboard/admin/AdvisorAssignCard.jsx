@@ -1,18 +1,10 @@
-import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { message, TreeSelect, Table } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowUpRightFromSquare,
-  faPerson,
-  faPersonDress,
-} from "@fortawesome/free-solid-svg-icons";
-import { Table } from "antd";
-import { useEffect, useState } from "react";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import userApi from "../../../api/userApi";
-import { message, TreeSelect } from "antd";
-import moment from "moment";
 import "./AdminClientCard.scss";
-
 import male from "../../../assets/img/male.png";
 import female from "../../../assets/img/female.png";
 
@@ -22,7 +14,6 @@ const AdvisorAssignCard = (props) => {
   const [treeValue, setTreeValue] = useState();
 
   useEffect(() => {
-    console.log(props);
     if (props.advisors) {
       const treeData = props.advisors.map((advisor, index) => {
         return {
@@ -35,10 +26,8 @@ const AdvisorAssignCard = (props) => {
 
     if (props.clients) {
       const newClients = props.clients.filter((client) => {
-        console.log(client);
         return client.advisor === null;
       });
-      console.log(newClients, "newClients");
       setClients(newClients);
     }
   }, [props]);
@@ -55,18 +44,15 @@ const AdvisorAssignCard = (props) => {
           advisor: value,
         });
         if (res.data) {
-          console.log(res.data);
           props.getClients();
           message.success({
             content: "The advisor assigned successfully.",
-            duration: 6,
           });
         }
       } catch (e) {
         // console.log(e);
         message.error({
           content: "Updating client failed.",
-          duration: 6,
         });
       }
     };
@@ -139,7 +125,7 @@ const AdvisorAssignCard = (props) => {
   ];
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
 
   return (

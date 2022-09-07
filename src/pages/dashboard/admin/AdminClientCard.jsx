@@ -1,18 +1,9 @@
-import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowUpRightFromSquare,
-  faPerson,
-  faPersonDress,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Table } from "antd";
-import { useEffect, useState } from "react";
-import userApi from "../../../api/userApi";
-import { message } from "antd";
-import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import "./AdminClientCard.scss";
-
 import male from "../../../assets/img/male.png";
 import female from "../../../assets/img/female.png";
 
@@ -63,7 +54,7 @@ const AdminClientCard = (props) => {
   ];
 
   const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+    // console.log("params", pagination, filters, sorter, extra);
   };
 
   return (

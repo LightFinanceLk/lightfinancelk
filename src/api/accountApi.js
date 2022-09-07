@@ -45,8 +45,7 @@ const updateAccount = async (accountId, data) => {
   );
 };
 
-const deleteAccount = async (accountId, data) => {
-  console.log(accountId);
+const deleteAccount = async (accountId) => {
   return axios.delete(
     `${config.api.BASE_URL}${config.api.API_PREFIX}/accounts/${accountId}`,
     {
