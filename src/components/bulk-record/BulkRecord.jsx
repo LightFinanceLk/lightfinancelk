@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { Popconfirm, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +16,7 @@ import recordApi from "../../api/recordApi";
 import "./BulkRecord.scss";
 
 const BulkRecord = (props) => {
+  const navigate = useNavigate();
   const [account, setAccount] = useState([]);
   const [bulkRecords, setBulkRecords] = useState([]);
 
@@ -32,7 +34,6 @@ const BulkRecord = (props) => {
     try {
       const res = await recordApi.getBulkRecordsByAccountId(aId);
       if (res.data) {
-        console.log(res.data.bulkRecords);
         setBulkRecords(res.data.bulkRecords);
       }
     } catch (error) {
@@ -53,8 +54,8 @@ const BulkRecord = (props) => {
   const deleteBulkRecords = async (bId) => {
     try {
       const res = await recordApi.deleteBulkRecordsById(bId);
-      if (res.data) {
-        props.getUserAccounts();
+      if (res) {
+        navigate("/record/create-bulk-record");
         message.success({
           content: "Bulk Record is Deleted Successfully.",
         });

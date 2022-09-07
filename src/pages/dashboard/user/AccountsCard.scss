@@ -1,10 +1,18 @@
 .lf-c-accounts {
   &__item {
     display: flex;
-    padding: 5px;
+    padding: 15px;
     margin-bottom: 10px;
-    background-color: gray;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all ease-in-out 0.3s;
+    p {
+      margin: 0;
+    }
+
+    &:hover {
+      box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+    }
   }
   &__item-name {
     flex: 2;
@@ -13,7 +21,9 @@
     }
   }
   &__item-balance {
+    padding-right: 15px;
     flex: 1;
+    text-align: right;
   }
   &__item-link {
     flex: 0 0 auto;

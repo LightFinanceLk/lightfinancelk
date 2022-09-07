@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./AccountsCard.scss";
 import {
@@ -8,85 +9,49 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const AccountsCard = () => {
+  let accounts = useSelector((state) => state.account.accounts);
+  accounts = accounts.slice(0, 3);
   return (
-    <div className="lf-c-accounts">
-      <div className="lf-c-accounts__item">
-        <div className="lf-c-accounts__item-name">
-          <p>Test</p>
-          <p>Type</p>
+    <>
+      {accounts && (
+        <div className="lf-c-accounts">
+          {accounts.map((account) => {
+            return (
+              <>
+                <div
+                  className="lf-c-accounts__item"
+                  style={{ "border-color": account.accountColor }}
+                >
+                  <div className="lf-c-accounts__item-name">
+                    <p>{account.accountName}</p>
+                  </div>
+                  <div className="lf-c-accounts__item-balance">
+                    <p>
+                      {account.currency.toUpperCase()} {account.amount}
+                    </p>
+                  </div>
+                  <div className="lf-c-accounts__item-link">
+                    <NavLink to={`/account/${account._id}`}>
+                      <span className="nav-link lf-c-link">
+                        <FontAwesomeIcon icon={faAngleRight} />
+                      </span>
+                    </NavLink>
+                  </div>
+                </div>
+                <div>
+                  <NavLink to="/account">
+                    <span className="nav-link link-secondary lf-c-more-link">
+                      Accounts
+                      <FontAwesomeIcon icon={faAngleDoubleRight} />
+                    </span>
+                  </NavLink>
+                </div>
+              </>
+            );
+          })}
         </div>
-        <div className="lf-c-accounts__item-balance">
-          <p>LKR 99,900.00</p>
-        </div>
-        <div className="lf-c-accounts__item-link">
-          <NavLink to="/account">
-            <span className="nav-link link-light lf-c-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </span>
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="lf-c-accounts__item">
-        <div className="lf-c-accounts__item-name">
-          <p>Test</p>
-          <p>Type</p>
-        </div>
-        <div className="lf-c-accounts__item-balance">
-          <p>LKR 99,900.00</p>
-        </div>
-        <div className="lf-c-accounts__item-link">
-          <NavLink to="/account">
-            <span className="nav-link link-light lf-c-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </span>
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="lf-c-accounts__item">
-        <div className="lf-c-accounts__item-name">
-          <p>Test</p>
-          <p>Type</p>
-        </div>
-        <div className="lf-c-accounts__item-balance">
-          <p>LKR 99,900.00</p>
-        </div>
-        <div className="lf-c-accounts__item-link">
-          <NavLink to="/account">
-            <span className="nav-link link-light lf-c-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </span>
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="lf-c-accounts__item">
-        <div className="lf-c-accounts__item-name">
-          <p>Test</p>
-          <p>Type</p>
-        </div>
-        <div className="lf-c-accounts__item-balance">
-          <p>LKR 99,900.00</p>
-        </div>
-        <div className="lf-c-accounts__item-link">
-          <NavLink to="/account">
-            <span className="nav-link link-light lf-c-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </span>
-          </NavLink>
-        </div>
-      </div>
-
-      <div>
-        <NavLink to="/account">
-          <span className="nav-link link-secondary lf-c-more-link">
-            Accounts
-            <FontAwesomeIcon icon={faAngleDoubleRight} />
-          </span>
-        </NavLink>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

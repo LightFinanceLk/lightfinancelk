@@ -1,20 +1,34 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { accountActions } from "../../store/account";
+import userApi from "../../api/userApi";
 import accountApi from "../../api/accountApi";
 import CreateAccountForm from "../../components/form/forms/account/CreateAccountForm";
 
 const CreateAccountPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
+
+  const setAccountData = async () => {
+    try {
+      const res = await userApi.getAccountsByUserId(userId);
+      if (res.data) {
+        dispatch(accountActions.getAccounts(res.data.userAccount));
+      }
+    } catch (error) {}
+  };
+
   const submitHandler = async (data) => {
     try {
       const res = await accountApi.createAccount(userId, JSON.stringify(data));
       if (res) {
+        setAccountData();
         navigate("/account");
         message.success({
           content: "Your account is created successfully.",

@@ -14,7 +14,6 @@ const BulkRecordListPage = () => {
     try {
       const res = await userApi.getAccountsByUserId(userId);
       if (res.data) {
-        console.log(res.data);
         setUserAccounts(res.data.userAccount);
       }
     } catch (error) {

@@ -29,7 +29,6 @@ const LoginPage = () => {
     try {
       const res = await userApi.getDataByUserId(id);
       if (res.data && res.data.user) {
-        console.log(res.data.user, "data");
         dispatch(userActions.getUser(res.data.user));
       }
     } catch (error) {}

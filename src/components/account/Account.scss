@@ -31,24 +31,26 @@
     }
   }
   &__icon-color {
+    flex: 1;
     width: 50px;
     height: 50px;
     opacity: 0.5;
     border-radius: 10px;
   }
   &__type {
-    flex: 1;
+    flex: 2;
     p {
       margin: 0;
       font-size: 15px;
     }
   }
   &__name {
-    flex: 4;
+    flex: 6;
     color: $dark;
     font-size: 1.2rem;
   }
   &__amount {
+    flex: 2;
     text-align: right;
     font-size: 1.5rem;
     color: $dark;

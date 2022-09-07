@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +15,7 @@ import AccountRecords from "./AccountRecords";
 import "./Account.scss";
 
 const AccountPage = () => {
+  const navigate = useNavigate();
   const { aid } = useParams();
   const userId = useSelector((state) => state.auth.userId);
 
@@ -35,6 +36,7 @@ const AccountPage = () => {
     try {
       const res = await accountApi.deleteAccount(aid);
       if (res.data) {
+        navigate("/account");
         message.success({
           content: "Your account is deleted successfully.",
         });

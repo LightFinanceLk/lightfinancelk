@@ -43,7 +43,7 @@ const AutoUpdateForm = (props) => {
       ]);
       props.setIsSubCategoryEnabled(false);
     }
-  }, [values, props.initialValues]);
+  }, []);
   return null;
 };
 
@@ -131,7 +131,7 @@ const UpdateRecordForm = (props) => {
   return (
     categoryOptions !== {} &&
     userAccounts.length &&
-    initialValues !== {} && (
+    initialValues.accountId && (
       <div className="lf-account-form lf-account-form--create-record">
         <div className="lf-account-form__inner">
           <div className="lf-account-form__welcome-msg">

@@ -83,7 +83,6 @@ const CreateAccountForm = (props) => {
                         type="text"
                         label="Starting Amount"
                         name="startingAmount"
-                        value="0"
                       />
                     </div>
                     <div className="col-sm-6">
