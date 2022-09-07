@@ -21,6 +21,7 @@ import ProfileWrapper from "./pages/profile/ProfileWrapper";
 import MeetingsPage from "./pages/meetings/MeetingsPage";
 import BulkRecordListPage from "./pages/bulkRecords/BulkRecordListPage";
 import RecordPage from "./pages/record/RecordPage";
+import AnalysisPage from "./pages/analysis/AnalysisPage";
 import "./App.scss";
 
 const ROLES = {
@@ -47,6 +48,7 @@ function App() {
           <Route path="account/:aid" element={<AccountPage />} />
           <Route path="record/create/:aid" element={<CreateRecordPage />} />
           <Route path="record/:rid" element={<RecordPage />} />
+          <Route path="analysis" element={<AnalysisPage />} />
           <Route
             path="record/create-bulk-record"
             element={<BulkRecordsPage />}

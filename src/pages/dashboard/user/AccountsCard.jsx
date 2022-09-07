@@ -10,10 +10,12 @@ import {
 
 const AccountsCard = () => {
   let accounts = useSelector((state) => state.account.accounts);
-  accounts = accounts.slice(0, 3);
+  if (accounts.length) {
+    accounts = accounts.slice(0, 3);
+  }
   return (
     <>
-      {accounts && (
+      {accounts.length ? (
         <div className="lf-c-accounts">
           {accounts.map((account) => {
             return (
@@ -50,6 +52,8 @@ const AccountsCard = () => {
             );
           })}
         </div>
+      ) : (
+        <p className="text-center">Accounts are yet to be created.</p>
       )}
     </>
   );

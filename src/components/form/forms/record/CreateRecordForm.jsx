@@ -159,7 +159,7 @@ const CreateRecordForm = (props) => {
                         <DatePickerControl
                           label="Date"
                           name="date"
-                          date={moment().format("YYYY/MM/DD")}
+                          date={moment().format("DD/MM/YYYY")}
                         ></DatePickerControl>
                       </div>
                     </div>

@@ -86,7 +86,7 @@ const AdvisorCard = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center">An advisor is not assigned.</p>
+        <p className="text-center">An advisor is yet to be assigned.</p>
       )}
     </>
   );

@@ -60,6 +60,13 @@ const Header = () => {
                         </span>
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink to="/analysis">
+                        <span className="nav-link px-2 link-secondary">
+                          Analysis
+                        </span>
+                      </NavLink>
+                    </li>
                   </>
                 )}
               </ul>

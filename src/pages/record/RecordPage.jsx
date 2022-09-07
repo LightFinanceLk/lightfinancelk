@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import recordApi from "../../api/recordApi";
 import UpdateRecordForm from "../../components/form/forms/record/UpdateRecordForm";
 
 const RecordPage = () => {
+  const navigate = useNavigate();
   const { rid } = useParams();
   const [record, setRecord] = useState({});
 
@@ -24,7 +25,16 @@ const RecordPage = () => {
     getRecord();
   }, [rid]);
 
-  const submitHandler = async (data) => {};
+  const submitHandler = async (data) => {
+    try {
+      const res = await recordApi.updateRecord(data, rid);
+      if (res.data) {
+        navigate(`/account/${record.accountId}`);
+      }
+    } catch (e) {
+      // console.log(e);
+    }
+  };
 
   return (
     <>

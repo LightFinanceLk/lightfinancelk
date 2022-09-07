@@ -24,6 +24,7 @@ const AccountRecords = (props) => {
       if (res.data) {
         message.success({
           content: "Your record is deleted successfully.",
+          duration: 1,
         });
         setUpdated(true);
       }

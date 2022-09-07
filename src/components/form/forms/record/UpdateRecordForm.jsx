@@ -43,7 +43,7 @@ const AutoUpdateForm = (props) => {
       ]);
       props.setIsSubCategoryEnabled(false);
     }
-  }, []);
+  }, [props.initialValues]);
   return null;
 };
 
@@ -125,7 +125,14 @@ const UpdateRecordForm = (props) => {
   ];
 
   const onSubmit = (values) => {
-    props.submitHandler(values);
+    let val = values;
+    if (val.recordType === "expense") {
+      val.amount = Math.abs(val.amount) * -1;
+    } else {
+      val.amount = Math.abs(val.amount);
+    }
+    val.date = moment(val.date).format("DD/MM/YYYY");
+    props.submitHandler(val);
   };
 
   return (

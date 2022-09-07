@@ -239,6 +239,7 @@ const BulkRecordsStepSix = (props) => {
         rowClassName="editable-row"
         pagination={{
           onChange: cancel,
+          defaultPageSize: 100,
         }}
       />
     </Form>
