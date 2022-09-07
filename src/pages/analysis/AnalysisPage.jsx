@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import userApi from "../../api/userApi";
 import AccountAnalysis from "./AccountAnalysis";
+import "./Analysis.scss";
 
 const AnalysisPage = () => {
   const userId = useSelector((state) => state.auth.userId);
@@ -29,7 +30,12 @@ const AnalysisPage = () => {
         <>
           {accounts.map((account) => {
             return (
-              <AccountAnalysis aid={account._id} aName={account.accountName} />
+              <div className="lf-analysis-chart">
+                <AccountAnalysis
+                  aid={account._id}
+                  aName={account.accountName}
+                />
+              </div>
             );
           })}
         </>
